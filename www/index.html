@@ -4,21 +4,40 @@
 <body>
 
 <h3>Mission</h3>
-<p>This project contains installers for ArgoUML.</p>
+This project contains installers for ArgoUML.<p>
 
-<p>There is one directory for each ArgoUML release.  Each directory
-contains all the files needed to install that release on any supported
-platform. Click here for a <a
-href="http://argouml.tigris.org/releases.html/">list of
-releases</a>.</p>
+There is one directory for each installer.
+Each directory contains the configuration files, and tools, 
+needed to build a package using that installer.<p>
 
-
-
-<h3>Related resources</h3>
-
+The documentation of the specifics for each installer is in 
+a directory in the web site part of this directory.
+Each such set contains:
 <ul>
-<li>This project uses an installer tool from <a href="http://www.zerog.com">ZeroG</a>..</li>
+  <li>names and references of the tools needed
+  <li>information on the platform needed to run that installer
+  <li>the list of tools to install and links to installation instructions.
+</ul>
+<p>
 
+The result of running the installers is either 
+published somewhere on the web
+(the <a href="http://argouml-download.tigris.org">argouml-download project</a>
+is one possibility) or
+available only for the runner (for burning on cd:s).
+(This project was previously used for the purpose of publishing releases.
+This is not a good idea and will be discontinued.)
+<p>
+
+<h3>Documentation for the different installers</h3>
+The following installers are candidates to investigate:
+<ul>
+  <li>zerog: Installer tool from <a href="http://www.zerog.com">ZeroG</a>.
+- not implemented
+  <li>nsis: <a href="http://nsis.sourceforge.net">Nullsoft</a>
+- not implemented
+(suggested by Graham Compton
+<a href="http://argouml.tigris.org/issues/show_bug.cgi?id=3705">issue 3705</a>)
 </ul>
 
 </body>
