@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The root element -->
+<antactions>
+
+    <!-- The pack sections. The names should be the same as the pack sections in
+         the install xml file (see also installation.dtd). The defined actions 
+         are performed only for packs which are selected for installation.
+    -->
+    <pack name="ArgoUML-AndroMDA">
+    	<antcall order="afterpacks" buildfile="$INSTALL_PATH/setup.xml" verbose="yes" logfile="$INSTALL_PATH/setup.log">
+    		<target name="setup"/>
+    	</antcall>
+    </pack>
+
+</antactions>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+     24 nov. 2005 18:28:39                                                        
+
+     mdatoolchain-postinstall    
+     Setup the MDA Toolchain after installation:
+     - copy mdr libs of AndroMDA to ArgoUML installation folder
+                   
+     lmaitre                                                                
+     ====================================================================== -->
+<project name="argouml-andromda-postinstall" basedir="$INSTALL_PATH" default="setup">
+    <description>
+            Setup the ArgoUML-AndroMDA plugin after installation
+    </description>
+
+    <!-- ================================= 
+          target: setup              
+         ================================= -->
+    <target name="setup" depends="init,copy-mdr-to-argouml,install-andromda-in-argo" 
+    	description="--> Setup the MDA Toolchain after installation"/>
+    
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: install-andromda-in-maven                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="install-andromda-in-argo">
+	<!-- Update properties of ArgoUML with collected values -->
+    	<propertyfile file="${user.home}/argouml.user.properties">
+    		<entry key="argo.andromda.home" value="$INSTALL_PATH/andromda"/>
+    		<entry key="argo.defaultModel" value="$INSTALL_PATH/andromda/andromda/xml.zips/andromda-profile-${andromda.version}.xml.zip"/>
+    		<entry key="argo.maven.home" value="$INSTALL_PATH/maven"/>
+    	</propertyfile>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: copy-mdr-to-argouml                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="copy-mdr-to-argouml" if="${useAndromdaLibs}">
+    	  <copy todir="$INSTALL_PATH/argouml" overwrite="true">
+    	    <fileset dir="$INSTALL_PATH/andromda/lib/mdr/jars"/>
+    	    <globmapper from="*-${andromda.mdr.timestamp}.jar" to="*.jar"/>
+    	  </copy>  
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="init">
+    	<property name="andromda.mdr.timestamp" value="20050630"/>
+    	<property name="useAndromdaLibs" value="$USE_ANDRO_LIBS"/>
+    	<property name="useAndromdaProfile" value="$USE_ANDRO_PROFILE"/>
+    </target>
+
+</project>

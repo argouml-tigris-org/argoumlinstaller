@@ -1,0 +1,64 @@
+<userInput>
+    <!-- Applications settings panels -->
+
+    <panel order="0">
+        <field type="title" align="right" txt="Installed applications"
+            bold="true" size="2" id="applicationsHome" />
+        <field type="search" variable="MAVEN_HOME">
+            <description align="left" txt="The Maven home folder"
+                id="mavenHome" />
+            <spec txt="Maven home:" id="mavenHome.label"
+                type="directory" result="directory">
+                <choice value="${env.USER_HOME}/maven/" os="unix" />
+                <choice value="${env.USER_HOME}/maven/" os="mac" />
+                <choice value="C:\Program Files\maven" os="windows" />
+                <choice value="C:\maven" os="windows" />
+            </spec>
+        </field>
+        <field type="search" variable="ANDROMDA_HOME">
+            <description align="left" txt="The AndroMDA home folder"
+                id="andromdaHome" />
+            <spec txt="AndroMDA home:" id="andromdaHome.label"
+                type="directory" result="directory">
+                <choice value="${env.USER_HOME}/andromda/" os="unix" />
+                <choice value="${env.USER_HOME}/andromda/" os="mac" />
+                <choice value="C:\Program Files\andromda" os="windows" />
+                <choice value="C:\andromda" os="windows" />
+                <choice
+                    value="${env.USER_HOME}\.maven\repository\andromda"
+                    os="windows" />
+                <choice
+                    value="${env.USER_HOME}/.maven/repository/andromda"
+                    os="unix" />
+                <choice
+                    value="${env.USER_HOME}/.maven/repository/andromda"
+                    os="mac" />
+            </spec>
+        </field>
+    </panel>
+
+    <!-- ArgoUML/AndroMDA panel -->
+    <panel order="1">
+        <field type="title" align="right"
+            txt="ArgoUML/AndroMDA integration" bold="true" size="2"
+            id="argoandroIntegration" />
+        <createForSelectedPack name="ArgoUML-AndroMDA" />
+        <!-- MDR libs and use of profile -->
+        <field type="staticText" align="left"
+            txt="This section allows you to choose how ArgoUML and AndroMDA are integrated."
+            id="argoandroText" />
+        <field type="check" variable="USE_ANDRO_LIBS">
+            <description align="left"
+                txt="Use MDR libs of AndroMDA with ArgoUML (replacing the original)"
+                id="useAndromdaLibsDesc" />
+            <spec txt="Use MDR libs of AndroMDA"
+                id="useAndromdaLibsSpec" true="true" false="false"
+                set="true" />
+        </field>
+        <field type="check" variable="USE_ANDRO_PROFILE">
+            <spec txt="Use AndroMDA profile" id="useAndromdaProfileSpec"
+                true="true" false="false" set="false" />
+        </field>
+    </panel>
+
+</userInput>

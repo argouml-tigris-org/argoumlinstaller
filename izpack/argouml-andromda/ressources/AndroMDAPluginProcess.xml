@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing>
+    <job name="Activating AndroMDA profile">
+        <executeclass name="﻿org.apache.tools.ant.launch.Launcher">
+            <arg>-f</arg>
+            <arg>$INSTALL_PATH/setup.xml</arg>
+            <arg>activate-profile</arg>
+        </executeclass>
+        <executeForVariable name="USE_ANDRO_PROFILE"/>
+    </job>
+</processing>

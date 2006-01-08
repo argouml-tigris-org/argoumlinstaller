@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<!-- 
+    The ArgoUML-AndroMDA installation file.
+-->
+
+<installation version="1.0">
+
+    <!-- 
+        The info section.
+    -->
+    <info>
+        <appname>ArgoUML-AndroMDA Module</appname>
+        <appversion>0.6</appversion>
+        <appsubpath>argouml</appsubpath>
+        <authors>
+            <author name="Ludovic Maitre" email="ludovic.maitre@free.fr"/>
+        </authors>
+        <url>http://argouml-andromda.tigris.org/</url>
+        <webdir>http://argouml-andromda.tigris.org/download</webdir>
+        <javaversion>1.4</javaversion>
+    </info>
+
+    <variables>
+	<variable name="released-on" value="2006/01/08"/>
+	<variable name="andromda.version" value="3.1"/>
+    </variables>
+
+    <!-- 
+        The gui preferences indication.
+    -->
+    <guiprefs width="640" height="480" resizable="no">
+	<modifier key="useLabelIcons" value="no"/>
+    </guiprefs>
+    
+    <!-- 
+        The locale section.
+    -->
+    <locale>
+        <langpack iso3="eng"/>
+    </locale>
+    
+    <!-- 
+        The resources section.
+        The ids must be these ones if you want to use the LicencePanel and/or the InfoPanel.
+    -->
+    <resources>
+        <res id="LicencePanel.licence" src="ressources/License.txt"/>
+        <res id="InfoPanel.info" src="ressources/Readme.txt"/>
+        <res id="AntActionsSpec.xml" src="ressources/AntSpecs.xml" />
+        <res id="userInputSpec.xml" src="ressources/UserInputSpecs.xml"/>
+        ?<res id="ProcessPanel.Spec.xml" src="ressources/AndroMDAPluginProcess.xml" />
+    </resources>
+    
+    <!-- 
+        The panels section.
+        We indicate here which panels we want to use. The order will be respected.
+    -->
+    <panels>
+        <panel classname="HelloPanel"/>
+        <panel classname="InfoPanel"/>
+        <panel classname="LicencePanel"/>
+        <panel classname="TargetPanel"/>
+        <!-- UserInputPanel#0 - Maven and AndroMDA home -->
+        <panel classname="UserInputPanel"/>
+        <!-- UserInputPanel#1 - ArgoUML/AndroMDA integration -->
+        <panel classname="UserInputPanel"/>   
+        <panel classname="InstallPanel"/>
+        ?<panel classname="ProcessPanel"/>
+        <panel classname="SimpleFinishPanel"/>
+    </panels>
+    
+    <!-- The listener section -->
+    <listeners>
+        <listener installer="AntActionInstallerListener"
+          uninstaller="AntActionUninstallerListener" />
+    </listeners>
+
+    <!-- 
+        The packs section.
+        We specify here our packs.
+    -->
+    <packs>
+    	<!-- base package with support files for other packages -->
+        <pack name="ArgoUML-AndroMDA" required="yes">
+            <description>The ArgoUML-AndroMDA module</description>
+            <fileset dir="ressources" targetdir="$INSTALL_PATH">
+            	<include name="Readme.txt"/>
+            	<include name="License.txt"/>
+            	<include name="setup.xml"/>    	
+            </fileset>
+            <fileset dir="../../../argouml-andromda" targetdir="$INSTALL_PATH/ext">
+            	<include name="build/*.jar"/>
+            	<include name="lib/*.jar"/>
+            </fileset>
+            <parsable targetfile="$INSTALL_PATH/setup.xml"/> 
+        </pack>
+    </packs>
+
+    <!-- Support JAR files for jobs -->
+    <jar src="../lib/ant-1.6.5.jar" stage="both" />
+    <jar src="../lib/ant-launcher-1.6.5.jar" stage="both" />
+    
+</installation>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+     8 janv. 2006 23:25:54                                                        
+
+     doit-izpack-installer    
+     Do it build file for the IzPack installer.
+                   
+     lmaitre                                                                
+     ====================================================================== -->
+<project name="doit-izpack-installer" default="usage">
+	<description>
+            Do it build file for the IzPack installer.
+    </description>
+
+	<!-- ================================= 
+          target: usage              
+         ================================= -->
+	<target name="usage" depends="init" description="--> Do it build file for the IzPack installer.">
+		<echo>Targets:</echo>
+		<echo>do-all			Build all installers</echo>
+		<echo>do-argouml			Build ArgoUML installer</echo>
+		<echo>do-argouml-andromda		Build the ArgoUML-AndroMDA module installer</echo>
+		<echo>do-argosoffice		Build the ArgoUML-StarOffice module installer</echo>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="init">
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: do-all                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="do-all" description="--> Do all installers.">
+		<antcall target="do-argouml" />
+		<antcall target="do-argouml-andromda" />
+		<antcall target="do-argosoffice" />
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: do-argouml                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="do-argouml" description="--> Do ArgoUML installer">
+		<ant dir="argouml" target="build"/>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: do-argouml                      
+	         - - - - - - - - - - - - - - - - - -->
+	<target name="do-argouml-andromda" description="--> Do ArgoUML-AndroMDA installer">
+		<ant dir="argouml-andromda" target="build"/>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: do-argouml                      
+	         - - - - - - - - - - - - - - - - - -->
+	<target name="do-argosoffice" description="--> Do ArgoUML-StarOffice installer">
+		<ant dir="argosoffice" target="build"/>
+	</target>
+
+</project>
