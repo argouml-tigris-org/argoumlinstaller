@@ -57,7 +57,7 @@
     <resources>
         <res id="LicencePanel.licence" src="../../../argouml/src_new/argouml.LICENSE.txt"/>
         <res id="InfoPanel.info" src="../../../argouml/build/README.txt"/>
-        <res id="installer.langsel.img" src="../../../argouml/src_new/org/argouml/Images/splash.png"/>
+        <res id="installer.langsel.img" src="../../../argouml/src_new/org/argouml/Images/Splash.png"/>
     </resources>
     
     <!-- 
