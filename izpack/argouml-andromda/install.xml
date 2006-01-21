@@ -49,7 +49,7 @@
         <res id="InfoPanel.info" src="ressources/Readme.txt"/>
         <res id="AntActionsSpec.xml" src="ressources/AntSpecs.xml" />
         <res id="userInputSpec.xml" src="ressources/UserInputSpecs.xml"/>
-        ?<res id="ProcessPanel.Spec.xml" src="ressources/AndroMDAPluginProcess.xml" />
+        <res id="ProcessPanel.Spec.xml" src="ressources/AndroMDAPluginProcess.xml" />
     </resources>
     
     <!-- 
@@ -70,11 +70,12 @@
         <panel classname="SimpleFinishPanel"/>
     </panels>
     
-    <!-- The listener section -->
+    <!-- The listener section
     <listeners>
         <listener installer="AntActionInstallerListener"
           uninstaller="AntActionUninstallerListener" />
     </listeners>
+    -->
 
     <!-- 
         The packs section.
@@ -89,9 +90,11 @@
             	<include name="License.txt"/>
             	<include name="setup.xml"/>    	
             </fileset>
-            <fileset dir="../../../argouml-andromda" targetdir="$INSTALL_PATH/ext">
-            	<include name="build/*.jar"/>
-            	<include name="lib/*.jar"/>
+            <fileset dir="../../../argouml-andromda/build" targetdir="$INSTALL_PATH/ext">
+            	<include name="*.jar"/>
+            </fileset>
+            <fileset dir="../../../argouml-andromda/lib" targetdir="$INSTALL_PATH/ext">
+            	<include name="*.jar"/>
             </fileset>
             <parsable targetfile="$INSTALL_PATH/setup.xml"/> 
         </pack>
@@ -100,5 +103,7 @@
     <!-- Support JAR files for jobs -->
     <jar src="../lib/ant-1.6.5.jar" stage="both" />
     <jar src="../lib/ant-launcher-1.6.5.jar" stage="both" />
+    <jar src="../lib/ant-nodeps-1.6.5.jar" stage="both" />
+    <jar src="../lib/izpack-ext.jar" stage="both" />
     
 </installation>
