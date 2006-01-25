@@ -47,7 +47,6 @@
     <resources>
         <res id="LicencePanel.licence" src="ressources/License.txt"/>
         <res id="InfoPanel.info" src="ressources/Readme.txt"/>
-        <res id="AntActionsSpec.xml" src="ressources/AntSpecs.xml" />
         <res id="userInputSpec.xml" src="ressources/UserInputSpecs.xml"/>
         <res id="ProcessPanel.Spec.xml" src="ressources/AndroMDAPluginProcess.xml" />
     </resources>
@@ -69,13 +68,6 @@
         ?<panel classname="ProcessPanel"/>
         <panel classname="SimpleFinishPanel"/>
     </panels>
-    
-    <!-- The listener section
-    <listeners>
-        <listener installer="AntActionInstallerListener"
-          uninstaller="AntActionUninstallerListener" />
-    </listeners>
-    -->
 
     <!-- 
         The packs section.
