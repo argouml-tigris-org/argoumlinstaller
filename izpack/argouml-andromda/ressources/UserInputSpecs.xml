@@ -52,12 +52,12 @@
                 txt="Use MDR libs of AndroMDA with ArgoUML (replacing the original)"
                 id="useAndromdaLibsDesc" />
             <spec txt="Use MDR libs of AndroMDA"
-                id="useAndromdaLibsSpec" true="true" false="false"
+                id="useAndromdaLibsSpec" true="-DuseAndromdaLibs=true" false=""
                 set="true" />
         </field>
         <field type="check" variable="USE_ANDRO_PROFILE">
             <spec txt="Use AndroMDA profile" id="useAndromdaProfileSpec"
-                true="true" false="false" set="false" />
+                true="-DuseAndromdaProfile=true" false="" set="true" />
         </field>
     </panel>
 

@@ -16,29 +16,47 @@
     <!-- ================================= 
           target: setup              
          ================================= -->
-    <target name="setup" depends="init,copy-mdr-to-argouml,install-andromda-in-argo" 
+    <target name="setup" depends="init,copy-mdr-libs,activate-profile" 
     	description="--> Setup the MDA Toolchain after installation"/>
     
     <!-- - - - - - - - - - - - - - - - - - 
           target: install-andromda-in-maven                      
          - - - - - - - - - - - - - - - - - -->
-    <target name="install-andromda-in-argo">
-	<!-- Update properties of ArgoUML with collected values -->
-    	<propertyfile file="${user.home}/argouml.user.properties">
-    		<entry key="argo.andromda.home" value="$INSTALL_PATH/andromda"/>
-    		<entry key="argo.defaultModel" value="$INSTALL_PATH/andromda/andromda/xml.zips/andromda-profile-${andromda.version}.xml.zip"/>
-    		<entry key="argo.maven.home" value="$INSTALL_PATH/maven"/>
-    	</propertyfile>
+    <target name="activate-profile" depends="init" if="useAndromdaProfile">
+    		<echo>Update ArgoUML property file</echo>
+    		<path id="maven"></path>
+		<pathconvert property="maven.home" dirsep="/">
+			<path location="$MAVEN_HOME"/>
+		</pathconvert>
+		<pathconvert property="andromda.home" dirsep="/">
+			<path location="$ANDROMDA_HOME"/>
+		</pathconvert>
+		<!-- Update properties of ArgoUML with collected values -->
+    		<propertyfile file="${user.home}/argo.user.properties">
+    			<entry key="argo.andromda.home" value="${andromda.home}"/>
+    			<entry key="argo.defaultModel" value="${andromda.home}/andromda/xml.zips/andromda-profile-${andromda.version}.xml.zip"/>
+    			<entry key="argo.maven.home" value="${maven.home}"/>
+    		</propertyfile>
     </target>
 
     <!-- - - - - - - - - - - - - - - - - - 
           target: copy-mdr-to-argouml                      
          - - - - - - - - - - - - - - - - - -->
-    <target name="copy-mdr-to-argouml" if="${useAndromdaLibs}">
-    	  <copy todir="$INSTALL_PATH/argouml" overwrite="true">
-    	    <fileset dir="$INSTALL_PATH/andromda/lib/mdr/jars"/>
-    	    <globmapper from="*-${andromda.mdr.timestamp}.jar" to="*.jar"/>
-    	  </copy>  
+    <target name="copy-mdr-libs" depends="init" if="useAndromdaLibs">
+		<echo>Install AndroMDA MDR libs</echo>
+    		<copy todir="$INSTALL_PATH">
+			<fileset dir="$INSTALL_PATH">
+    				<include name="jmiutils.jar"/>
+    				<include name="mdrapi.jar"/>
+        			<include name="nbmdr.jar"/>
+        			<include name="openide-util.jar"/>
+			</fileset>
+        	    <globmapper from="*.jar" to="*.jar.bak"/>
+    		</copy>
+		<copy todir="$INSTALL_PATH" overwrite="true">
+    	    		<fileset dir="$ANDROMDA_HOME/lib/mdr/jars"/>
+    	    		<globmapper from="*-${andromda.mdr.timestamp}.jar" to="*.jar"/>
+		</copy> 
     </target>
 
     <!-- - - - - - - - - - - - - - - - - - 
@@ -46,8 +64,6 @@
          - - - - - - - - - - - - - - - - - -->
     <target name="init">
     	<property name="andromda.mdr.timestamp" value="20050630"/>
-    	<property name="useAndromdaLibs" value="$USE_ANDRO_LIBS"/>
-    	<property name="useAndromdaProfile" value="$USE_ANDRO_PROFILE"/>
     </target>
 
 </project>
