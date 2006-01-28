@@ -18,20 +18,35 @@
 		-->
 		<property name="izpack.dir" value=".." />
 		<taskdef name="izpack" classpath="${izpack.dir}/lib/izpack-standalone-compiler-3.8.1.jar" classname="com.izforge.izpack.ant.IzPackTask" />
-		<property name="installer.version" value="0.1" />
-		<property name="installer.name" value="argouml-installer" />
+		<property name="argo.version" value="0.20.BETA_2"/>
+		<property name="installer.name" value="argouml-${argo.version}-installer" />
 		<property name="dist.dir" value="${basedir}/dist" />
+		<property name="argo.dir" value="${user.home}/tmp/ArgoUML-${argo.version}"/>
+		<property name="argo-root" value="../../../argouml"/>
+		<property name="argo-mdr-root" value="../../../argouml-mdr"/>	
 	</target>
 
 	<!-- ================================= 
+          target: build
+         ================================= -->
+	<target name="build" depends="init,clean,make-install" description="--> Create the installer. The targets 'package' in ArgoUML and 'jar' in ArgoUML-MDR must have been previously called successfully.">
+		<echo message="Makes the installer using IzPack from source distribution" />
+		<!-- Standalone installer -->
+		<izpack input="${basedir}/install.xml" output="${dist.dir}/${installer.name}.jar" installerType="standard" basedir="${basedir}" izPackDir="${izpack.dir}" />
+		<!-- Web installer -->
+		<izpack input="${basedir}/install.xml" output="${dist.dir}/download/${installer.name}.jar" basedir="${basedir}" izPackDir="${izpack.dir}" />
+	</target>
+	
+	<!-- ================================= 
           target: build              
          ================================= -->
-	<target name="build" depends="init,clean" description="--> Create the installer. The targets 'package' in ArgoUML and 'jar' in ArgoUML-MDR must have been previously called successfully.">
-		<echo message="Makes the installer using IzPack" />
+	<target name="build-from-dist" depends="init,clean,make-install" description="--> Create the installer. The targets 'package' in ArgoUML and 'jar' in ArgoUML-MDR must have been previously called successfully.">
+		<echo message="Makes the installer using IzPack from binary distribution" />
+		<unjar src="${argo.dir}/argouml.jar" dest="build" overwrite="true"/>
 		<!-- Standalone installer -->
-		<izpack input="${basedir}/install.xml" output="${dist.dir}/${installer.name}-${installer.version}.jar" installerType="standard" basedir="${basedir}" izPackDir="${izpack.dir}" />
+		<izpack input="${basedir}/install-from-dist.xml" output="${dist.dir}/${installer.name}.jar" installerType="standard" basedir="${basedir}" izPackDir="${izpack.dir}" />
 		<!-- Web installer -->
-		<izpack input="${basedir}/install.xml" output="${dist.dir}/download/${installer.name}-${installer.version}.jar" basedir="${basedir}" izPackDir="${izpack.dir}" />
+		<izpack input="${basedir}/install-from-dist.xml" output="${dist.dir}/download/${installer.name}.jar" basedir="${basedir}" izPackDir="${izpack.dir}" />
 	</target>
 
 	<!-- ================================= 
@@ -45,6 +60,31 @@
 		</delete>
 		<mkdir dir="${dist.dir}" />
 		<mkdir dir="${dist.dir}/download" />
+		<delete dir="build"/>
+		<mkdir dir="build"/>
 	</target>
+	
+    <!-- ================================= 
+          target: make-install              
+         ================================= -->
+    <target name="make-install" depends="init" description="--> Make the install files">
+		<delete failonerror="false">
+			<fileset dir="${basedir}">
+			    <include name="install.xml"/>
+			    <include name="install-from-dist.xml"/>
+			</fileset>
+		</delete>
+		<filter token="ARGO_VERSION" value="${argo.version}"/>
+		<filter token="ARGO_DIST" value="${argo.dir}"/>
+		<filter token="ARGO_ROOT" value="${argo-root}"/>
+		<filter token="ARGOMDR_ROOT" value="${argo-mdr-root}"/>
+		<copy todir="${basedir}" filtering="true">
+			<fileset dir="${basedir}">
+    				<include name="*.template.xml"/>
+			</fileset>
+			<mapper from="*.template.xml" to="*.xml" type="glob"/>
+		</copy>
+    </target>
+
 
 </project>
