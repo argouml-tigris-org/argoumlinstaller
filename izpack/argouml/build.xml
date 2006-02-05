@@ -18,7 +18,7 @@
 		-->
 		<property name="izpack.dir" value=".." />
 		<taskdef name="izpack" classpath="${izpack.dir}/lib/izpack-standalone-compiler-3.8.1.jar" classname="com.izforge.izpack.ant.IzPackTask" />
-		<property name="argo.version" value="0.20.BETA_2"/>
+		<property name="argo.version" value="0.20.BETA_3"/>
 		<property name="installer.name" value="argouml-${argo.version}-installer" />
 		<property name="dist.dir" value="${basedir}/dist" />
 		<property name="argo.dir" value="${user.home}/tmp/ArgoUML-${argo.version}"/>
@@ -72,6 +72,7 @@
 			<fileset dir="${basedir}">
 			    <include name="install.xml"/>
 			    <include name="install-from-dist.xml"/>
+				<include name="modules.xml"/>
 			</fileset>
 		</delete>
 		<filter token="ARGO_VERSION" value="${argo.version}"/>
@@ -79,11 +80,28 @@
 		<filter token="ARGO_ROOT" value="${argo-root}"/>
 		<filter token="ARGOMDR_ROOT" value="${argo-mdr-root}"/>
 		<copy todir="${basedir}" filtering="true">
-			<fileset dir="${basedir}">
+			<fileset dir="${basedir}/ressources">
     				<include name="*.template.xml"/>
 			</fileset>
 			<mapper from="*.template.xml" to="*.xml" type="glob"/>
 		</copy>
+		<style in="${basedir}/ressources/modulesdef.xml" 
+			style="${basedir}/ressources/Modules2Install.xsl" 
+			out="${basedir}/modules.xml"
+			force="true">
+			<param name="argo-ext-dir" expression="${argo-root}/ext"/>
+		</style>
+		<style in="${basedir}/ressources/modulesdef.xml" 
+			style="${basedir}/ressources/Modules2Install.xsl" 
+			out="${basedir}/modules.xml"
+			force="true">
+			<param name="argo-ext-dir" expression="${argo.dir}/ext"/>
+		</style>
+    		<!-- Modules -->
+    		<loadfile property="modules" srcfile="${basedir}/modules.xml"/>
+    		<replace file="install-from-dist.xml">
+    			<replacefilter token="&lt;!--@MODULES@--&gt;" value="${modules}"/>
+    		</replace>
     </target>
 
 
