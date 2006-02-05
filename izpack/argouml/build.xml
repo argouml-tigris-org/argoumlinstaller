@@ -14,16 +14,19 @@
           target: init
          ================================= -->
 	<target name="init" description="--> Initialize some properties">
+		<!-- Override properties in this file -->
+		<property file="build.properties"/>
+		<!-- User configurable properties -->
+		<property name="argo.version" value="0.20.BETA_3"/>
+		<property name="argo.dir" value="${user.home}/tmp/ArgoUML-${argo.version}"/>
+		<property name="argo-root" value="../../../argouml"/>
+		<property name="argo-mdr-root" value="../../../argouml-mdr"/>	
 		<!-- The IzPack library, this is the standalone lib from the 3.8 distribution.
 		-->
 		<property name="izpack.dir" value=".." />
 		<taskdef name="izpack" classpath="${izpack.dir}/lib/izpack-standalone-compiler-3.8.1.jar" classname="com.izforge.izpack.ant.IzPackTask" />
-		<property name="argo.version" value="0.20.BETA_3"/>
 		<property name="installer.name" value="argouml-${argo.version}-installer" />
 		<property name="dist.dir" value="${basedir}/dist" />
-		<property name="argo.dir" value="${user.home}/tmp/ArgoUML-${argo.version}"/>
-		<property name="argo-root" value="../../../argouml"/>
-		<property name="argo-mdr-root" value="../../../argouml-mdr"/>	
 	</target>
 
 	<!-- ================================= 
