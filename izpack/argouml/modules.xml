@@ -1,0 +1,42 @@
+<pack required="no" name="ClassFile" preselected="yes">
+<description>This module enables ArgoUML to read jar and/or class files and reverse engineer the information contained in it.</description>
+<fileset targetdir="$INSTALL_PATH/ext" dir="/Users/lmaitre/tmp/ArgoUML-0.20.BETA_3/ext">
+<include name="argo_classfile.jar"/>
+</fileset>
+</pack>
+<pack required="no" name="CPP" preselected="yes">
+<description>This module intent is to provide C++ round-trip engineering.</description>
+<fileset targetdir="$INSTALL_PATH/ext" dir="/Users/lmaitre/tmp/ArgoUML-0.20.BETA_3/ext">
+<include name="argo_cpp.jar"/>
+</fileset>
+</pack>
+<pack required="no" name="IDL" preselected="yes">
+<description>This module enables ArgoUML to read IDL files and reverse engineer the information contained in them.</description>
+<fileset targetdir="$INSTALL_PATH/ext" dir="/Users/lmaitre/tmp/ArgoUML-0.20.BETA_3/ext">
+<include name="argo_idl.jar"/>
+</fileset>
+</pack>
+<pack required="no" name="PHP" preselected="yes">
+<description>This module enables ArgoUML to generate PHP source files.</description>
+<fileset targetdir="$INSTALL_PATH/ext" dir="/Users/lmaitre/tmp/ArgoUML-0.20.BETA_3/ext">
+<include name="argo_php.jar"/>
+</fileset>
+</pack>
+<pack required="no" name="CSharp" preselected="yes">
+<description>C# support in ArgoUML</description>
+<fileset targetdir="$INSTALL_PATH/ext" dir="/Users/lmaitre/tmp/ArgoUML-0.20.BETA_3/ext">
+<include name="argouml-csharp.jar"/>
+</fileset>
+</pack>
+<pack required="no" name="Norwegian Bokmal" preselected="no">
+<description>Norwegian Bokmal localization of ArgoUML</description>
+<fileset targetdir="$INSTALL_PATH/ext" dir="/Users/lmaitre/tmp/ArgoUML-0.20.BETA_3/ext">
+<include name="argouml-i18n-nb.jar"/>
+</fileset>
+</pack>
+<pack required="no" name="Chinese" preselected="no">
+<description>Chinese localization of ArgoUML</description>
+<fileset targetdir="$INSTALL_PATH/ext" dir="/Users/lmaitre/tmp/ArgoUML-0.20.BETA_3/ext">
+<include name="argouml-i18n-zh.jar"/>
+</fileset>
+</pack>
