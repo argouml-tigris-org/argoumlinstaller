@@ -90,6 +90,14 @@
             </fileset>
             <parsable targetfile="$INSTALL_PATH/setup.xml"/> 
         </pack>
+        <pack name="ArgoUML-Launcher" required="yes">
+            <description>ArgoUML profile launcher</description>
+            <fileset dir="../../../argouml-andromda/build" targetdir="$INSTALL_PATH">
+            	<include name="argouml-launcher.jar"/>
+            	<include name="exec-1.0-SNAPSHOT.jar"/>
+            </fileset>
+            <parsable targetfile="$INSTALL_PATH/setup.xml"/> 
+        </pack>
     </packs>
 
     <!-- Support JAR files for jobs -->
