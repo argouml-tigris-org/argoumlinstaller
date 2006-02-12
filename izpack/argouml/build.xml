@@ -25,7 +25,7 @@
 		-->
 		<property name="izpack.dir" value=".." />
 		<taskdef name="izpack" classpath="${izpack.dir}/lib/izpack-standalone-compiler-3.8.1.jar" classname="com.izforge.izpack.ant.IzPackTask" />
-		<property name="installer.name" value="argouml-${argo.version}-installer" />
+		<property name="installer.name" value="ArgoUML-${argo.version}-installer" />
 		<property name="dist.dir" value="${basedir}/dist" />
 		<property name="build.dir" value="${basedir}/build"/>
 	</target>
@@ -46,7 +46,9 @@
          ================================= -->
 	<target name="build-from-dist" depends="init,clean,prepare,make-install" description="--> Create the installer. The targets 'package' in ArgoUML and 'jar' in ArgoUML-MDR must have been previously called successfully.">
 		<echo message="Makes the installer using IzPack from binary distribution" />
-		<delete includeemptydirs="true" dir="${dist.dir}"/>
+		<delete dir="${dist.dir}">
+			<include name="**/*.jar"/>
+		</delete>
 		<mkdir dir="${dist.dir}"/>
 		<mkdir dir="${dist.dir}/web" />
 		<unjar src="${argo.dir}/argouml.jar" dest="build" overwrite="true">
