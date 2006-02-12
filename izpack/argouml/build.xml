@@ -2,7 +2,7 @@
 <!-- ====================================================================== 
      27 août 2005 00:19:39                                                        
 
-     ArgoUML IzPack Installer
+     ArgoUML IzPack Installer.
      Require IzPack 3.8+          
      lmaitre                                                                
      ====================================================================== -->
@@ -27,6 +27,7 @@
 		<taskdef name="izpack" classpath="${izpack.dir}/lib/izpack-standalone-compiler-3.8.1.jar" classname="com.izforge.izpack.ant.IzPackTask" />
 		<property name="installer.name" value="argouml-${argo.version}-installer" />
 		<property name="dist.dir" value="${basedir}/dist" />
+		<property name="build.dir" value="${basedir}/build"/>
 	</target>
 
 	<!-- ================================= 
@@ -43,28 +44,27 @@
 	<!-- ================================= 
           target: build              
          ================================= -->
-	<target name="build-from-dist" depends="init,clean,make-install" description="--> Create the installer. The targets 'package' in ArgoUML and 'jar' in ArgoUML-MDR must have been previously called successfully.">
+	<target name="build-from-dist" depends="init,clean,prepare,make-install" description="--> Create the installer. The targets 'package' in ArgoUML and 'jar' in ArgoUML-MDR must have been previously called successfully.">
 		<echo message="Makes the installer using IzPack from binary distribution" />
-		<unjar src="${argo.dir}/argouml.jar" dest="build" overwrite="true"/>
+		<delete includeemptydirs="true" dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}/web" />
+		<unjar src="${argo.dir}/argouml.jar" dest="build" overwrite="true">
+		    <patternset>
+		        <include name="org/argouml/Images/Splash.png"/>
+		    	</patternset>
+		</unjar>
 		<!-- Standalone installer -->
 		<izpack input="${basedir}/install-from-dist.xml" output="${dist.dir}/${installer.name}.jar" installerType="standard" basedir="${basedir}" izPackDir="${izpack.dir}" />
 		<!-- Web installer -->
-		<izpack input="${basedir}/install-from-dist.xml" output="${dist.dir}/download/${installer.name}.jar" basedir="${basedir}" izPackDir="${izpack.dir}" />
+		<izpack input="${basedir}/install-from-dist.xml" output="${dist.dir}/web/${installer.name}.jar" basedir="${basedir}" izPackDir="${izpack.dir}" />
 	</target>
 
 	<!-- ================================= 
           target: clean              
          ================================= -->
 	<target name="clean" depends="init" description="--> Clean dist folder">
-		<delete includeemptydirs="true" failonerror="false">
-			<fileset dir="${dist.dir}" defaultexcludes="false">
-				<include name="**" />
-			</fileset>
-		</delete>
-		<mkdir dir="${dist.dir}" />
-		<mkdir dir="${dist.dir}/download" />
-		<delete dir="build"/>
-		<mkdir dir="build"/>
+		<delete includeemptydirs="true" dir="${build.dir}"/>
 	</target>
 	
     <!-- ================================= 
@@ -106,6 +106,35 @@
     			<replacefilter token="&lt;!--@MODULES@--&gt;" value="${modules}"/>
     		</replace>
     </target>
+
+	
+    <!-- ================================= 
+          target: prepare              
+         ================================= -->
+    <target name="prepare" depends="init" description="--> Prepare the build, copying and unzipping the ArgoUML dist to package in the right place.">
+    		<mkdir dir="${build.dir}"/>
+    		<untar dest="${build.dir}" compression="gzip">
+			<fileset dir="${argouml.downloads.dir}">
+    				<include name="ArgoUML-${argo.version}.tar.gz"/>
+				<include name="ArgoUML-${argo.version}-modules.tar.gz"/>
+			</fileset>
+    		</untar>
+    		<mkdir dir="${build.dir}/doc"/>
+    		<copy todir="${build.dir}/doc">
+			<fileset dir="${argouml.downloads.dir}">
+    				<include name="*.pdf"/>
+			</fileset>
+    		</copy>
+    </target>
+
+	
+    <!-- ================================= 
+          target: deploy              
+         ================================= -->
+    <target name="deploy" depends="init" description="--> Copy the installers in the final folder of the website.">
+        
+    </target>
+
 
 
 </project>
