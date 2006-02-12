@@ -50,7 +50,7 @@
     <resources>
         <res id="LicencePanel.licence" src="ressources/LICENSE.txt"/>
         <res id="InfoPanel.info" src="@ARGO_DIST@/README.txt"/>
-        <res id="installer.langsel.img" src="build/org/argouml/Images/Splash.png"/>
+        <res id="installer.langsel.img" src="@ARGO_DIST@/org/argouml/Images/Splash.png"/>
     </resources>
     
     <!-- 
@@ -76,6 +76,7 @@
             <!-- ArgoUML -->
             <fileset dir="@ARGO_DIST@" targetdir="$INSTALL_PATH">
 	            	<include name="*.*"/>	
+	            	<exclude name="org/argouml/Images/Splash.png"/>
             </fileset>
             <executable targetfile="$INSTALL_PATH/argouml.sh" stage="never">
 	            	<os family="unix"/>
@@ -84,6 +85,13 @@
          </pack>
          <!--@MODULES@-->
          <!--@DOCUMENTATION@-->
+        <pack name="Documentation" required="no">
+            <description>ArgoUML Documentation</description>
+            <!-- ArgoUML Documentation -->
+            <fileset dir="@ARGO_DIST@/doc" targetdir="$INSTALL_PATH/doc">
+	            	<include name="*.*"/>	
+            </fileset>
+         </pack>         
     </packs>
     
 </installation>
