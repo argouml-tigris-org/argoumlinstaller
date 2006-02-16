@@ -38,7 +38,7 @@
 		<!-- Standalone installer -->
 		<izpack input="${basedir}/install.xml" output="${dist.dir}/${installer.name}.jar" installerType="standard" basedir="${basedir}" izPackDir="${izpack.dir}" />
 		<!-- Web installer -->
-		<izpack input="${basedir}/install.xml" output="${dist.dir}/download/${installer.name}.jar" basedir="${basedir}" izPackDir="${izpack.dir}" />
+		<izpack input="${basedir}/install.xml" output="${dist.dir}/web/${installer.name}.jar" basedir="${basedir}" izPackDir="${izpack.dir}" />
 	</target>
 	
 	<!-- ================================= 
