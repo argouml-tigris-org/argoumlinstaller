@@ -15,19 +15,20 @@
          ================================= -->
 	<target name="init" description="--> Initialize some properties">
 		<!-- Override properties in this file -->
-		<property file="build.properties"/>
+		<property file="build.properties" />
 		<!-- User configurable properties -->
-		<property name="argo.version" value="0.20.BETA_3"/>
-		<property name="argo.dir" value="${user.home}/tmp/ArgoUML-${argo.version}"/>
-		<property name="argo-root" value="../../../argouml"/>
-		<property name="argo-mdr-root" value="../../../argouml-mdr"/>	
+		<property name="argo.version" value="0.20.BETA_3" />
+		<property name="argo.dir" value="${user.home}/tmp/ArgoUML-${argo.version}" />
+		<property name="argo-root" value="../../../argouml" />
+		<property name="argo-mdr-root" value="../../../argouml-mdr" />
 		<!-- The IzPack library, this is the standalone lib from the 3.8 distribution.
 		-->
 		<property name="izpack.dir" value=".." />
 		<taskdef name="izpack" classpath="${izpack.dir}/lib/izpack-standalone-compiler-3.8.1.jar" classname="com.izforge.izpack.ant.IzPackTask" />
 		<property name="installer.name" value="ArgoUML-${argo.version}-installer" />
 		<property name="dist.dir" value="${basedir}/dist" />
-		<property name="build.dir" value="${basedir}/build"/>
+		<property name="dist.dir" value="${basedir}/dist/web" />
+		<property name="build.dir" value="${basedir}/build" />
 	</target>
 
 	<!-- ================================= 
@@ -40,21 +41,16 @@
 		<!-- Web installer -->
 		<izpack input="${basedir}/install.xml" output="${dist.dir}/web/${installer.name}.jar" basedir="${basedir}" izPackDir="${izpack.dir}" />
 	</target>
-	
+
 	<!-- ================================= 
           target: build              
          ================================= -->
 	<target name="build-from-dist" depends="init,clean,prepare,make-install" description="--> Create the installer. The targets 'package' in ArgoUML and 'jar' in ArgoUML-MDR must have been previously called successfully.">
 		<echo message="Makes the installer using IzPack from binary distribution" />
-		<delete dir="${dist.dir}">
-			<include name="**/*.jar"/>
-		</delete>
-		<mkdir dir="${dist.dir}"/>
-		<mkdir dir="${dist.dir}/web" />
 		<unjar src="${argo.dir}/argouml.jar" dest="build" overwrite="true">
-		    <patternset>
-		        <include name="org/argouml/Images/Splash.png"/>
-		    	</patternset>
+			<patternset>
+				<include name="org/argouml/Images/Splash.png" />
+			</patternset>
 		</unjar>
 		<!-- Standalone installer -->
 		<izpack input="${basedir}/install-from-dist.xml" output="${dist.dir}/${installer.name}.jar" installerType="standard" basedir="${basedir}" izPackDir="${izpack.dir}" />
@@ -66,77 +62,105 @@
           target: clean              
          ================================= -->
 	<target name="clean" depends="init" description="--> Clean dist folder">
-		<delete includeemptydirs="true" dir="${build.dir}"/>
+		<delete includeemptydirs="true" dir="${build.dir}" />
+		<delete includeemptydirs="true" dir="${dist.dir}" />
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${dist.dir}/web" />
 	</target>
-	
-    <!-- ================================= 
+
+	<!-- ================================= 
           target: make-install              
          ================================= -->
-    <target name="make-install" depends="init" description="--> Make the install files">
+	<target name="make-install" depends="init" description="--> Make the install files">
 		<delete failonerror="false">
 			<fileset dir="${basedir}">
-			    <include name="install.xml"/>
-			    <include name="install-from-dist.xml"/>
-				<include name="modules.xml"/>
+				<include name="install.xml" />
+				<include name="install-from-dist.xml" />
+				<include name="modules.xml" />
+				<include name="modules-from-source.xml" />
 			</fileset>
 		</delete>
-		<filter token="ARGO_VERSION" value="${argo.version}"/>
-		<filter token="ARGO_DIST" value="${argo.dir}"/>
-		<filter token="ARGO_ROOT" value="${argo-root}"/>
-		<filter token="ARGOMDR_ROOT" value="${argo-mdr-root}"/>
+		<filter token="ARGO_VERSION" value="${argo.version}" />
+		<filter token="ARGO_DIST" value="${argo.dir}" />
+		<filter token="ARGO_ROOT" value="${argo-root}" />
+		<filter token="ARGOMDR_ROOT" value="${argo-mdr-root}" />
+		<filter token="PROJECT_URL" value="${project.url}" />
+		<filter token="PROJECT_WEBDIR" value="${project.webdir}" />
 		<copy todir="${basedir}" filtering="true">
 			<fileset dir="${basedir}/ressources">
-    				<include name="*.template.xml"/>
+				<include name="*.template.xml" />
 			</fileset>
-			<mapper from="*.template.xml" to="*.xml" type="glob"/>
+			<mapper from="*.template.xml" to="*.xml" type="glob" />
 		</copy>
-		<style in="${basedir}/ressources/modulesdef.xml" 
-			style="${basedir}/ressources/Modules2Install.xsl" 
-			out="${basedir}/modules.xml"
-			force="true">
-			<param name="argo-ext-dir" expression="${argo-root}/ext"/>
+		<!-- The module file for installation from source -->
+		<style in="${basedir}/ressources/modulesdef.xml" style="${basedir}/ressources/Modules2Install.xsl" out="${basedir}/modules-from-source.xml" force="true">
+			<param name="argo-ext-dir" expression="${argo-root}/build/ext" />
 		</style>
-		<style in="${basedir}/ressources/modulesdef.xml" 
-			style="${basedir}/ressources/Modules2Install.xsl" 
-			out="${basedir}/modules.xml"
-			force="true">
-			<param name="argo-ext-dir" expression="${argo.dir}/ext"/>
+		<!-- The module file for installation from dist -->
+		<style in="${basedir}/ressources/modulesdef.xml" style="${basedir}/ressources/Modules2Install.xsl" out="${basedir}/modules.xml" force="true">
+			<param name="argo-ext-dir" expression="${argo.dir}/ext" />
 		</style>
-    		<!-- Modules -->
-    		<loadfile property="modules" srcfile="${basedir}/modules.xml"/>
-    		<replace file="install-from-dist.xml">
-    			<replacefilter token="&lt;!--@MODULES@--&gt;" value="${modules}"/>
-    		</replace>
-    </target>
+		<!-- Modules -->
+		<antcall target="prepare-modules" />
+	</target>
 
-	
-    <!-- ================================= 
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: prepare-modules                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="prepare-modules" unless="skip-modules">
+		<loadfile property="modules-from-source" srcfile="${basedir}/modules-from-source.xml" />
+		<replace file="install.xml">
+			<replacefilter token="&lt;!--@MODULES@--&gt;" value="${modules-from-source}" />
+		</replace>
+		<loadfile property="modules" srcfile="${basedir}/modules.xml" />
+		<replace file="install-from-dist.xml">
+			<replacefilter token="&lt;!--@MODULES@--&gt;" value="${modules}" />
+		</replace>
+	</target>
+
+	<!-- ================================= 
           target: prepare              
          ================================= -->
-    <target name="prepare" depends="init" description="--> Prepare the build, copying and unzipping the ArgoUML dist to package in the right place.">
-    		<mkdir dir="${build.dir}"/>
-    		<untar dest="${build.dir}" compression="gzip">
+	<target name="prepare" depends="init" description="--> Prepare the build, copying and unzipping the ArgoUML dist to package in the right place.">
+		<mkdir dir="${build.dir}" />
+		<untar dest="${build.dir}" compression="gzip">
 			<fileset dir="${argouml.downloads.dir}">
-    				<include name="ArgoUML-${argo.version}.tar.gz"/>
-				<include name="ArgoUML-${argo.version}-modules.tar.gz"/>
+				<include name="ArgoUML-${argo.version}.tar.gz" />
+				<include name="ArgoUML-${argo.version}-modules.tar.gz" />
 			</fileset>
-    		</untar>
-    		<mkdir dir="${build.dir}/doc"/>
-    		<copy todir="${build.dir}/doc">
+		</untar>
+		<mkdir dir="${build.dir}/doc" />
+		<copy todir="${build.dir}/doc">
 			<fileset dir="${argouml.downloads.dir}">
-    				<include name="*.pdf"/>
+				<include name="*.pdf" />
 			</fileset>
-    		</copy>
-    </target>
+		</copy>
+	</target>
 
-	
-    <!-- ================================= 
+	<!-- ================================= 
           target: deploy              
          ================================= -->
-    <target name="deploy" depends="init" description="--> Copy the installers in the final folder of the website.">
-        
-    </target>
+	<target name="deploy" depends="init" description="--> Copy the installers in the final folder of the website.">
 
+	</target>
+
+	
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: build-argo-and-mdr                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="build-argo-and-mdr" depends="init">
+    		<echo>Building ArgoUML</echo>
+        <exec dir="${argo-root}/src_new" command="build.sh">
+        		<arg value="clean"/>
+        		<arg value="package"/>
+        </exec>
+		<echo>Building ArgoUML-MDR</echo>
+        <exec dir="${argo-mdr-root}" command="build.sh">
+        		<arg value="clean"/>
+	    		<arg value="package"/>
+	    		<arg value="install"/>
+        </exec>
+    </target>
 
 
 </project>
