@@ -19,8 +19,8 @@
         <authors>
             <author name="ArgoUML development team" email="dev@argouml.tigris.org"/>
         </authors>
-        <url>http://argouml.tigris.org/</url>
-        <webdir>http://argouml.tigris.org/download</webdir>
+        <url>@PROJECT_URL@</url>
+        <webdir>@PROJECT_WEBDIR@</webdir>        
         <javaversion>1.4</javaversion>
     </info>
 
@@ -49,7 +49,7 @@
     -->
     <resources>
         <res id="LicencePanel.licence" src="@ARGO_ROOT@/src_new/argouml.LICENSE.txt"/>
-        <res id="InfoPanel.info" src="@ARGO_ROOT@/build/README.txt"/>
+        <res id="InfoPanel.info" src="@ARGO_ROOT@/src_new/README.txt"/>
         <res id="installer.langsel.img" src="@ARGO_ROOT@/src_new/org/argouml/Images/Splash.png"/>
     </resources>
     

@@ -19,8 +19,8 @@
         <authors>
             <author name="ArgoUML development team" email="dev@argouml.tigris.org"/>
         </authors>
-        <url>http://argouml.tigris.org/</url>
-        <webdir>http://argouml-downloads.tigris.org/nonav/argouml-0.20/izpack/web</webdir>
+        <url>@PROJECT_URL@</url>
+        <webdir>@PROJECT_WEBDIR@</webdir>
         <javaversion>1.4</javaversion>
     </info>
 
