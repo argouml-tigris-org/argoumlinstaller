@@ -1,4 +1,5 @@
 #!/bin/sh
+# $Id$
 
 # This file will copy the jar files that are modified from
 # ../../VERSION_XX/argouml/build
@@ -142,7 +143,8 @@ EOF
 
 cat $FILES |
 sed 's;^;    <jar href="http://argouml-downloads.tigris.org/maven2/;' |
-sed 's;$;"/>;' >> $JNLPFILE
+sed 's;$;"/>;' |
+sed 's;org/argouml/argouml/.*";& main="true";' >> $JNLPFILE
 
 cat >> $JNLPFILE <<EOF
 
