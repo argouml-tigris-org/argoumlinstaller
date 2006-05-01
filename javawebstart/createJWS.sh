@@ -6,10 +6,10 @@
 # and
 # ../../VERSION_XX/argouml/build/ext
 # to a structure under
-# ../../../svn/argouml-downloads/trunk/www/maven2
+# ../../../svn/argouml-downloads/www/maven2
 # according to the setup in the file LAYOUT.
 # The created jnlp file will end up in
-# ../../../svn/argouml-downloads/trunk/www/jws
+# ../../../svn/argouml-downloads/www/jws
 
 # Must be run from this directory.
 if test ! -r LAYOUT; then
@@ -23,8 +23,8 @@ read releasename
 directory=VERSION_`echo $releasename | sed 's/\./_/g'`_F
 
 SOURCEDIRS="../../$directory/argouml/build ../../$directory/argouml/build/ext"
-TARGETDIR="../../../svn/argouml-downloads/trunk/www/maven2"
-JNLPTARGETDIR="../../../svn/argouml-downloads/trunk/www/jws"
+TARGETDIR="../../../svn/argouml-downloads/www/maven2"
+JNLPTARGETDIR="../../../svn/argouml-downloads/www/jws"
 
 CMDS=tmp-commands$$.sh
 FILES=tmp-files$$.sh
