@@ -2,9 +2,9 @@
 # $Id$
 
 # This file will copy the jar files that are modified from
-# ../../VERSION_XX/argouml/build
+# ../../VERSION_XX_F/argouml/build
 # and
-# ../../VERSION_XX/argouml/build/ext
+# ../../VERSION_XX_F/argouml/build/ext
 # to a structure under
 # ../../../svn/argouml-downloads/www/maven2
 # according to the setup in the file LAYOUT.
