@@ -4,10 +4,10 @@
 BUILD=PACKRELEASE:
 
 echo $BUILD The purpose of this shellscript is to take the contents
-echo $BUILD of the build directory, tar/zip/whatever it and upload it.
+echo $BUILD of the build directory, and create tar and zip files.
 
-# Check that JAVA_HOME is set.
-if test ! -x $JAVA_HOME/bin/javac
+# Check that JAVA_HOME is set correctly (for jar)
+if test ! -x $JAVA_HOME/bin/jar
 then
     echo JAVA_HOME is not set correctly.
     exit 1;
@@ -19,8 +19,14 @@ then
     exit 1;
 fi
 
+echo "This script expects that the directory VERSION_X_Y_X_F/argouml/build"
+echo "contains a newly built release."
+echo ""
+
 echo "Give the name of the release (like X.Y.Z)."
 read releasename
+
+mkdir ../svn/argouml-downloads/www/argouml-$releasename
 
 directory=VERSION_`echo $releasename | sed 's/\./_/g'`_F
 
@@ -54,28 +60,14 @@ mkdir DIST
   tar cvf DIST/ArgoUML-$releasename-src.tar --exclude="CVS" $SRCDIRS
 )
 ( cd DIST && gzip -v *.tar )
-cp argouml/build/*.pdf DIST
-
-# Copy the Java Web Start stuff
-mkdir DIST/jws
-cp argouml/build/*.jar DIST/jws
-mkdir DIST/jws/ext
-cp argouml/build/ext/*.jar DIST/jws/ext
-for jnlpfile in argouml/src_new/templates/jnlp/*.jnlp
-do
-  sed "s,@URLROOT@,http://argouml-downloads.tigris.org/argouml-$releasename,g;s,@VERSION@,$releasename,g" < $jnlpfile > DIST/jws/`basename $jnlpfile`
-done
 
 sed "s,@URLROOT@,http://argouml-downloads.tigris.org/nonav/argouml-$releasename,g;s,@VERSION@,$releasename,g" < argouml/src_new/templates/release_html.template > DIST/index.html
 
 echo $BUILD copying to the svn directory
-mv DIST ../../svn/argouml-downloads/www/argouml-$releasename
+mv DIST/* ../../svn/argouml-downloads/www/argouml-$releasename
+rmdir DIST
 
 echo Add and commit the newly created directory
 echo ../svn/argouml-downloads/www/$directoryname
 
 echo Update the index.html in the argouml-downloads project.
-
-echo "Copy the index file to the download directory (argouml/www/download)"
-echo and add and commit it there. This is not in the tagged version but
-echo in the echo original version.
