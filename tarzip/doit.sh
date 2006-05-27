@@ -41,18 +41,13 @@ echo "$BUILD Create the zip and tar files."
 mkdir DIST
 (
   cd argouml/build;
-  $JAVA_HOME/bin/jar cvf ../../DIST/ArgoUML-$releasename.zip *.jar README.txt *.sh *.bat
-  tar cvf ../../DIST/ArgoUML-$releasename.tar *.jar README.txt *.sh *.bat
+  $JAVA_HOME/bin/jar cvf ../../DIST/ArgoUML-$releasename.zip *.jar README.txt *.sh *.bat ext/*.jar
+  tar cvf ../../DIST/ArgoUML-$releasename.tar *.jar README.txt *.sh *.bat ext/*.jar
 )
 (
   cd argouml/lib;
   $JAVA_HOME/bin/jar cvf ../../DIST/ArgoUML-$releasename-libs.zip *.txt *.jar
   tar cvf ../../DIST/ArgoUML-$releasename-libs.tar *.txt *.jar
-)
-(
-  cd argouml/build;
-  $JAVA_HOME/bin/jar cvf ../../DIST/ArgoUML-$releasename-modules.zip ext/*.jar
-  tar cvf ../../DIST/ArgoUML-$releasename-modules.tar ext/*.jar
 )
 (
   SRCDIRS="argouml/src_new argouml/src/*/src argouml-*/src"
