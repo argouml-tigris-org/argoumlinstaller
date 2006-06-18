@@ -62,11 +62,13 @@ do
 
         rootname=`basename $jar .jar`
         groupiddir=`echo $groupid | tr . /`
-        lastversion=`ls $TARGETDIR/$groupiddir/$rootname 2> /dev/null | tail -1`
-        lastjar="$TARGETDIR/$groupiddir/$rootname/$lastversion/$rootname-$lastversion.jar"
 
         if test ! -n "$version"
         then
+            # This will only work until version x.y.9. When x.y.10 comes
+            # the lastversion will point to x.y.9 because of the sort order.
+            lastversion=`ls $TARGETDIR/$groupiddir/$rootname 2> /dev/null | tail -1`
+            lastjar="$TARGETDIR/$groupiddir/$rootname/$lastversion/$rootname-$lastversion.jar"
 	    if test ! -f $lastjar
             then
 		echo $rootname new - OK
@@ -85,18 +87,19 @@ do
 		echo $groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $FILES
 	    fi
 	else
-            if test "$version" = "$lastversion"
+            if test -d $TARGETDIR/$groupiddir/$rootname/$version
             then
-		if ./compare-jars.sh $lastjar $foundjar > /dev/null
+                oldjar="$TARGETDIR/$groupiddir/$rootname/$version/$rootname-$version.jar"
+		if ./compare-jars.sh $oldjar $foundjar > /dev/null
 		then
 		    echo $rootname the same version $version - OK
-		    echo $groupiddir/$rootname/$lastversion/$rootname-$lastversion.jar >> $FILES
+		    echo $groupiddir/$rootname/$version/$rootname-$version.jar >> $FILES
 		else
 		    echo $rootname differ - NOT OK - update LAYOUT
 		    exit 1
 		fi
 	    else
-		echo $rootname explicit new version $version replacing $lastversion - OK
+		echo $rootname explicit new version $version - OK
 		echo mkdir $TARGETDIR/$groupiddir/$rootname/$version >> $CMDS
 		echo cp $foundjar $TARGETDIR/$groupiddir/$rootname/$version/$rootname-$version.jar >> $CMDS
 		echo $groupiddir/$rootname/$version/$rootname-$version.jar >> $FILES
