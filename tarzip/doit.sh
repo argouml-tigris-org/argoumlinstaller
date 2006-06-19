@@ -56,7 +56,7 @@ mkdir DIST
 )
 ( cd DIST && gzip -v *.tar )
 
-sed "s,@URLROOT@,http://argouml-downloads.tigris.org/nonav/argouml-$releasename,g;s,@VERSION@,$releasename,g" < argouml/src_new/templates/release_html.template > DIST/index.html
+sed "s,@URLROOT@,http://argouml-downloads.tigris.org/nonav/argouml-$releasename,g;s,@VERSION@,$releasename,g" < argoumlinstaller/tarzip/release_html.template > DIST/index.html
 
 echo $BUILD copying to the svn directory
 mv DIST/* ../../svn/argouml-downloads/www/argouml-$releasename
