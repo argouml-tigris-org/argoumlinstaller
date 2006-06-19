@@ -35,7 +35,7 @@ Quick Guide
 <TR><TH COLSPAN=2>Java Web Start</TH></TR>
 
 <TR><TD>
-<a href="@URLROOT@/jws/argouml.jnlp">Java Web Start</a>
+<a href="http://argouml-downloads.tigris.org/jws/argouml-@VERSION@.jnlp">Java Web Start</a>
 </TD><TD>
 Starts from Java Web Start
 </TD></TR>
