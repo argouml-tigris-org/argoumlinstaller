@@ -18,12 +18,13 @@ nbmdr.jar		org.netbeans.mdr	0.0
 ocl-argo.jar		tudresden.ocl	1.1
 openide-util.jar	org.netbeans.mdr	0.0
 swidgets.jar		org.tigris.swidgets	0.1.4
-toolbar.jar		org.tigris.toolbar	1.2
+toolbar.jar		org.tigris.toolbar	1.3
 # Ext
 argouml-i18n-de.jar	org.argouml
 argouml-i18n-en_GB.jar	org.argouml
 argouml-i18n-es.jar	org.argouml
 argouml-i18n-fr.jar	org.argouml
+argouml-i18n-it.jar	org.argouml
 argouml-i18n-nb.jar	org.argouml
 argouml-i18n-ru.jar	org.argouml
 argouml-i18n-zh.jar	org.argouml
