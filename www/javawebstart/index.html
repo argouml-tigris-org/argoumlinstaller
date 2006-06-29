@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>The javawebstart script</title>
+</head>
+<body>
+
+<div class="h2">
+<h2>javawebstart</h2>
+
+<p>
+The script is called createJWS.sh.
+</p>
+
+<p>
+The javawebstart script copies the files to the maven2-like structure
+in the argouml-downloads project
+used for storing the javawebstart jars and
+creates the jnlp file.
+</p>
+
+<p>
+The version of each jar file is controlled by the LAYOUT file.
+A file in the LAYOUT file is either "argouml-provided" i.e. it will be
+created with the same version as the argouml release or
+not "argouml-provided" i.e. it will be created with the version number
+in the LAYOUT file that is the same version number as that jar file is
+known with.
+</p>
+
+<div class="h3">
+<h3>Tools used</h3>
+<p>
+It must be run on a Cygwin system (probably a Unix system will do).
+</p>
+
+<p>
+On top of the really basic unix commands (sh, mkdir, ls, cp, cat, rm, test, echo, basename, tr, chmod)
+the following are needed:
+grep,
+sed,
+awk,
+cmp,
+unzip,
+diff
+</p>
+
+</div>
+
+</div>
+
+<hr>
+This page was last modified $Date$.
+
+</body>
+</html>
