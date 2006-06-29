@@ -3,13 +3,22 @@
 </head>
 <body>
 
-<h3>Mission</h3>
-This project contains installers for ArgoUML.<p>
+<div class="h2">
+<h2>Mission</h2>
+<p>
+This project contains scripts to package ArgoUML.
+The result of the packaging are "installers"
+i.e. something that can be used to install ArgoUML on a host.
+"Installers" can be for different platforms and different purposes.
+</p>
 
+<p>
 There is one directory for each installer.
 Each directory contains the configuration files, and tools, 
-needed to build a package using that installer.<p>
+needed to build a package using that installer.
+</p>
 
+<p>
 The directory contains a script
 doit.bat if that installer is available on a windows platform, and
 doit.sh if that installer is available on a unix platform.
@@ -20,8 +29,9 @@ doall.sh runs all the installers that works on a unix platform.
 All scripts assume that argouml has been built or downloaded and
 available in
 ../argouml/build.
-<p>
+</p>
 
+<p>
 The documentation of the specifics for each installer is in 
 a directory in the web site part of this directory.
 Each such set contains:
@@ -30,8 +40,8 @@ Each such set contains:
   <li>information on the platform needed to run that installer
   <li>the list of tools to install and links to installation instructions.
 </ul>
-<p>
 
+<p>
 The result of running the installers is either 
 published somewhere on the web
 (the <a href="http://argouml-downloads.tigris.org">argouml-downloads project</a>
@@ -39,18 +49,25 @@ is one possibility) or
 available only for the runner (for burning on cd:s).
 (This project was previously used for the purpose of publishing releases.
 This is not a good idea and will be discontinued.)
-<p>
+</p>
+</div>
 
-<h3>Documentation for each of the different installers</h3>
+<div class="h2">
+<h2>Documentation for each of the different installers</h2>
 The following installers are candidates to investigate:
 <ul>
   <li>zerog: Installer tool from <a href="http://www.zerog.com">ZeroG</a>.
-- not implemented
+- not implemented</li>
   <li>nsis: <a href="http://nsis.sourceforge.net">Nullsoft</a>
 - not implemented
 (suggested by Graham Compton
 <a href="http://argouml.tigris.org/issues/show_bug.cgi?id=3705">issue 3705</a>)
+  </li>
 </ul>
+</div>
+
+<hr>
+This page was last modified $Date$.
 
 </body>
 </html>
