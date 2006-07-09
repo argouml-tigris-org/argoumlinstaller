@@ -138,3 +138,11 @@ chmod +x $DIRECTORY/argoumlinstaller/tarzip/doit.sh &&
 )
 
 
+## Do most of the subversion adding.
+(
+    cd $DESTDIR
+    svn add argouml-$RELEASE
+    svn propset svn:mime-type application/octet-stream argouml-$RELEASE/*.pdf
+    svn add jws/argouml-$RELEASE.jnlp
+    svn status maven2 | awk '/^?/ { print $2 }' | xargs svn add
+)
