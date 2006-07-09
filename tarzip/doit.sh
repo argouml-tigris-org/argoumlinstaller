@@ -23,8 +23,13 @@ echo "This script expects that the directory VERSION_X_Y_X_F/argouml/build"
 echo "contains a newly built release."
 echo ""
 
-echo "Give the name of the release (like X.Y.Z)."
-read releasename
+if test -n "$RELEASE"
+then
+    releasename=$RELEASE
+else
+    echo "Give the name of the release (like X.Y.Z)."
+    read releasename
+fi
 
 mkdir ../svn/argouml-downloads/www/argouml-$releasename
 

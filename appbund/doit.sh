@@ -2,8 +2,13 @@
 
 # Create the Appbund for MacOS
 
-echo "Give the name of the release (like X.Y.Z)."
-read releasename
+if test -n "$RELEASE"
+then
+    releasename=$RELEASE
+else
+    echo "Give the name of the release (like X.Y.Z)."
+    read releasename
+fi
 
 # Must be run from this directory.
 if test ! -d infra; then
