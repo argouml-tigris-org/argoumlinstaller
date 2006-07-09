@@ -17,8 +17,13 @@ if test ! -r LAYOUT; then
     exit 1
 fi
 
-echo "Give the name of the release (like X.Y.Z)."
-read releasename
+if test -n "$RELEASE"
+then
+    releasename=$RELEASE
+else
+    echo "Give the name of the release (like X.Y.Z)."
+    read releasename
+fi
 
 directory=VERSION_`echo $releasename | sed 's/\./_/g'`_F
 
