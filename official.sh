@@ -6,7 +6,7 @@ BUILD=OFFICIAL:
 echo $BUILD The purpose of this shellscript is to create an official release.
 echo $BUILD It will use a set of scripts defined by the contents.
 
-DESTDIR=${DESTDIR-`pwd`/../svn/argouml-downloads/www}
+DESTDIR=${DESTDIR-`pwd`/../../svn/argouml-downloads/www}
 BUILDDIR=${BUILDDIR-`pwd`/argouml/build}
 
 # Do all kinds of tests!
@@ -69,7 +69,7 @@ echo "Give the name of the release (like 0.21.3 or 0.22.ALPHA_3)."
 read release
 
 RELEASE=$release
-RELEASEFILENAME=`echo $releasename | sed 's/\./_/g'`
+RELEASEFILENAME=`echo $release | sed 's/\./_/g'`
 DIRECTORY=`pwd`/../VERSION_${RELEASEFILENAME}_F
 
 # Are we in the right directory?
