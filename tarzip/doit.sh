@@ -53,6 +53,10 @@ mkdir DIST
   cd argouml/lib;
   $JAVA_HOME/bin/jar cvf ../../DIST/ArgoUML-$releasename-libs.zip *.txt *.jar
   tar cvf ../../DIST/ArgoUML-$releasename-libs.tar *.txt *.jar
+
+  cd ../src/model-mdr/lib;
+  $JAVA_HOME/bin/jar uvf ../../../../DIST/ArgoUML-$releasename-libs.zip *.txt *.jar
+  tar rvf ../../../../DIST/ArgoUML-$releasename-libs.tar *.txt *.jar
 )
 (
   SRCDIRS="argouml/src_new argouml/src/*/src argouml/src/*/build.xml argouml-*/src"
