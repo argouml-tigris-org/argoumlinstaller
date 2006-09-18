@@ -3,7 +3,7 @@
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@.tar.gz"
-   onClick="javascript:urchinTracker('@URLROOT@/ArgoUML-@VERSION@.tar.gz')"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.tar.gz')"
    >ArgoUML-@VERSION@.tar.gz</a>
 </TD><TD>
 binary distribution
@@ -11,7 +11,7 @@ binary distribution
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@.zip"
-   onClick="javascript:urchinTracker('@URLROOT@/ArgoUML-@VERSION@.zip')"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.zip')"
    >ArgoUML-@VERSION@.zip</a>
 </TD><TD>
 binary distribution
@@ -19,7 +19,7 @@ binary distribution
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@.app.tgz"
-   onClick="javascript:urchinTracker('@URLROOT@/ArgoUML-@VERSION@.app.tgz')"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.app.tgz')"
    >ArgoUML-@VERSION@.app.tgz</a>
 </TD><TD>
 Mac OS X binary distribution
@@ -27,7 +27,7 @@ Mac OS X binary distribution
 
 <TR><TD>
 <a href="@URLROOT@/argomanual-@VERSION@.pdf"
-   onClick="javascript:urchinTracker('@URLROOT@/argomanual-@VERSION@.pdf')"
+   onClick="javascript:urchinTracker('DOWNLOAD/argomanual-@VERSION@.pdf')"
    >argomanual-@VERSION@.pdf</a>
 </TD><TD>
 User Manual
@@ -35,7 +35,7 @@ User Manual
 
 <TR><TD>
 <a href="@URLROOT@/quickguide-@VERSION@.pdf"
-   onClick="javascript:urchinTracker('@URLROOT@/quickguide-@VERSION@.pdf')"
+   onClick="javascript:urchinTracker('DOWNLOAD/quickguide-@VERSION@.pdf')"
    >quickguide-@VERSION@.pdf</a>
 </TD><TD>
 Quick Guide
@@ -62,7 +62,7 @@ Starts from Java Web Start
 
 <TR><TD>
 <a href="@URLROOT@/cookbook-@VERSION@.pdf"
-   onClick="javascript:urchinTracker('@URLROOT@/cookbook-@VERSION@.pdf')"
+   onClick="javascript:urchinTracker('DOWNLOAD/cookbook-@VERSION@.pdf')"
    >cookbook-@VERSION@.pdf</a>
 </TD><TD>
 Cookbook
@@ -70,7 +70,7 @@ Cookbook
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-libs.tar.gz"
-   onClick="javascript:urchinTracker('@URLROOT@/ArgoUML-@VERSION@-libs.tar.gz')"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-libs.tar.gz')"
    >ArgoUML-@VERSION@-libs.tar.gz</a>
 </TD><TD>
 libraries needed to compile
@@ -78,7 +78,7 @@ libraries needed to compile
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-libs.zip"
-   onClick="javascript:urchinTracker('@URLROOT@/ArgoUML-@VERSION@-libs.zip')"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-libs.zip')"
    >ArgoUML-@VERSION@-libs.zip</a>
 </TD><TD>
 libraries needed to compile
@@ -86,7 +86,7 @@ libraries needed to compile
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-src.tar.gz"
-   onClick="javascript:urchinTracker('@URLROOT@/ArgoUML-@VERSION@-src.tar.gz')"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-src.tar.gz')"
    >ArgoUML-@VERSION@-src.tar.gz</a>
 </TD><TD>
 source code without libraries.<br>
@@ -97,7 +97,7 @@ Unpack with GNU-tar.
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-src.zip"
-   onClick="javascript:urchinTracker('@URLROOT@/ArgoUML-@VERSION@-src.zip')"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-src.zip')"
    >ArgoUML-@VERSION@-src.zip</a>
 </TD><TD>
 source code without libraries.<br>
