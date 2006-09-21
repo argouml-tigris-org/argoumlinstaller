@@ -46,7 +46,7 @@ Quick Guide
 
 <TR><TD>
 <a href="http://argouml-downloads.tigris.org/jws/argouml-@VERSION@.jnlp"
-   onClick="javascript:urchinTracker('http://argouml-downloads.tigris.org/jws/argouml-@VERSION@.jnlp')"
+   onClick="javascript:urchinTracker('JWS/argouml-@VERSION@.jnlp')"
    >Java Web Start</a>
 </TD><TD>
 Starts from Java Web Start
