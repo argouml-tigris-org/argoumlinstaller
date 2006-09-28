@@ -139,6 +139,22 @@ verifyallexists() {
   echo done.
 }
 
+verifyallexists() {
+  echo -n Checking for checked out
+  for proj in $PROJECTS
+  do
+    echo -n .
+    if test -d $DESTDIR/$proj
+    then
+	:
+    else
+	echo The checked out copy $DESTDIR/$proj does not exist. 1>&2
+        exit 1
+    fi
+  done
+  echo done.
+}
+
 
 verifyjavahomejavac() {
   # Check that JAVA_HOME is set correctly (for jar and jarsigner)
@@ -186,7 +202,7 @@ fi
 if $build
 then
   verifyjavahomejavac
-  verifyallexists
+  verifyallcheckedout
 
   # Test that the version does not contain pre.
   if grep -q "argo.core.version=PRE-" $DESTDIR/argouml/src_new/default.properties
@@ -203,14 +219,14 @@ then
     for proj in $PROJECTS
     do
       echo Building $proj
-      cd $proj && ../argouml/tools/ant-1.6.2/bin/ant install
+      ( cd $proj && ../argouml/tools/ant-1.6.2/bin/ant install )
     done
   )
 fi
 
 if $sign
 then
-  verifyjavahome
+  verifyjavahomejar
 
   (
     cd $DESTDIR/argouml/build &&
