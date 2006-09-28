@@ -25,11 +25,9 @@ else
     read releasename
 fi
 
-directory=VERSION_`echo $releasename | sed 's/\./_/g'`_F
-
-SOURCEDIRS="../../$directory/argouml/build ../../$directory/argouml/build/ext"
-TARGETDIR="../../../svn/argouml-downloads/www/maven2"
-JNLPTARGETDIR="../../../svn/argouml-downloads/www/jws"
+SOURCEDIRS="$BUILDDIR $BUILDDIR/ext"
+TARGETDIR="$DESTDIR/maven2"
+JNLPTARGETDIR="$DESTDIR/jws"
 
 CMDS=tmp-commands$$.sh
 FILES=tmp-files$$.sh

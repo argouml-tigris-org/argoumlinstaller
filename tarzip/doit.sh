@@ -13,13 +13,15 @@ then
     exit 1;
 fi
 
-if test ! -d ../svn/argouml-downloads/www
+
+
+if test ! -d $DESTDIR
 then
-    echo The output directory ../svn/argouml-downloads/www does not exist.
+    echo The output directory $DESTDIR does not exist.
     exit 1;
 fi
 
-echo "This script expects that the directory VERSION_X_Y_X_F/argouml/build"
+echo "This script expects that the directory VERSION_X_Y_X/argouml/build"
 echo "contains a newly built release."
 echo ""
 
@@ -31,9 +33,9 @@ else
     read releasename
 fi
 
-mkdir ../svn/argouml-downloads/www/argouml-$releasename
+mkdir $DESTDIR/argouml-$releasename
 
-directory=VERSION_`echo $releasename | sed 's/\./_/g'`_F
+directory=VERSION_`echo $releasename | sed 's/\./_/g'`
 
 if test ! -d $directory
 then
@@ -61,17 +63,17 @@ mkdir DIST
 (
   SRCDIRS="argouml/src_new argouml/src/*/src argouml/src/*/build.xml argouml-*/src"
   $JAVA_HOME/bin/jar cvf DIST/ArgoUML-$releasename-src.zip $SRCDIRS
-  tar cvf DIST/ArgoUML-$releasename-src.tar --exclude="CVS" $SRCDIRS
+  tar cvf DIST/ArgoUML-$releasename-src.tar --exclude=".svn" $SRCDIRS
 )
 ( cd DIST && gzip -v *.tar )
 
 sed "s,@URLROOT@,http://argouml-downloads.tigris.org/nonav/argouml-$releasename,g;s,@VERSION@,$releasename,g" < argoumlinstaller/tarzip/release_html.template > DIST/index.html
 
 echo $BUILD copying to the svn directory
-mv DIST/* ../../svn/argouml-downloads/www/argouml-$releasename
+mv DIST/* $DESTDIR/argouml-$releasename
 rmdir DIST
 
 echo Add and commit the newly created directory
-echo ../svn/argouml-downloads/www/$directoryname
+echo $DESTDIR/$directoryname
 
 echo Update the index.html in the argouml-downloads project.
