@@ -6,8 +6,17 @@ BUILD=OFFICIAL:
 echo $BUILD The purpose of this shellscript is to create an official release.
 echo $BUILD It will use a set of scripts defined by the contents.
 
-DESTDIR=${DESTDIR-`pwd`/../../svn/argouml-downloads/www}
-BUILDDIR=${BUILDDIR-`pwd`/argouml/build}
+echo "Give the name of the release (like 0.21.3 or 0.22.ALPHA_3)."
+read release
+
+RELEASE=$release
+VERSIONNAME=VERSION_`echo $release | sed 's/\./_/g'`
+BUILDDIR=`pwd`/build/$VERSIONNAME/argouml/build
+
+DESTDIR=${DESTDIR-`pwd`/../argouml-downloads/www}
+
+RELEASEFILENAME=`echo $release | sed 's/\./_/g'`
+DIRECTORY=`pwd`/build/VERSION_${RELEASEFILENAME}
 
 # Do all kinds of tests!
 
@@ -62,32 +71,12 @@ do
     fi
 done
 
-
-
-
-echo "Give the name of the release (like 0.21.3 or 0.22.ALPHA_3)."
-read release
-
-RELEASE=$release
-RELEASEFILENAME=`echo $release | sed 's/\./_/g'`
-DIRECTORY=`pwd`/../VERSION_${RELEASEFILENAME}_F
-
 # Are we in the right directory?
 if test ! -d $DIRECTORY
 then
     echo $BUILD The directory $DIRECTORY does not exist. Version given incorrectly.
     exit 1;
 fi
-
-tfile=XY$$ZZ
-touch $tfile
-if test ! -f $DIRECTORY/$tfile
-then
-    echo $BUILD This is not the right directory. $DIRECTORY points somewhere else.
-    rm $tfile
-    exit 1;
-fi
-rm $tfile
 
 # Add more tests above...
 
@@ -97,16 +86,6 @@ export DESTDIR BUILDDIR RELEASE DIRECTORY
 
 ## Start doing things
 set -x
-
-(
-    cd $BUILDDIR &&
-    find . -name \*.jar -print |
-    while read jarname
-    do
-        echo "signing $jarname"
-        $JAVA_HOME/bin/jarsigner -storepass secret $jarname argouml
-    done
-)
 
 chmod +x $DIRECTORY/argoumlinstaller/tarzip/doit.sh &&
 (
@@ -133,7 +112,7 @@ chmod +x $DIRECTORY/argoumlinstaller/tarzip/doit.sh &&
 
 (
 # Fix this...
-    cd ../argoumlinstaller/javawebstart &&
+    cd $DIRECTORY/argoumlinstaller/javawebstart &&
     ./createJWS.sh
 )
 
