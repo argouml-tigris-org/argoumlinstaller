@@ -104,7 +104,7 @@ then
     for proj in $PROJECTS
     do
       echo Creating the release in $proj
-      svn copy http://$proj.tigris.org/svn/$proj/trunk http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME
+      svn copy http://$proj.tigris.org/svn/$proj/trunk http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
     done
   else
     exit 0
