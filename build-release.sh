@@ -139,7 +139,7 @@ verifyallexists() {
   echo done.
 }
 
-verifyallexists() {
+verifyallcheckedout() {
   echo -n Checking for checked out
   for proj in $PROJECTS
   do
