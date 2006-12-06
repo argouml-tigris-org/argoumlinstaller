@@ -3,8 +3,12 @@
 
 BUILD=OFFICIAL:
 
-echo $BUILD The purpose of this shellscript is to create an official release.
-echo $BUILD It will use a set of scripts defined by the contents.
+# The purpose of this shellscript is to create an official release.
+# It will use a set of other scripts from the argoumlinstaller project
+# to do so.
+#
+# Before this script starts everything is built and signed correctly.
+# This just constructs the tars, zips etc.
 
 echo "Give the name of the release (like 0.21.3 or 0.22.ALPHA_3)."
 read release
@@ -75,6 +79,13 @@ done
 if test ! -d $DIRECTORY
 then
     echo $BUILD The directory $DIRECTORY does not exist. Version given incorrectly.
+    exit 1;
+fi
+
+# Is the pdf documentation built?
+if test ! -f $BUILDDIR/documentation/pdf/manual/argomanual.pdf
+then
+    echo $BUILD The pdf version of the manual does not exist. Build incorrect.
     exit 1;
 fi
 

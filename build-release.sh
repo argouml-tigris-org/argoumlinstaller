@@ -9,10 +9,11 @@
 # -t do tag
 # -c do checkout
 # -b do build
+# -d do build of documentation
 # -s do sign
-# Normal argument: -tcbs
+# Normal arguments to give: -tcbds
 #
-# This will be tested for the first time during the 0.23.2 release.
+# This was tested for the first time during the 0.23.2 release.
 
 PROJECTS=" \
     argouml \
@@ -32,8 +33,9 @@ tag=false
 dontjusttest=false
 checkout=false
 build=false
+builddoc=false
 sign=false
-while getopts Ttcbs found "$@"
+while getopts Ttcbds found "$@"
 do
     case $found in
     T)
@@ -49,6 +51,9 @@ do
     b)
         build=true
         ;;
+    d)
+        builddoc=true
+        ;;
     s)
         sign=true
         ;;
@@ -63,7 +68,9 @@ read release
 
 RELEASE=$release
 VERSIONNAME=VERSION_`echo $release | sed 's/\./_/g'`
-DESTDIR=`pwd`/build/$VERSIONNAME
+BUILD=`pwd`/build
+DESTDIR=$BUILD/$VERSIONNAME
+JIMICLASSES=$BUILD/JimiProClasses.zip
 
 echo Release: $release
 echo Tagname: $VERSIONNAME
@@ -156,18 +163,9 @@ verifyallcheckedout() {
 }
 
 
-verifyjavahomejavac() {
-  # Check that JAVA_HOME is set correctly (for jar and jarsigner)
-  if test ! -x "$JAVA_HOME/bin/javac"
-  then
-    echo JAVA_HOME is not set correctly.
-    exit 1;
-  fi
-}
-
-verifyjavahomejar() {
-  # Check that JAVA_HOME is set correctly (for jar and jarsigner)
-  if test ! -x "$JAVA_HOME/bin/jar"
+verifyjavahome() {
+  # Check that JAVA_HOME is set correctly
+  if test ! -x "$JAVA_HOME/bin/$1"
   then
     echo JAVA_HOME is not set correctly.
     exit 1;
@@ -201,7 +199,7 @@ fi
 
 if $build
 then
-  verifyjavahomejavac
+  verifyjavahome javac
   verifyallcheckedout
 
   # Test that the version does not contain pre.
@@ -224,9 +222,38 @@ then
   )
 fi
 
+if $builddoc
+then
+  verifyjavahome java
+  verifyallcheckedout
+
+  # Test that the version does not contain pre.
+  if grep -q "argo.core.version=PRE-" $DESTDIR/argouml/src_new/default.properties
+  then
+    echo The version contains PRE-. 1>&2
+    exit 1
+  fi
+
+  # Test that the version does not contain pre.
+  if test ! -f $JIMICLASSES
+  then
+    echo The file $JIMICLASSES does not exist. 1>&2
+    exit 1
+  fi
+
+  # Build things
+  echo Downloading docbook
+  cd $DESTDIR/argouml/documentation && ./build.sh docbook-xsl-get
+  echo Copy Jimi
+  cp $JIMICLASSES $DESTDIR/argouml/tools/lib
+  echo Building documentation
+  cd $DESTDIR/argouml/documentation && ./build.sh pdf
+fi
+
+
 if $sign
 then
-  verifyjavahomejar
+  verifyjavahome jar
 
   (
     cd $DESTDIR/argouml/build &&
