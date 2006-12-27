@@ -76,6 +76,24 @@ echo Release: $release
 echo Tagname: $VERSIONNAME
 echo Destdir: $DESTDIR
 
+
+svn_add_prop()
+{
+  # $1 property
+  # $2 the line to add
+  # $3 the path
+  TMPFILE=/tmp/svn_add_prop$$.txt
+  TMPDIR=/tmp/svn_add_prop$$.dir
+  svn propget --non-interactive $1 $3 | egrep -v '^$' > $TMPFILE
+  echo $2 >> $TMPFILE
+  svn co -q -N $3 $TMPDIR
+  svn propset -q --non-interactive $1 --file $TMPFILE $TMPDIR
+  svn commit -q -m"Updated the $1 tag." $TMPDIR
+  rm $TMPFILE
+  rm -rf $TMPDIR
+}
+
+
 # Set the tag
 if $tag
 then
@@ -108,9 +126,29 @@ then
 
   if $dontjusttest
   then
+    # Fixing subclipse:tags property for the main project
+    svn info http://argouml.tigris.org/svn/argouml/trunk |
+    grep '^Revision:' |
+    while read zz rev
+    do
+      for subdir in documentation lib modules/dev modules/menutest \
+             src/model src/model-mdr src_new tests tools www
+      do
+        svn_add_prop subclipse:tags "$rev,$VERSIONNAME,/releases/$VERSIONNAME,tag" http://argouml.tigris.org/svn/argouml/trunk/$subdir
+      done
+    done
+
     for proj in $PROJECTS
     do
       echo Creating the release in $proj
+
+      svn info http://$proj.tigris.org/svn/$proj/trunk |
+      grep '^Revision:' |
+      while read zz rev
+      do
+        svn_add_prop subclipse:tags "$rev,$VERSIONNAME,/releases/$VERSIONNAME,tag" http://$proj.tigris.org/svn/$proj/trunk
+      done
+
       svn copy http://$proj.tigris.org/svn/$proj/trunk http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
     done
   else
