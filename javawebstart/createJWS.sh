@@ -25,6 +25,17 @@ else
     read releasename
 fi
 
+notonlytest=true
+while getopts t found "$@"
+do
+    case $found in
+    t)
+        notonlytest=false
+        ;;
+    esac
+done
+
+
 SOURCEDIRS="$BUILDDIR $BUILDDIR/ext"
 TARGETDIR="$DESTDIR/maven2"
 JNLPTARGETDIR="$DESTDIR/jws"
@@ -112,16 +123,19 @@ do
     done
 done
 
-#
-echo Copy the files.
-chmod +x $CMDS
-sh -x $CMDS
 
-# 
-echo Create the java web start file.
-JNLPFILE=$JNLPTARGETDIR/argouml-$releasename.jnlp
+if $notonlytest
+then
+    #
+    echo Copy the files.
+    chmod +x $CMDS
+    sh -x $CMDS
 
-cat >> $JNLPFILE <<EOF
+    # 
+    echo Create the java web start file.
+    JNLPFILE=$JNLPTARGETDIR/argouml-$releasename.jnlp
+
+    cat >> $JNLPFILE <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <!-- JNLP File for launching ArgoUML with WebStart -->
 <jnlp
@@ -133,7 +147,7 @@ cat >> $JNLPFILE <<EOF
     <vendor>Tigris.org (Open Source)</vendor>
     <homepage href="http://argouml.tigris.org/"/>
     <description>ArgoUML Tigris Application
-                 With your default language.
+		 With your default language.
     </description>
     <description kind="short">The ArgoUML version $releasename</description>
     <icon href="http://argouml.tigris.org/images/argologo.gif"/>
@@ -147,21 +161,26 @@ cat >> $JNLPFILE <<EOF
 
 EOF
 
-cat $FILES |
-sed 's;^;    <jar href="http://argouml-downloads.tigris.org/maven2/;' |
-sed 's;$;"/>;' |
-sed 's;org/argouml/argouml/.*";& main="true";' >> $JNLPFILE
+    cat $FILES |
+    sed 's;^;    <jar href="http://argouml-downloads.tigris.org/maven2/;' |
+    sed 's;$;"/>;' |
+    sed 's;org/argouml/argouml/.*";& main="true";' >> $JNLPFILE
 
-cat >> $JNLPFILE <<EOF
+    cat >> $JNLPFILE <<EOF
 
   </resources>
   <application-desc main-class="org.argouml.application.Main"/>
 </jnlp>
 EOF
 
-echo Done.
+    echo Done.
+
+    echo Now you should add and commit the new files in
+    echo $TARGET and
+    echo $JNLPTARGETDIR
+
+fi
+
 rm $CMDS $FILES
 
-echo Now you should add and commit the new files in
-echo $TARGET and
-echo $JNLPTARGETDIR
+exit 0

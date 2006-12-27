@@ -89,6 +89,15 @@ then
     exit 1;
 fi
 
+# Test for javawebstart
+if ( cd $DIRECTORY/argoumlinstaller/javawebstart && ./createJWS.sh -t )
+then
+    : OK
+else
+    echo $BUILD The java web start is not correctly setup.
+    exit 1;
+fi
+
 # Add more tests above...
 
 # All clear!
