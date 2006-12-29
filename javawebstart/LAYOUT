@@ -1,3 +1,4 @@
+# $Id$
 #
 # This file describes how the layout of the maven2 repository is i.e.
 # mostly what jar file uses what groupID and version.
@@ -18,7 +19,7 @@ nbmdr.jar		org.netbeans.mdr	0.0-2
 ocl-argo.jar		tudresden.ocl	1.1-2
 openide-util.jar	org.netbeans.mdr	0.0-2
 swidgets.jar		org.tigris.swidgets	0.1.4-2
-toolbar.jar		org.tigris.toolbar	1.3-2
+toolbar.jar		org.tigris.toolbar	1.4beta
 # Ext
 argouml-i18n-de.jar	org.argouml
 argouml-i18n-en_GB.jar	org.argouml
