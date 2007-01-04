@@ -8,7 +8,7 @@ argouml-mdr.jar		org.argouml
 argouml-model.jar	org.argouml
 argouml.jar		org.argouml
 commons-logging.jar	commons-logging	1.0.2-2
-gef.jar			org.tigris.gef	0.12.3beta2.jar
+gef.jar			org.tigris.gef	0.12.3.jar
 java-interfaces.jar	org.argouml
 jmi.jar			jmi	1.0-2
 jmiutils.jar		org.netbeans.mdr	0.0-2
