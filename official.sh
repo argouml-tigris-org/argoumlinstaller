@@ -22,6 +22,8 @@ DESTDIR=${DESTDIR-`pwd`/../argouml-downloads/www}
 RELEASEFILENAME=`echo $release | sed 's/\./_/g'`
 DIRECTORY=`pwd`/build/VERSION_${RELEASEFILENAME}
 
+export DESTDIR BUILDDIR RELEASE DIRECTORY
+
 # Do all kinds of tests!
 
 # Check that JAVA_HOME is set correctly (for jar and jarsigner)
@@ -101,7 +103,6 @@ fi
 # Add more tests above...
 
 # All clear!
-export DESTDIR BUILDDIR RELEASE DIRECTORY
 
 
 ## Start doing things
