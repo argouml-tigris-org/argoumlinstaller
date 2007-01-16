@@ -23,7 +23,7 @@ PROJECTS=" \
     argouml-idl \
     argouml-php \
     argouml-de argouml-es argouml-en-gb argouml-fr argouml-it argouml-nb \
-    argouml-pt \
+    argouml-pt argouml-pt-br \
     argouml-ru \
     argoumlinstaller \
     argouml-i18n-zh \

@@ -66,6 +66,7 @@ for file in \
     argouml-i18n-it.jar \
     argouml-i18n-nb.jar \
     argouml-i18n-pt.jar \
+    argouml-i18n-pt_BR.jar \
     argouml-i18n-ru.jar \
     argouml-i18n-zh.jar
 do
