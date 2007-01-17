@@ -232,6 +232,13 @@ then
       svn co http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME $proj
     done
   )
+
+  # The reason for doing this at this point is that a network connection
+  # is needed for this. If this is done here, then the rest of the process
+  # can be done without the network.
+  echo Downloading docbook
+  cd $DESTDIR/argouml/documentation && ./build.sh docbook-xsl-get
+
 fi
 
 
@@ -280,7 +287,7 @@ then
   fi
 
   # Build things
-  echo Downloading docbook
+  echo Downloading docbook again
   cd $DESTDIR/argouml/documentation && ./build.sh docbook-xsl-get
   echo Copy Jimi
   cp $JIMICLASSES $DESTDIR/argouml/tools/lib
