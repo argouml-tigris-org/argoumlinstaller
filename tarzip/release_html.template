@@ -7,6 +7,22 @@
    >ArgoUML-@VERSION@.tar.gz</a>
 </TD><TD>
 binary distribution
+(Includes support for
+classfile,
+cpp,
+idl,
+php,
+csharp,
+<nobr>German (de)</nobr>,
+<nobr>U.K. English (en_GB)</nobr>,
+<nobr>Spanish (es)</nobr>,
+<nobr>French (fr)</nobr>,
+<nobr>Italian (it)</nobr>,
+<nobr>Norwegian Bokmål (nb)</nobr>,
+<nobr>Portuguese (pt)</nobr>,
+<nobr>Brazilian Portuguese (pt_BR)</nobr>,
+<nobr>Russian (ru)</nobr>, and
+<nobr>Chinese (zh)</nobr>.)
 </TD></TR>
 
 <TR><TD>
@@ -15,6 +31,7 @@ binary distribution
    >ArgoUML-@VERSION@.zip</a>
 </TD><TD>
 binary distribution
+(Includes same as above.)
 </TD></TR>
 
 <TR><TD>
@@ -90,9 +107,9 @@ libraries needed to compile
    >ArgoUML-@VERSION@-src.tar.gz</a>
 </TD><TD>
 source code without libraries.<br>
+Unpack with GNU-tar.<br>
 If you want to build ArgoUML from source, 
-the cvs version is recommended.<br>
-Unpack with GNU-tar.
+the getting it from the subversion repository is recommended.
 </TD></TR>
 
 <TR><TD>
@@ -102,7 +119,7 @@ Unpack with GNU-tar.
 </TD><TD>
 source code without libraries.<br>
 If you want to build ArgoUML from source, 
-the cvs version is recommended.
+the getting it from the subversion repository is recommended.
 </TD></TR>
 
 
