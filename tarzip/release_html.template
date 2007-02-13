@@ -4,7 +4,7 @@
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@.tar.gz"
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.tar.gz')"
-   >ArgoUML-@VERSION@.tar.gz</a>
+   ><nobr>ArgoUML-@VERSION@.tar.gz</nobr></a>
 </TD><TD>
 binary distribution
 (Includes support for
@@ -28,7 +28,7 @@ csharp,
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@.zip"
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.zip')"
-   >ArgoUML-@VERSION@.zip</a>
+   ><nobr>ArgoUML-@VERSION@.zip</nobr></a>
 </TD><TD>
 binary distribution
 (Includes same as above.)
@@ -37,7 +37,7 @@ binary distribution
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@.app.tgz"
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.app.tgz')"
-   >ArgoUML-@VERSION@.app.tgz</a>
+   ><nobr>ArgoUML-@VERSION@.app.tgz</nobr></a>
 </TD><TD>
 Mac OS X binary distribution
 </TD></TR>
@@ -45,7 +45,7 @@ Mac OS X binary distribution
 <TR><TD>
 <a href="@URLROOT@/argomanual-@VERSION@.pdf"
    onClick="javascript:urchinTracker('DOWNLOAD/argomanual-@VERSION@.pdf')"
-   >argomanual-@VERSION@.pdf</a>
+   ><nobr>argomanual-@VERSION@.pdf</nobr></a>
 </TD><TD>
 User Manual
 </TD></TR>
@@ -53,7 +53,7 @@ User Manual
 <TR><TD>
 <a href="@URLROOT@/quickguide-@VERSION@.pdf"
    onClick="javascript:urchinTracker('DOWNLOAD/quickguide-@VERSION@.pdf')"
-   >quickguide-@VERSION@.pdf</a>
+   ><nobr>quickguide-@VERSION@.pdf</nobr></a>
 </TD><TD>
 Quick Guide
 </TD></TR>
@@ -64,7 +64,7 @@ Quick Guide
 <TR><TD>
 <a href="http://argouml-downloads.tigris.org/jws/argouml-@VERSION@.jnlp"
    onClick="javascript:urchinTracker('JWS/argouml-@VERSION@.jnlp')"
-   >Java Web Start</a>
+   ><nobr>Java Web Start</nobr></a>
 </TD><TD>
 Starts from Java Web Start
 </TD></TR>
@@ -80,7 +80,7 @@ Starts from Java Web Start
 <TR><TD>
 <a href="@URLROOT@/cookbook-@VERSION@.pdf"
    onClick="javascript:urchinTracker('DOWNLOAD/cookbook-@VERSION@.pdf')"
-   >cookbook-@VERSION@.pdf</a>
+   ><nobr>cookbook-@VERSION@.pdf</nobr></a>
 </TD><TD>
 Cookbook
 </TD></TR>
@@ -88,7 +88,7 @@ Cookbook
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-libs.tar.gz"
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-libs.tar.gz')"
-   >ArgoUML-@VERSION@-libs.tar.gz</a>
+   ><nobr>ArgoUML-@VERSION@-libs.tar.gz</nobr></a>
 </TD><TD>
 libraries needed to compile
 </TD></TR>
@@ -96,7 +96,7 @@ libraries needed to compile
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-libs.zip"
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-libs.zip')"
-   >ArgoUML-@VERSION@-libs.zip</a>
+   ><nobr>ArgoUML-@VERSION@-libs.zip</nobr></a>
 </TD><TD>
 libraries needed to compile
 </TD></TR>
@@ -104,7 +104,7 @@ libraries needed to compile
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-src.tar.gz"
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-src.tar.gz')"
-   >ArgoUML-@VERSION@-src.tar.gz</a>
+   ><nobr>ArgoUML-@VERSION@-src.tar.gz</nobr></a>
 </TD><TD>
 source code without libraries.<br>
 Unpack with GNU-tar.<br>
@@ -115,7 +115,7 @@ the getting it from the subversion repository is recommended.
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-src.zip"
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-src.zip')"
-   >ArgoUML-@VERSION@-src.zip</a>
+   ><nobr>ArgoUML-@VERSION@-src.zip</nobr></a>
 </TD><TD>
 source code without libraries.<br>
 If you want to build ArgoUML from source, 
