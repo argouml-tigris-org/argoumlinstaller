@@ -262,7 +262,7 @@ then
     for proj in $PROJECTS
     do
       echo Building $proj
-      ( cd $proj && ../argouml/tools/ant-1.6.2/bin/ant install )
+      ( cd $proj && ../argouml/tools/apache-ant-1.6.5/bin/ant install )
     done
   )
 fi
