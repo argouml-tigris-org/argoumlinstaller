@@ -134,7 +134,9 @@ then
       for subdir in documentation lib modules/dev modules/menutest \
              src/model src/model-mdr src_new tests tools www
       do
-        svn_add_prop subclipse:tags "$rev,$VERSIONNAME,/releases/$VERSIONNAME,tag" http://argouml.tigris.org/svn/argouml/trunk/$subdir
+        svn_add_prop subclipse:tags \
+	    "$rev,$VERSIONNAME,/releases/$VERSIONNAME/$subdir,tag" \
+	    http://argouml.tigris.org/svn/argouml/trunk/$subdir
       done
     done
 
