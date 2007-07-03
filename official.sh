@@ -60,6 +60,7 @@ done
 for file in \
     argo_classfile.jar \
     argo_cpp.jar argo_idl.jar argo_php.jar argouml-csharp.jar \
+    argouml-sql.jar \
     argouml-i18n-de.jar \
     argouml-i18n-en_GB.jar argouml-i18n-es.jar \
     argouml-i18n-fr.jar \

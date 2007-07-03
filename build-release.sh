@@ -22,6 +22,7 @@ PROJECTS=" \
     argouml-csharp \
     argouml-idl \
     argouml-php \
+    argouml-sql \
     argouml-de argouml-es argouml-en-gb argouml-fr argouml-it argouml-nb \
     argouml-pt argouml-pt-br \
     argouml-ru \

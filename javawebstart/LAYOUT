@@ -36,3 +36,4 @@ argo_cpp.jar		org.argouml
 argo_idl.jar		org.argouml
 argouml-i18n-pt.jar	org.argouml
 argouml-i18n-pt_BR.jar	org.argouml
+argouml-sql.jar		org.argouml
