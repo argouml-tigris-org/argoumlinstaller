@@ -30,6 +30,9 @@ PROJECTS=" \
     argouml-i18n-zh \
     "
 
+RELATIVE_ANT=tools/apache-ant-1.7.0/bin/ant
+
+
 tag=false
 dontjusttest=false
 checkout=false
@@ -124,6 +127,21 @@ then
     fi
   done
   echo done.
+
+  echo Checking for ant
+  if svn info http://argouml.tigris.org/svn/argouml/trunk/$RELATIVE_ANT 2>/dev/null |
+      grep -q "Node Kind: file"
+  then
+    : ok it does exist
+  else
+    echo Ant is missing at $RELATIVE_ANT
+    if $dontjusttest
+    then
+      exit 1
+    fi
+  fi
+  echo done.
+  
 
   if $dontjusttest
   then
@@ -265,7 +283,7 @@ then
     for proj in $PROJECTS
     do
       echo Building $proj
-      ( cd $proj && ../argouml/tools/apache-ant-1.6.5/bin/ant install )
+      ( cd $proj && ../argouml/$RELATIVE_ANT install )
     done
   )
 fi
