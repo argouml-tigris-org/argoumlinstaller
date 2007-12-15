@@ -56,5 +56,5 @@ tar uvf ArgoUML.app.tar ArgoUML.app/Contents/Resources/Java
 
 gzip < ArgoUML.app.tar > ../build/ArgoUML-$releasename.app.tgz
 
-rm -r ArgoUML.app
+rm -rf ArgoUML.app
 rm ArgoUML.app.tar
