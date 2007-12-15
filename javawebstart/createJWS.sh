@@ -2,20 +2,19 @@
 # $Id$
 
 # This file will copy the jar files that are modified from
-# ../../VERSION_XX_F/argouml/build
-# and
-# ../../VERSION_XX_F/argouml/build/ext
+# $BUILDDIR
 # to a structure under
-# ../../../svn/argouml-downloads/www/maven2
+# $DESTDIR/maven2
 # according to the setup in the file LAYOUT.
 # The created jnlp file will end up in
-# ../../../svn/argouml-downloads/www/jws
+# $DESTDIR/jws
 
-# Must be run from this directory.
-if test ! -r LAYOUT; then
-    echo $0: "Missing config file. Started from the wrong place?"
+LAYOUT="`dirname $0`/LAYOUT"
+if test ! -r "$LAYOUT"; then
+    echo $0: "Missing config file $LAYOUT."
     exit 1
 fi
+COMPAREJARS="`dirname $0`/compare-jars.sh"
 
 if test -n "$RELEASE"
 then
@@ -43,7 +42,7 @@ JNLPTARGETDIR="$DESTDIR/jws"
 CMDS=tmp-commands$$.sh
 FILES=tmp-files$$.sh
 
-GETLAYOUT="grep -v '^#' LAYOUT | grep -v '^$'"
+GETLAYOUT="grep -v '^#' $LAYOUT | grep -v '^$'"
 
 # Check that all groupIDs directories are created.
 
@@ -90,7 +89,7 @@ do
 		echo mkdir $TARGETDIR/$groupiddir/$rootname/$releasename >> $CMDS
 		echo cp $foundjar $TARGETDIR/$groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $CMDS
 		echo $groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $FILES
-            elif ./compare-jars.sh $lastjar $foundjar > /dev/null
+            elif $COMPAREJARS $lastjar $foundjar > /dev/null
 	    then
 		echo $rootname the same as $lastversion - OK
 		echo $groupiddir/$rootname/$lastversion/$rootname-$lastversion.jar >> $FILES
@@ -104,12 +103,12 @@ do
             if test -d $TARGETDIR/$groupiddir/$rootname/$version
             then
                 oldjar="$TARGETDIR/$groupiddir/$rootname/$version/$rootname-$version.jar"
-		if ./compare-jars.sh $oldjar $foundjar > /dev/null
+		if $COMPAREJARS $oldjar $foundjar > /dev/null
 		then
 		    echo $rootname the same version $version - OK
 		    echo $groupiddir/$rootname/$version/$rootname-$version.jar >> $FILES
 		else
-		    echo $rootname differ - NOT OK - update LAYOUT
+		    echo $rootname differ - NOT OK - update "$LAYOUT"
 		    exit 1
 		fi
 	    else

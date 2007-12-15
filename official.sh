@@ -94,7 +94,7 @@ then
 fi
 
 # Test for javawebstart
-if ( cd $DIRECTORY/argoumlinstaller/javawebstart && ./createJWS.sh -t )
+if ( javawebstart/createJWS.sh -t )
 then
     : OK
 else
@@ -133,11 +133,7 @@ chmod +x $DIRECTORY/argoumlinstaller/tarzip/doit.sh &&
 )
 
 
-(
-# Fix this...
-    cd $DIRECTORY/argoumlinstaller/javawebstart &&
-    ./createJWS.sh
-)
+javawebstart/createJWS.sh
 
 
 ## Do most of the subversion adding.
