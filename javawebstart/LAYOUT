@@ -3,23 +3,23 @@
 # This file describes how the layout of the maven2 repository is i.e.
 # mostly what jar file uses what groupID and version.
 #
-antlrall.jar		antlr	2.7.2-3
+antlrall.jar		antlr	2.7.2-4
 argouml-mdr.jar		org.argouml
 argouml-model.jar	org.argouml
 argouml.jar		org.argouml
-commons-logging.jar	commons-logging	1.0.2-3
-gef.jar			org.tigris.gef	0.12.4M4
+commons-logging.jar	commons-logging	1.0.2-4
+gef.jar			org.tigris.gef	0.12.4M4-2
 java-interfaces.jar	org.argouml
-jmi.jar			jmi	1.0-3
-jmiutils.jar		org.netbeans.mdr	0.0-3
-log4j.jar		log4j	1.2.6-3
-mdrapi.jar		org.netbeans.mdr	0.0-3
-mof.jar			jmi	0.0-3
-nbmdr.jar		org.netbeans.mdr	0.0-3
-ocl-argo.jar		tudresden.ocl	1.1-3
-openide-util.jar	org.netbeans.mdr	0.0-3
-swidgets.jar		org.tigris.swidgets	0.1.4-3
-toolbar.jar		org.tigris.toolbar	1.4
+jmi.jar			jmi	1.0-4
+jmiutils.jar		org.netbeans.mdr	0.0-4
+log4j.jar		log4j	1.2.6-4
+mdrapi.jar		org.netbeans.mdr	0.0-4
+mof.jar			jmi	0.0-4
+nbmdr.jar		org.netbeans.mdr	0.0-4
+ocl-argo.jar		tudresden.ocl	1.1-4
+openide-util.jar	org.netbeans.mdr	0.0-4
+swidgets.jar		org.tigris.swidgets	0.1.4-4
+toolbar.jar		org.tigris.toolbar	1.4-2
 # Ext
 argouml-i18n-de.jar	org.argouml
 argouml-i18n-en_GB.jar	org.argouml
