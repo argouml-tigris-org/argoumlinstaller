@@ -29,7 +29,7 @@
 		<key>MainClass</key>
 		<string>org.argouml.application.Main</string>
 		<key>JVMVersion</key>
-		<string>1.4+</string>
+		<string>1.5+</string>
 		<key>ClassPath</key>
 			<array>
 @FILE_LIST@
