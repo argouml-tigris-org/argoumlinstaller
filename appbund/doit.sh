@@ -52,6 +52,8 @@ tar uvf ArgoUML.app.tar --mode 755 ArgoUML.app/Contents/MacOS
 
 mkdir ArgoUML.app/Contents/Resources/Java
 cp ../../argouml/build/*.jar ArgoUML.app/Contents/Resources/Java
+mkdir ArgoUML.app/Contents/Resources/Java/ext
+cp ../../argouml/build/ext/*.jar ArgoUML.app/Contents/Resources/Java/ext
 tar uvf ArgoUML.app.tar ArgoUML.app/Contents/Resources/Java
 
 gzip < ArgoUML.app.tar > ../build/ArgoUML-$releasename.app.tgz
