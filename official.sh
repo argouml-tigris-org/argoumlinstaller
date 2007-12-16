@@ -110,10 +110,11 @@ fi
 ## Start doing things
 set -x
 
-chmod +x $DIRECTORY/argoumlinstaller/tarzip/doit.sh &&
+TARZIPDOIT=`pwd`/tarzip/doit.sh
+chmod +x $TARZIPDOIT &&
 (
     cd $DIRECTORY/.. &&
-    $DIRECTORY/argoumlinstaller/tarzip/doit.sh
+    $TARZIPDOIT
 )
 
 (
@@ -125,12 +126,10 @@ chmod +x $DIRECTORY/argoumlinstaller/tarzip/doit.sh &&
 )
 
 (
-    cd $DIRECTORY/argoumlinstaller/appbund &&
+    cd appbund &&
     ./doit.sh
 )
-(
-    mv $DIRECTORY/argoumlinstaller/build/ArgoUML-*.app.tgz $DESTDIR/argouml-$RELEASE
-)
+mv build/ArgoUML-*.app.tgz $DESTDIR/argouml-$RELEASE
 
 
 javawebstart/createJWS.sh

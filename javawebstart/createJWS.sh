@@ -39,8 +39,8 @@ SOURCEDIRS="$BUILDDIR $BUILDDIR/ext"
 TARGETDIR="$DESTDIR/maven2"
 JNLPTARGETDIR="$DESTDIR/jws"
 
-CMDS=tmp-commands$$.sh
-FILES=tmp-files$$.sh
+CMDS=/tmp/commands$$.sh
+FILES=/tmp/files$$.sh
 
 GETLAYOUT="grep -v '^#' $LAYOUT | grep -v '^$'"
 

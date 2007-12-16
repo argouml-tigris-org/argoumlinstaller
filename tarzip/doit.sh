@@ -48,8 +48,13 @@ echo "$BUILD Create the zip and tar files."
 mkdir DIST
 (
   cd argouml/build;
-  $JAVA_HOME/bin/jar cvf ../../DIST/ArgoUML-$releasename.zip *.jar README.txt *.sh *.bat ext/*.jar
-  tar cvf ../../DIST/ArgoUML-$releasename.tar *.jar README.txt *.sh *.bat ext/*.jar
+  mkdir argouml-$releasename
+  cp *.jar README.txt *.sh *.bat argouml-$releasename
+  mkdir argouml-$releasename/ext
+  cp ext/*.jar argouml-$releasename/ext
+  $JAVA_HOME/bin/jar cvf ../../DIST/ArgoUML-$releasename.zip argouml-$releasename
+  tar cvf ../../DIST/ArgoUML-$releasename.tar argouml-$releasename
+  rm -rf argouml-$releasename
 )
 (
   cd argouml/lib;
@@ -67,7 +72,7 @@ mkdir DIST
 )
 ( cd DIST && gzip -v *.tar )
 
-sed "s,@URLROOT@,http://argouml-downloads.tigris.org/nonav/argouml-$releasename,g;s,@VERSION@,$releasename,g" < argoumlinstaller/tarzip/release_html.template > DIST/index.html
+sed "s,@URLROOT@,http://argouml-downloads.tigris.org/nonav/argouml-$releasename,g;s,@VERSION@,$releasename,g" < `dirname $0`/release_html.template > DIST/index.html
 
 echo $BUILD copying to the svn directory
 mv DIST/* $DESTDIR/argouml-$releasename
