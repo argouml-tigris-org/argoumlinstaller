@@ -87,8 +87,6 @@ The following tools are candidates to investigate:
 </ul>
 </div>
 
-</div>
-
 <div class="h2">
 <h2>What is done at every official release</h2>
 <p>
@@ -113,6 +111,101 @@ These are the scripts used in the official release:
 Linus Tolke is responsible for issueing official releases of ArgoUML.
 </p>
 
+</div>
+
+<div class="h2">
+<h2>Directory structure when doing releases</h2>
+<p>
+The build-release.sh script is used to tag, check out, and build
+the projects in an ArgoUML release.
+The resulting file hierarchy is the following:
+</p>
+<ul>
+  <li>
+    argoumlinstaller -
+    the directory where the build-release.sh script is residing.
+  </li>
+  <li>  
+    <p>
+    argoumlinstaller/build - 
+    directory where everything that is downloaded and built by the script
+    resides.
+    This directory contains a separate checked out copy for each release
+    built.
+    If you have plenty of disk space on your computer, save them for ever!
+    If disk space is scarse, remove them once the release work is complete.
+    </p>
+    <p>
+    This directory also shall contain the file JimiProClasses.zip
+    that is used to build the pdf versions of the documentation.
+    This file must be copied there manually by the person doing the release
+    since its license does not allow distribution.
+    </p>
+  </li>
+  <li>
+    argoumlinstaller/build/VERSION_<i>VER_NO</i> -
+    This is where every argouml-project is checked out in their directories
+    respectively.
+    When done, the layout is like this:
+    <table>
+      <tr><th>Path</th><th>Project</th><th>Svn url</th><th>Branched from</th></tr>
+      <tr>
+        <td>argoumlinstaller/build/VERSION_<i>VER_NO</i>/argouml</td>
+        <td>argouml</td>
+        <td>http://argouml.tigris.org/svn/argouml/releases/VERSION_<i>VER_NO</i></td>
+        <td>http://argouml.tigris.org/svn/argouml/trunk</td>
+      </tr>
+      <tr>
+        <td>argoumlinstaller/build/VERSION_<i>VER_NO</i>/argouml-classfile</td>
+        <td>argouml-classfile</td>
+        <td>http://argouml-classfile.tigris.org/svn/argouml-classfile/releases/VERSION_<i>VER_NO</i></td>
+        <td>http://argouml-classfile.tigris.org/svn/argouml-classfile/trunk</td>
+      </tr>
+      <tr>
+        <td>argoumlinstaller/build/VERSION_<i>VER_NO</i>/argouml-cpp</td>
+        <td>argouml-cpp</td>
+        <td>http://argouml-cpp.tigris.org/svn/argouml-cpp/releases/VERSION_<i>VER_NO</i></td>
+        <td>http://argouml-cpp.tigris.org/svn/argouml-cpp/trunk</td>
+      </tr>
+      <tr><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+    </table>
+  </li>
+  <li>  
+    argouml-downloads/www -
+    A checked out copy of the downloads project.
+    This is where the release is copied and everything is directly available at
+    <a href="http://argouml-downloads.tigris.org/">
+    the downloads project at http://argouml-downloads.tigris.org/</a>.
+    The installers scripts are supposed to copy everything needed into
+    the checked out copy.
+    The person doing the releases checks that it is all in place and 
+    updates links to the included parts, if needed.
+    The he commits it, publishing the new release.
+  </li>
+  <li>  
+    argouml-downloads/www/argouml-<i>VER.NO</i>/ -
+    Files for a given release.
+  </li>
+  <li>  
+    argouml-downloads/www/index.html and argouml-downloads/www/devrel.html -
+    Manually updated indexes to make all releases available.
+  </li>
+  <li>  
+    argouml-downloads/www/jws/ -
+    Directory for the Java Web Start jnlp files.
+  </li>
+  <li>  
+    argouml-downloads/www/maven2/ -
+    Directory for the Java Web Start jar files.
+    This has a directory structure according to the maven2 standard for
+    how to publish files but there are not any maven2 control files.
+    The reason for having this structure is to allow future use of maven2.
+    There are some special functions when building the jnlp files that
+    avoids creating new files with the exact same contents.
+    This is to allow the Java Web Start of new release of ArgoUML to reuse
+    previously downloaded files.
+  </li>
+</ul>
 </div>
 
 
