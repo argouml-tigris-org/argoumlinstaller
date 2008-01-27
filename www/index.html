@@ -120,30 +120,27 @@ The build-release.sh script is used to tag, check out, and build
 the projects in an ArgoUML release.
 The resulting file hierarchy is the following:
 </p>
-<ul>
-  <li>
-    argoumlinstaller -
-    the directory where the build-release.sh script is residing.
-  </li>
-  <li>  
-    <p>
-    argoumlinstaller/build - 
-    directory where everything that is downloaded and built by the script
+<dl>
+  <dt>argoumlinstaller</dt>
+  <dd>the directory where the build-release.sh script is residing</dd>
+
+  <dt>argoumlinstaller/build</dt>
+  <dd>directory where everything that is downloaded and built by the script
     resides.
     This directory contains a separate checked out copy for each release
     built.
     If you have plenty of disk space on your computer, save them for ever!
     If disk space is scarse, remove them once the release work is complete.
-    </p>
-    <p>
+  </dd>
+  <dd>
     This directory also shall contain the file JimiProClasses.zip
     that is used to build the pdf versions of the documentation.
     This file must be copied there manually by the person doing the release
     since its license does not allow distribution.
-    </p>
-  </li>
-  <li>
-    argoumlinstaller/build/VERSION_<i>VER_NO</i> -
+  </dd>
+
+  <dt>argoumlinstaller/build/VERSION_<i>VER_NO</i></dt>
+  <dd>
     This is where every argouml-project is checked out in their directories
     respectively.
     When done, the layout is like this:
@@ -169,9 +166,10 @@ The resulting file hierarchy is the following:
       </tr>
       <tr><td>...</td><td>...</td><td>...</td><td>...</td></tr>
     </table>
-  </li>
-  <li>  
-    argouml-downloads/www -
+  </dd>
+
+  <dt>argouml-downloads/www</dt>
+  <dd>
     A checked out copy of the downloads project.
     This is where the release is copied and everything is directly available at
     <a href="http://argouml-downloads.tigris.org/">
@@ -181,22 +179,20 @@ The resulting file hierarchy is the following:
     The person doing the releases checks that it is all in place and 
     updates links to the included parts, if needed.
     The he commits it, publishing the new release.
-  </li>
-  <li>  
-    argouml-downloads/www/argouml-<i>VER.NO</i>/ -
-    Files for a given release.
-  </li>
-  <li>  
-    argouml-downloads/www/index.html and argouml-downloads/www/devrel.html -
-    Manually updated indexes to make all releases available.
-  </li>
-  <li>  
-    argouml-downloads/www/jws/ -
-    Directory for the Java Web Start jnlp files.
-  </li>
-  <li>  
-    argouml-downloads/www/maven2/ -
-    Directory for the Java Web Start jar files.
+  </dd>
+
+  <dt>argouml-downloads/www/argouml-<i>VER.NO</i>/</dt>
+  <dd>Files for a given release.</dd>
+
+  <dt>argouml-downloads/www/index.html</dt>
+  <dt>argouml-downloads/www/devrel.html</dt>
+  <dd>Manually updated indexes to make all releases available</dd>
+
+  <dt>argouml-downloads/www/jws/</dt>
+  <dd>Directory for the Java Web Start jnlp files.</dd>
+
+  <dt>argouml-downloads/www/maven2/</dt>
+  <dd>Directory for the Java Web Start jar files.
     This has a directory structure according to the maven2 standard for
     how to publish files but there are not any maven2 control files.
     The reason for having this structure is to allow future use of maven2.
@@ -204,8 +200,9 @@ The resulting file hierarchy is the following:
     avoids creating new files with the exact same contents.
     This is to allow the Java Web Start of new release of ArgoUML to reuse
     previously downloaded files.
-  </li>
-</ul>
+  </dd>
+</dl>
+
 </div>
 
 
