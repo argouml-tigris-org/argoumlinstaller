@@ -1,0 +1,318 @@
+#
+# This file configures the creation of windows installers for the ArgoUML project 
+# The installers are genenerated using Nullsoft Scriptable Install System (NSIS).
+#
+# WORK IN PROGRESS....
+# Needs to spell out 2 usage scenarios, one from ./official.sh, one from eclipse.
+#
+# There are two usage scenarios for using this file:
+#
+# RUNNING VIA OFFICIAL RELEASE BUILD SCRIPT (argoumlinstaller/official.sh)
+# 1) NSIS does not need to be installed if running on Cygwin/Windows (nsis 
+#    binaries are included in the SVN checkout).
+# 2) Build the required release (build-release.sh).
+# 3) Run ./official.sh, which in turn calls argoumlinstaller/nsis/doit.sh
+# 4) ArgoUML-xxxx-setup.exe will be created in the directory specified by 
+#    doit.sh.
+# This script assumes that RELEASENAME, BUILDDIR and OUTPUTDIR are all
+# specified on the command line, e.g. 
+# $MAKENSIS /DRELEASENAME=$releasename /DBUILDDIR=../$directory/argouml/build \
+#    /DOUTPUTDIR=../$directory/DIST nsis/installer_config.nsi  
+#
+# RUNNING FROM ECLIPSE
+# 1) Install NSIS (http://nsis.sourceforge.net/)
+# 2) Install EclipseNSIS (http://eclipsensis.sourceforge.net/)
+# 3) Open this .nsi file within Eclipse.
+# 4) RELEASENAME, BUILDDIR and OUTPUTDIR are specified via 
+#    EclipseNSIS > Preferences > Defined Symbols, if you don't set them, a 
+#    dummy release name will be used (X.X.X), and suitable directories will be 
+#    guessed (this script will assume that 'argoumlinstaller' is checked out 
+#    into the same directory as the eclipse projects).
+#    Example settings
+# BUILDDIR "..\build\VERSION_0_25_4\argouml\build"
+# RELEASENAME 0.25.4
+# 5) Complile script using EclipseNSIS > Compiile Script
+#
+# In general, EclipseNSIS can be used to edit/develop this script, but the 
+# official builds should always be done using official.sh
+# 
+# $Id$
+
+; TODO
+;Make the installer show the correct version number on the unopenned installer
+; (currently shows as 0.0.0.0).
+;apply i18n to installation strings
+;Set up argo.user.properties with the correct language, based on install.
+;(maybe) Set up ArgoUML with windows look and feel
+;(maybe) Allow manual entry of java path if no JRE detected through registry?
+;(maybe) Provide alternate .exe with JRE bundled?
+
+# Defines
+!define NAME "ArgoUML"
+!define REGKEY "SOFTWARE\$(^Name)"
+!ifndef RELEASENAME
+  !define RELEASENAME X.X.X
+!endif
+; If BUILDDIR not defined, assume we are running in eclipse style layout.
+!ifndef BUILDDIR
+  !define BUILDDIR "..\..\build"
+  ; This workaround is only necessary because the .ico is not copied to the 
+  ; build directory by the build process, otherwise we'd just get it from 
+  ; ${BUILDDIR}\ArgoUML.ico, along with the .jars.
+  !define ICOFILE "${BUILDDIR}\..\argouml\bin\ArgoUML.ico"
+!else
+  !define ICOFILE "${BUILDDIR}\..\src_new\bin\ArgoUML.ico"
+!endif
+
+!ifndef OUTPUTDIR                      ; Where to put the generated installer(s). 
+  !define OUTPUTDIR "."                ; if unspecified, use script location.
+!endif
+!define COMPANY ""
+!define URL "http://argouml.tigris.org"
+!define URL_HELP "http://argouml.tigris.org/documentation"
+!define URL_UPDATES "http://argouml-downloads.tigris.org/"
+!define JRE_REQUIRED_VERSION "1.5"
+!define JRE_URL "http://javadl.sun.com/webapps/download/AutoDL?BundleId=11292"
+
+Name ${NAME}
+
+# MUI defines
+!define MUI_ICON ${ICOFILE}
+!define MUI_FINISHPAGE_NOAUTOCLOSE
+!define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
+!define MUI_STARTMENUPAGE_NODISABLE
+!define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
+!define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER ArgoUML
+!define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
+!define MUI_UNFINISHPAGE_NOAUTOCLOSE
+!define MUI_FINISHPAGE_LINK "Click here to visit the ArgoUML website"
+!define MUI_FINISHPAGE_LINK_LOCATION ${URL}
+
+# Included files
+!include "Sections.nsh"
+!include "MUI.nsh"
+!include "LogicLib.nsh"                ; for If, Else, etc used in DetectJRE
+!include "WordFunc.nsh"                ; For VersionCompare used in DetectJRE
+!insertmacro VersionCompare
+
+# Variables
+Var StartMenuGroup
+
+# Installer pages
+!insertmacro MUI_PAGE_WELCOME
+!define MUI_PAGE_CUSTOMFUNCTION_PRE DetectJRE
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_STARTMENU Application $StartMenuGroup
+!insertmacro MUI_PAGE_INSTFILES
+;!insertmacro MUI_PAGE_FINISH
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_INSTFILES
+
+# Installer languages
+!insertmacro MUI_LANGUAGE English
+!insertmacro MUI_LANGUAGE French
+!insertmacro MUI_LANGUAGE Spanish
+!insertmacro MUI_LANGUAGE Italian
+!insertmacro MUI_LANGUAGE Norwegian
+!insertmacro MUI_LANGUAGE Portuguese
+!insertmacro MUI_LANGUAGE Russian
+
+# Installer attributes
+OutFile ${OUTPUTDIR}\${NAME}-${RELEASENAME}-setup.exe
+Caption "${NAME} ${RELEASENAME} Setup"
+InstallDir $PROGRAMFILES\ArgoUML
+CRCCheck on
+XPStyle on
+ShowInstDetails hide
+VIProductVersion 0.0.0.0
+VIAddVersionKey /LANG=${LANG_ENGLISH} ProductName $(^Name)
+VIAddVersionKey /LANG=${LANG_ENGLISH} ProductVersion 0.0.0.0
+VIAddVersionKey /LANG=${LANG_ENGLISH} CompanyWebsite "${URL}"
+VIAddVersionKey /LANG=${LANG_ENGLISH} FileVersion "${RELEASENAME}"
+VIAddVersionKey /LANG=${LANG_ENGLISH} FileDescription ""
+VIAddVersionKey /LANG=${LANG_ENGLISH} LegalCopyright ""
+InstallDirRegKey HKLM "${REGKEY}" Path
+ShowUninstDetails hide
+BrandingText " "    ;Removes Nullsoft Install System vX.XX from UI.
+
+# Installer sections
+Section /o JRE SEC0000
+    AddSize 84566
+    StrCpy $2 "$TEMP\JRE-installer.exe"
+    DetailPrint "Downloading from ${JRE_URL}."
+    nsisdl::download /TIMEOUT=30000 ${JRE_URL} $2
+    Pop $R0 ;Get the return value
+        StrCmp $R0 "success" +3
+        MessageBox MB_OK "Download failed: $R0"
+        DetailPrint "Download failed: $R0"
+    Quit
+    ExecWait $2
+    Delete $2
+    DetailPrint "JRE Installation completed"
+    WriteRegStr HKLM "${REGKEY}\Components" JRE 1
+SectionEnd
+
+Section ArgoUML SEC0001
+    SetOutPath $INSTDIR
+    SetOverwrite on
+    File "${BUILDDIR}\*.jar"
+    File /nonfatal "${BUILDDIR}\*.bat"
+    File "${ICOFILE}"
+    SetOutPath $INSTDIR\ext"
+    File /nonfatal "${BUILDDIR}\ext\*.jar"
+    SetOutPath "$SMPROGRAMS\$StartMenuGroup"    ;Create folder on start menu. 
+    SetOutPath $INSTDIR
+    CreateShortcut "$DESKTOP\ArgoUML.lnk" "$INSTDIR\argouml.jar" "" \
+        "$INSTDIR\ArgoUML.ico" 0 SW_SHOWNORMAL \
+        "" "$(^Name) ${RELEASENAME} - UML Modelling tool"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\ArgoUML.lnk" \
+        "$INSTDIR\argouml.jar" "" "$INSTDIR\ArgoUML.ico" \
+        0 SW_SHOWNORMAL "" "$(^Name) ${RELEASENAME} - UML Modelling tool"
+    WriteRegStr HKLM "${REGKEY}\Components" ArgoUML 1
+SectionEnd
+
+Section -post SEC0002
+    WriteRegStr HKLM "${REGKEY}" Path $INSTDIR
+    SetOutPath $INSTDIR
+    WriteUninstaller $INSTDIR\uninstall.exe
+    !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
+    SetOutPath $SMPROGRAMS\$StartMenuGroup
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^UninstallLink).lnk" $INSTDIR\uninstall.exe
+    !insertmacro MUI_STARTMENU_WRITE_END
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayName "$(^Name) ${RELEASENAME}"
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayVersion "${RELEASENAME}"
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" URLInfoAbout "${URL}"
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" URLUpdateInfo "${URL_UPDATES}"
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" HelpLink "${URL_HELP}"
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayIcon $INSTDIR\ArgoUML.ico
+    WriteRegStr HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" UninstallString $INSTDIR\uninstall.exe
+    WriteRegDWORD HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoModify 1
+    WriteRegDWORD HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
+SectionEnd
+
+# Macro for selecting uninstaller sections
+!macro SELECT_UNSECTION SECTION_NAME UNSECTION_ID
+    Push $R0
+    ReadRegStr $R0 HKLM "${REGKEY}\Components" "${SECTION_NAME}"
+    StrCmp $R0 1 0 next${UNSECTION_ID}
+    !insertmacro SelectSection "${UNSECTION_ID}"
+    GoTo done${UNSECTION_ID}
+next${UNSECTION_ID}:
+    !insertmacro UnselectSection "${UNSECTION_ID}"
+done${UNSECTION_ID}:
+    Pop $R0
+!macroend
+
+# Uninstaller sections
+Section /o -un.ArgoUML UNSEC0000
+    MessageBox MB_OK "During the installation of ${NAME}, the Java Runtime \ 
+      Environment was installed. \
+      If you wish to uninstall the Java Runtime Environment, please use \
+      Add/Remove Programs in the Control Panel." 
+    DeleteRegValue HKLM "${REGKEY}\Components" JRE
+SectionEnd
+
+Section /o -un.ArgoUML UNSEC0001
+    Delete /REBOOTOK $DESKTOP\ArgoUML.lnk
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\ArgoUML.lnk"
+    RmDir /r /REBOOTOK $INSTDIR
+    DeleteRegValue HKLM "${REGKEY}\Components" ArgoUML
+SectionEnd
+
+Section -un.post UNSEC0002
+    DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\$(^UninstallLink).lnk"
+    Delete /REBOOTOK $INSTDIR\uninstall.exe
+    DeleteRegValue HKLM "${REGKEY}" StartMenuGroup
+    DeleteRegValue HKLM "${REGKEY}" Path
+    DeleteRegKey /IfEmpty HKLM "${REGKEY}\Components"
+    DeleteRegKey /IfEmpty HKLM "${REGKEY}"
+    RmDir /REBOOTOK $SMPROGRAMS\$StartMenuGroup
+    RmDir /REBOOTOK $INSTDIR
+SectionEnd
+
+# Installer functions
+Function .onInit
+    InitPluginsDir
+    ReadRegStr $R0 HKLM "${REGKEY}" Path
+    ${If} $R0 != ""
+      MessageBox MB_YESNO|MB_ICONEXCLAMATION \
+        "Setup detected that ${NAME} is already installed to '$R0' \
+        It is strongly advised that you uninstall this version first. \
+        Continue anyway?" IDYES yes IDNO no 
+no:
+      Quit
+yes:
+    ${EndIf}
+    StrCpy $StartMenuGroup "$(^Name)"
+FunctionEnd
+
+Function DetectJRE
+  ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\Java Runtime Environment" \
+             "CurrentVersion"
+  ${VersionCompare} "$2" "${JRE_REQUIRED_VERSION}" $3
+${If} $2 == ""
+  MessageBox MB_ICONINFORMATION "No Java Runtime Environment could be found.  \
+    Setup will automatically download a suitable JRE from sun.com."
+  DetailPrint "No JRE found, setting option to auto download"
+  SectionGetFlags SEC0000 $0
+  IntOp $0 $0 | ${SF_SELECTED}
+  SectionSetFlags SEC0000 $0
+${ElseIf} $3 == 2 
+  MessageBox MB_ICONINFORMATION "Your current Java Runtime Environment is \
+    out of date, and will be automatically updated from sun.com.  \
+    (Required JRE${JRE_REQUIRED_VERSION}, found JRE$2)."
+  DetailPrint "DetectJRE: Required: [${JRE_REQUIRED_VERSION}], \
+    Found [$2].  Setting option to auto download." 
+  SectionGetFlags SEC0000 $0
+  IntOp $0 $0 | ${SF_SELECTED}
+  SectionSetFlags SEC0000 $0
+${Else}
+  DetailPrint "Found Java Runtime Environment $2, \
+    (>=${JRE_REQUIRED_VERSION} required), OK"
+${EndIf}
+
+FunctionEnd
+
+# Uninstaller functions
+Function un.onInit
+    ReadRegStr $INSTDIR HKLM "${REGKEY}" Path
+    !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuGroup
+    !insertmacro SELECT_UNSECTION JRE ${UNSEC0000}
+    !insertmacro SELECT_UNSECTION ArgoUML ${UNSEC0001}
+FunctionEnd
+
+# Section Descriptions
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+!insertmacro MUI_DESCRIPTION_TEXT ${SEC0000} $(SEC0000_DESC)
+!insertmacro MUI_DESCRIPTION_TEXT ${SEC0001} $(SEC0001_DESC)
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+# Installer Language Strings
+# TODO Update the Language Strings with the appropriate translations.
+LangString ^UninstallLink ${LANG_ENGLISH} "Uninstall $(^Name)"
+LangString ^UninstallLink ${LANG_FRENCH} "Uninstall $(^Name)"
+LangString ^UninstallLink ${LANG_SPANISH} "Uninstall $(^Name)"
+LangString ^UninstallLink ${LANG_ITALIAN} "Uninstall $(^Name)"
+LangString ^UninstallLink ${LANG_NORWEGIAN} "Uninstall $(^Name)"
+LangString ^UninstallLink ${LANG_PORTUGUESE} "Uninstall $(^Name)"
+LangString ^UninstallLink ${LANG_RUSSIAN} "Uninstall $(^Name)"
+
+LangString SEC0000_DESC ${LANG_ENGLISH} "Java Runtime Environment (download from sun.com)"
+LangString SEC0000_DESC ${LANG_FRENCH} "Java Runtime Environment (download from sun.com)"
+LangString SEC0000_DESC ${LANG_SPANISH} "Java Runtime Environment (download from sun.com)"
+LangString SEC0000_DESC ${LANG_ITALIAN} "Java Runtime Environment (download from sun.com)"
+LangString SEC0000_DESC ${LANG_NORWEGIAN} "Java Runtime Environment (download from sun.com)"
+LangString SEC0000_DESC ${LANG_PORTUGUESE} "Java Runtime Environment (download from sun.com)"
+LangString SEC0000_DESC ${LANG_RUSSIAN} "Java Runtime Environment (download from sun.com)"
+
+LangString SEC0001_DESC ${LANG_ENGLISH} "The ArgoUML application itself (required)."
+LangString SEC0001_DESC ${LANG_FRENCH} "The ArgoUML application itself (required)."
+LangString SEC0001_DESC ${LANG_SPANISH} "The ArgoUML application itself (required)."
+LangString SEC0001_DESC ${LANG_ITALIAN} "The ArgoUML application itself (required)."
+LangString SEC0001_DESC ${LANG_NORWEGIAN} "The ArgoUML application itself (required)."
+LangString SEC0001_DESC ${LANG_PORTUGUESE} "The ArgoUML application itself (required)."
+LangString SEC0001_DESC ${LANG_RUSSIAN} "The ArgoUML application itself (required)."
+
