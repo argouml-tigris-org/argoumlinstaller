@@ -67,7 +67,7 @@ mkdir DIST
 )
 (
   SRCDIRS="argouml/src_new argouml/src/*/src argouml/src/*/build.xml argouml-*/src"
-  $JAVA_HOME/bin/jar cvf DIST/ArgoUML-$releasename-src.zip $SRCDIRS
+  zip -r DIST/ArgoUML-$releasename-src.zip $SRCDIRS -x "*/.svn/*"
   tar cvf DIST/ArgoUML-$releasename-src.tar --exclude=".svn" $SRCDIRS
 )
 ( cd DIST && gzip -v *.tar )
