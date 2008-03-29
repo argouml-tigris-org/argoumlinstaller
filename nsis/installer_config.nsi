@@ -2,13 +2,10 @@
 # This file configures the creation of windows installers for the ArgoUML project 
 # The installers are genenerated using Nullsoft Scriptable Install System (NSIS).
 #
-# WORK IN PROGRESS....
-# Needs to spell out 2 usage scenarios, one from ./official.sh, one from eclipse.
-#
 # There are two usage scenarios for using this file:
 #
 # RUNNING VIA OFFICIAL RELEASE BUILD SCRIPT (argoumlinstaller/official.sh)
-# 1) NSIS does not need to be installed if running on Cygwin/Windows (nsis 
+# 1) NSIS does not need to be installed if running on Cygwin/Windows (nsis
 #    binaries are included in the SVN checkout).
 # 2) Build the required release (build-release.sh).
 # 3) Run ./official.sh, which in turn calls argoumlinstaller/nsis/doit.sh
@@ -31,7 +28,7 @@
 #    Example settings
 # BUILDDIR "..\build\VERSION_0_25_4\argouml\build"
 # RELEASENAME 0.25.4
-# 5) Complile script using EclipseNSIS > Compiile Script
+# 5) Complile script using EclipseNSIS > Compile Script
 #
 # In general, EclipseNSIS can be used to edit/develop this script, but the 
 # official builds should always be done using official.sh
@@ -56,15 +53,9 @@
 ; If BUILDDIR not defined, assume we are running in eclipse style layout.
 !ifndef BUILDDIR
   !define BUILDDIR "..\..\build"
-  ; This workaround is only necessary because the .ico is not copied to the 
-  ; build directory by the build process, otherwise we'd just get it from 
-  ; ${BUILDDIR}\ArgoUML.ico, along with the .jars.
-  !define ICOFILE "${BUILDDIR}\..\argouml\bin\ArgoUML.ico"
-!else
-  !define ICOFILE "${BUILDDIR}\..\src_new\bin\ArgoUML.ico"
 !endif
 
-!ifndef OUTPUTDIR                      ; Where to put the generated installer(s). 
+!ifndef OUTPUTDIR                      ; Where to put the generated installer(s).
   !define OUTPUTDIR "."                ; if unspecified, use script location.
 !endif
 !define COMPANY ""
@@ -74,10 +65,14 @@
 !define JRE_REQUIRED_VERSION "1.5"
 !define JRE_URL "http://javadl.sun.com/webapps/download/AutoDL?BundleId=11292"
 
+!define ARGO_FILE_EXT ".zargo"
+!define ARGO_FILE_DESC "ArgoUML Project File"
+!define ARGO_FILE_KEYNAME "ArgoUML.Project"
+
 Name ${NAME}
 
 # MUI defines
-!define MUI_ICON ${ICOFILE}
+!define MUI_ICON ${BUILDDIR}\ArgoUML.ico
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_NODISABLE
@@ -94,10 +89,13 @@ Name ${NAME}
 !include "MUI.nsh"
 !include "LogicLib.nsh"                ; for If, Else, etc used in DetectJRE
 !include "WordFunc.nsh"                ; For VersionCompare used in DetectJRE
+!include "registerExtension.nsh"       ; for registering file extensions.
+!include "FileFunc.nsh"
+!insertmacro RefreshShellIcons
 !insertmacro VersionCompare
-
 # Variables
 Var StartMenuGroup
+Var JavaHome
 
 # Installer pages
 !insertmacro MUI_PAGE_WELCOME
@@ -155,22 +153,40 @@ Section /o JRE SEC0000
 SectionEnd
 
 Section ArgoUML SEC0001
+    ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\Java Runtime Environment" \
+             "BrowserJavaVersion"
+    ReadRegStr $JavaHome HKLM "SOFTWARE\JavaSoft\Java Runtime Environment\$2" \
+             "JavaHome"
+                        
     SetOutPath $INSTDIR
     SetOverwrite on
     File "${BUILDDIR}\*.jar"
     File /nonfatal "${BUILDDIR}\*.bat"
-    File "${ICOFILE}"
+    File "${BUILDDIR}\ArgoUML.ico"
+    File "${BUILDDIR}\ArgoUMLdoc.ico"
     SetOutPath $INSTDIR\ext"
     File /nonfatal "${BUILDDIR}\ext\*.jar"
     SetOutPath "$SMPROGRAMS\$StartMenuGroup"    ;Create folder on start menu. 
     SetOutPath $INSTDIR
-    CreateShortcut "$DESKTOP\ArgoUML.lnk" "$INSTDIR\argouml.jar" "" \
+    CreateShortcut "$DESKTOP\ArgoUML.lnk"  \
+        "$JavaHome\bin\javaw.exe" \
+        "-jar $\"$INSTDIR\argouml.jar$\""\
         "$INSTDIR\ArgoUML.ico" 0 SW_SHOWNORMAL \
         "" "$(^Name) ${RELEASENAME} - UML Modelling tool"
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\ArgoUML.lnk" \
-        "$INSTDIR\argouml.jar" "" "$INSTDIR\ArgoUML.ico" \
-        0 SW_SHOWNORMAL "" "$(^Name) ${RELEASENAME} - UML Modelling tool"
+        "$JavaHome\bin\javaw.exe" \
+        "-jar $\"$INSTDIR\argouml.jar$\""\
+        "$INSTDIR\ArgoUML.ico" 0 SW_SHOWNORMAL \
+        "" "$(^Name) ${RELEASENAME} - UML Modelling tool"
     WriteRegStr HKLM "${REGKEY}\Components" ArgoUML 1
+    
+    ${registerExtension} \
+        '$\"$JavaHome\bin\javaw.exe$\" -jar $\"$INSTDIR\argouml.jar$\"' \ 
+        "${ARGO_FILE_EXT}" \
+        "${ARGO_FILE_KEYNAME}" \
+        "${ARGO_FILE_DESC}" \
+        "$INSTDIR\ArgoUMLdoc.ico"
+    ${RefreshShellIcons}
 SectionEnd
 
 Section -post SEC0002
@@ -219,6 +235,10 @@ Section /o -un.ArgoUML UNSEC0001
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\ArgoUML.lnk"
     RmDir /r /REBOOTOK $INSTDIR
     DeleteRegValue HKLM "${REGKEY}\Components" ArgoUML
+    ${unregisterExtension} \
+            "${ARGO_FILE_EXT}" \
+            "${ARGO_FILE_KEYNAME}" \
+            "${ARGO_FILE_DESC}"
 SectionEnd
 
 Section -un.post UNSEC0002
