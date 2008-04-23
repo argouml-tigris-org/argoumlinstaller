@@ -134,6 +134,12 @@ mv build/ArgoUML-*.app.tgz $DESTDIR/argouml-$RELEASE
 
 javawebstart/createJWS.sh
 
+NSISDOIT=`pwd`/nsis/doit.sh
+chmod +x $NSISDOIT &&
+(
+  $NSISDOIT
+)
+
 
 ## Do most of the subversion adding.
 (

@@ -73,7 +73,13 @@ Starts from Java Web Start
 
 <TR><TH COLSPAN=2>Installers</TH></TR>
 
-<TR><TD COLSPAN=2>Added when available.<TD><TR>
+<TR><TD>
+<a href="@URLROOT@/ArgoUML-@VERSION@-setup.exe"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-setup.exe')"
+   ><nobr>ArgoUML-@VERSION@-setup.exe</nobr></a>
+</TD><TD>
+Windows Installer
+</TD></TR>
 
 
 
