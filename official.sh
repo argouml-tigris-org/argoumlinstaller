@@ -16,6 +16,7 @@ read release
 RELEASE=$release
 VERSIONNAME=VERSION_`echo $release | sed 's/\./_/g'`
 BUILDDIR=`pwd`/build/$VERSIONNAME/argouml/build
+DOCBUILDDIR=`pwd`/build/$VERSIONNAME/argouml/documentation/build
 
 DESTDIR=${DESTDIR-`pwd`/../argouml-downloads/www}
 
@@ -45,7 +46,8 @@ then
     exit 1;
 fi
 
-for file in argouml.jar log4j.jar java-interfaces.jar mof.jar
+# Update this whenever the version of log4j changes!
+for file in argouml.jar log4j-1.2.6.jar java-interfaces.jar mof.jar
 do
     if test ! -f $BUILDDIR/$file
     then
@@ -87,7 +89,7 @@ then
 fi
 
 # Is the pdf documentation built?
-if test ! -f $BUILDDIR/documentation/pdf/manual/argomanual.pdf
+if test ! -f $DOCBUILDDIR/documentation/pdf/manual/argomanual.pdf
 then
     echo $BUILD The pdf version of the manual does not exist. Build incorrect.
     exit 1;
@@ -119,7 +121,7 @@ chmod +x $TARZIPDOIT &&
 
 (
     cd $DIRECTORY/.. &&
-    for pdffile in $BUILDDIR/documentation/pdf/*/*.pdf
+    for pdffile in $DOCBUILDDIR/documentation/pdf/*/*.pdf
     do
         cp $pdffile $DESTDIR/argouml-$RELEASE/`basename $pdffile .pdf`-$RELEASE.pdf
     done

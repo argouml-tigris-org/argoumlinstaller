@@ -149,8 +149,16 @@ then
     grep '^Revision:' |
     while read zz rev
     do
-      for subdir in documentation lib modules/dev modules/menutest \
-             src/model src/model-mdr src_new tests tools www
+      for subdir in documentation \
+             modules/dev \
+             src/argouml-app \
+             src/argouml-core-diagrams-sequence2 \
+             src/argouml-core-infra \
+             src/argouml-core-model \
+             src/argouml-core-model-euml \
+             src/argouml-core-model-mdr \
+             src \
+             tools www
       do
         svn_add_prop subclipse:tags \
 	    "$rev,$VERSIONNAME,/releases/$VERSIONNAME/$subdir,tag" \
@@ -268,7 +276,7 @@ then
   verifyallcheckedout
 
   # Test that the version does not contain pre.
-  if grep -q "argo.core.version=PRE-" $DESTDIR/argouml/src_new/default.properties
+  if grep -q "argo.core.version=PRE-" $DESTDIR/argouml/src/argouml-app/default.properties
   then
     echo The version contains PRE-. 1>&2
     exit 1
@@ -276,7 +284,7 @@ then
 
   # Build things
   echo Building package in core
-  cd $DESTDIR/argouml/src_new && ./build.sh package
+  cd $DESTDIR/argouml && $RELATIVE_ANT install
   (
     cd $DESTDIR
     for proj in $PROJECTS
@@ -293,7 +301,7 @@ then
   verifyallcheckedout
 
   # Test that the version does not contain pre.
-  if grep -q "argo.core.version=PRE-" $DESTDIR/argouml/src_new/default.properties
+  if grep -q "argo.core.version=PRE-" $DESTDIR/argouml/src/argouml-app/default.properties
   then
     echo The version contains PRE-. 1>&2
     exit 1
