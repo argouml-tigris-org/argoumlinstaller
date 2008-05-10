@@ -28,7 +28,7 @@ export DESTDIR BUILDDIR RELEASE DIRECTORY
 # Do all kinds of tests!
 
 # Check that JAVA_HOME is set correctly (for jar and jarsigner)
-if test ! -x $JAVA_HOME/bin/jar
+if test ! -x "$JAVA_HOME"/bin/jar
 then
     echo JAVA_HOME is not set correctly.
     exit 1;
