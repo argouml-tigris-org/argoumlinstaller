@@ -64,14 +64,21 @@ do
     do
         b=`basename $foundjar`
         jar=`eval $GETLAYOUT | grep "^$b" | awk '{print $1}'`
-        groupid=`eval $GETLAYOUT | grep "^$b" | awk '{print $2}'`
-        version=`eval $GETLAYOUT | grep "^$b" | awk '{print $3}'`
+
+	if test ! -n "$jar"
+        then
+            b=`echo $b | sed 's/[._0-9-]*[BETA3]*.jar$/.jar/'`
+            jar=`eval $GETLAYOUT | grep "^$b" | awk '{print $1}'`
+        fi
 
 	if test ! -n "$jar"
         then
             echo Cannot find config for $foundjar
             exit 1
         fi
+
+        groupid=`eval $GETLAYOUT | grep "^$b" | awk '{print $2}'`
+        version=`eval $GETLAYOUT | grep "^$b" | awk '{print $3}'`
 
         rootname=`basename $jar .jar`
         groupiddir=`echo $groupid | tr . /`
@@ -89,7 +96,7 @@ do
 		echo mkdir $TARGETDIR/$groupiddir/$rootname/$releasename >> $CMDS
 		echo cp $foundjar $TARGETDIR/$groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $CMDS
 		echo $groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $FILES
-            elif $COMPAREJARS $lastjar $foundjar > /dev/null
+            elif $COMPAREJARS $lastjar $foundjar
 	    then
 		echo $rootname the same as $lastversion - OK
 		echo $groupiddir/$rootname/$lastversion/$rootname-$lastversion.jar >> $FILES
@@ -100,10 +107,19 @@ do
 		echo $groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $FILES
 	    fi
 	else
+            # Check that $foundjar and $rootname-$version are similar enough
+            if echo $rootname-$version | grep `basename $foundjar .jar` > /dev/null
+            then
+               : this is OK
+            else
+               echo `basename $foundjar` does not match $rootname-$version - NOT OK - update "$LAYOUT"
+               exit 1
+            fi
+
             if test -d $TARGETDIR/$groupiddir/$rootname/$version
             then
                 oldjar="$TARGETDIR/$groupiddir/$rootname/$version/$rootname-$version.jar"
-		if $COMPAREJARS $oldjar $foundjar > /dev/null
+		if $COMPAREJARS $oldjar $foundjar
 		then
 		    echo $rootname the same version $version - OK
 		    echo $groupiddir/$rootname/$version/$rootname-$version.jar >> $FILES

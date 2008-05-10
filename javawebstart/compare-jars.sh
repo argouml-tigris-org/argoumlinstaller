@@ -17,27 +17,28 @@ if test ! -r "$file2"; then
     exit 1
 fi
 
-if cmp $file1 $file2; then
+if cmp $file1 $file2 > /dev/null; then
     # They are the same
     exit 0
 fi
 
-# Now, we need to unpack and then compare the contents of every file 
-# except the *.dsa file.
+# Now, we need to unpack and then compare the contents of every file
+# except
+# * the *.dsa file
 TMP=/tmp/compare-jars$$
 trap "rm -rf $TMP" 0 1 2 15
 
-echo TMP is $TMP
-
 mkdir $TMP $TMP/1 $TMP/2 || exit 1
-unzip -d $TMP/1 $file1 || exit 1
-unzip -d $TMP/2 $file2 || exit 1
+unzip -d $TMP/1 $file1 > /dev/null || exit 1
+unzip -d $TMP/2 $file2 > /dev/null || exit 1
 
 rm $TMP/1/META-INF/*.DSA
 rm $TMP/2/META-INF/*.DSA
 
-diff -rq $TMP/1 $TMP/2
+diff -r $TMP/1 $TMP/2 > $TMP/diff-result
 res=$?
+
+head -5 $TMP/diff-result
 
 rm -rf $TMP
 
