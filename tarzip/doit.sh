@@ -7,7 +7,7 @@ echo $BUILD The purpose of this shellscript is to take the contents
 echo $BUILD of the build directory, and create tar and zip files.
 
 # Check that JAVA_HOME is set correctly (for jar)
-if test ! -x $JAVA_HOME/bin/jar
+if test ! -x "$JAVA_HOME"/bin/jar
 then
     echo JAVA_HOME is not set correctly.
     exit 1;
@@ -52,21 +52,23 @@ mkdir DIST
   cp *.jar README.txt *.sh *.bat argouml-$releasename
   mkdir argouml-$releasename/ext
   cp ext/*.jar argouml-$releasename/ext
-  $JAVA_HOME/bin/jar cvf ../../DIST/ArgoUML-$releasename.zip argouml-$releasename
+  "$JAVA_HOME"/bin/jar cvf ../../DIST/ArgoUML-$releasename.zip argouml-$releasename
   tar cvf ../../DIST/ArgoUML-$releasename.tar argouml-$releasename
   rm -rf argouml-$releasename
 )
-(
-  cd argouml/lib;
-  $JAVA_HOME/bin/jar cvf ../../DIST/ArgoUML-$releasename-libs.zip *.txt *.jar
-  tar cvf ../../DIST/ArgoUML-$releasename-libs.tar *.txt *.jar
 
-  cd ../src/model-mdr/lib;
-  $JAVA_HOME/bin/jar uvf ../../../../DIST/ArgoUML-$releasename-libs.zip *.txt *.jar
-  tar rvf ../../../../DIST/ArgoUML-$releasename-libs.tar *.txt *.jar
+# The libs are now from different directories but all copied to
+# argouml/build. Lets fetch all those that don't start with 
+# argouml and that will be good enough hopefully
+# TODO: Make this more solid or perhaps stop distributing libs.
+(
+  cd argouml/build;
+  FILES=`ls *.txt *.jar | grep -v '^argouml'`
+  "$JAVA_HOME"/bin/jar cvf ../../DIST/ArgoUML-$releasename-libs.zip $FILES
+  tar cvf ../../DIST/ArgoUML-$releasename-libs.tar $FILES
 )
 (
-  SRCDIRS="argouml/src_new argouml/src/*/src argouml/src/*/build.xml argouml-*/src"
+  SRCDIRS="argouml/src/*/src argouml/src/*/build.xml argouml-*/src argouml-*/build.xml"
   zip -r DIST/ArgoUML-$releasename-src.zip $SRCDIRS -x "*/.svn/*"
   tar cvf DIST/ArgoUML-$releasename-src.tar --exclude=".svn" $SRCDIRS
 )
