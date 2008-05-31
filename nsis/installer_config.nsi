@@ -52,7 +52,7 @@
 !endif
 ; If BUILDDIR not defined, assume we are running in eclipse style layout.
 !ifndef BUILDDIR
-  !define BUILDDIR "..\..\build"
+  !define BUILDDIR "..\..\argouml-build\build"
 !endif
 
 !ifndef OUTPUTDIR                      ; Where to put the generated installer(s).
@@ -68,6 +68,7 @@
 !define ARGO_FILE_EXT ".zargo"
 !define ARGO_FILE_DESC "ArgoUML Project File"
 !define ARGO_FILE_KEYNAME "ArgoUML.Project"
+!define ARGO_JVM_ARGS "-Xmx512m"
 
 Name ${NAME}
 
@@ -170,18 +171,18 @@ Section ArgoUML SEC0001
     SetOutPath $INSTDIR
     CreateShortcut "$DESKTOP\ArgoUML.lnk"  \
         "$JavaHome\bin\javaw.exe" \
-        "-jar $\"$INSTDIR\argouml.jar$\""\
+        "${ARGO_JVM_ARGS} -jar $\"$INSTDIR\argouml.jar$\""\
         "$INSTDIR\ArgoUML.ico" 0 SW_SHOWNORMAL \
         "" "$(^Name) ${RELEASENAME} - UML Modelling tool"
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\ArgoUML.lnk" \
         "$JavaHome\bin\javaw.exe" \
-        "-jar $\"$INSTDIR\argouml.jar$\""\
+        "${ARGO_JVM_ARGS} -jar $\"$INSTDIR\argouml.jar$\""\
         "$INSTDIR\ArgoUML.ico" 0 SW_SHOWNORMAL \
         "" "$(^Name) ${RELEASENAME} - UML Modelling tool"
     WriteRegStr HKLM "${REGKEY}\Components" ArgoUML 1
     
     ${registerExtension} \
-        '$\"$JavaHome\bin\javaw.exe$\" -jar $\"$INSTDIR\argouml.jar$\"' \ 
+        '$\"$JavaHome\bin\javaw.exe$\" ${ARGO_JVM_ARGS} -jar $\"$INSTDIR\argouml.jar$\"' \ 
         "${ARGO_FILE_EXT}" \
         "${ARGO_FILE_KEYNAME}" \
         "${ARGO_FILE_DESC}" \
