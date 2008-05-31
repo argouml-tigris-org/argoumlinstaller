@@ -172,7 +172,7 @@ then
     <all-permissions/>
   </security>
   <resources>
-    <j2se version="1.4+" max-heap-size="512m"/>
+    <j2se version="1.5+" max-heap-size="512m"/>
 
 EOF
 
