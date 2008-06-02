@@ -74,15 +74,20 @@ Name ${NAME}
 
 # MUI defines
 !define MUI_ICON ${BUILDDIR}\ArgoUML.ico
+!define MUI_FINISHPAGE_RUN "$JavaHome\bin\javaw.exe"
+!define MUI_FINISHPAGE_RUN_PARAMETERS "${ARGO_JVM_ARGS} -jar $\"$INSTDIR\argouml.jar$\""
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_NODISABLE
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER ArgoUML
+!define MUI_LANGDLL_REGISTRY_ROOT "HKLM" 
+!define MUI_LANGDLL_REGISTRY_KEY "${REGKEY}" 
+!define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
-!define MUI_FINISHPAGE_LINK "Click here to visit the ArgoUML website"
+!define MUI_FINISHPAGE_LINK ${URL}
 !define MUI_FINISHPAGE_LINK_LOCATION ${URL}
 
 # Included files
@@ -105,18 +110,21 @@ Var JavaHome
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuGroup
 !insertmacro MUI_PAGE_INSTFILES
-;!insertmacro MUI_PAGE_FINISH
+!insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
 
 # Installer languages
 !insertmacro MUI_LANGUAGE English
 !insertmacro MUI_LANGUAGE French
+!insertmacro MUI_LANGUAGE German
 !insertmacro MUI_LANGUAGE Spanish
 !insertmacro MUI_LANGUAGE Italian
 !insertmacro MUI_LANGUAGE Norwegian
 !insertmacro MUI_LANGUAGE Portuguese
+!insertmacro MUI_LANGUAGE PortugueseBR
 !insertmacro MUI_LANGUAGE Russian
+!insertmacro MUI_LANGUAGE TradChinese
 
 # Installer attributes
 OutFile ${OUTPUTDIR}\${NAME}-${RELEASENAME}-setup.exe
@@ -126,7 +134,7 @@ CRCCheck on
 XPStyle on
 ShowInstDetails hide
 VIProductVersion 0.0.0.0
-VIAddVersionKey /LANG=${LANG_ENGLISH} ProductName $(^Name)
+VIAddVersionKey /LANG=${LANG_ENGLISH} ProductName "${NAME}"
 VIAddVersionKey /LANG=${LANG_ENGLISH} ProductVersion 0.0.0.0
 VIAddVersionKey /LANG=${LANG_ENGLISH} CompanyWebsite "${URL}"
 VIAddVersionKey /LANG=${LANG_ENGLISH} FileVersion "${RELEASENAME}"
@@ -257,6 +265,20 @@ SectionEnd
 # Installer functions
 Function .onInit
     InitPluginsDir
+    System::Call 'kernel32::GetUserDefaultUILanguage() i.r10'
+    ${Switch} $R0    ; If english PC, don't bother with language selection. 
+      ${Case} '0409' ; en-us
+        Goto langok
+        ${Break}
+      ${Case} '0809' ;en-uk
+        Goto langok
+        ${Break}
+      ${Case} '1033' ;also en-uk
+        Goto langok
+        ${Break}
+    ${EndSwitch}
+!insertmacro MUI_LANGDLL_DISPLAY
+langok:
     ReadRegStr $R0 HKLM "${REGKEY}" Path
     ${If} $R0 != ""
       MessageBox MB_YESNO|MB_ICONEXCLAMATION \
@@ -300,6 +322,7 @@ FunctionEnd
 # Uninstaller functions
 Function un.onInit
     ReadRegStr $INSTDIR HKLM "${REGKEY}" Path
+    !insertmacro MUI_UNGETLANGUAGE
     !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuGroup
     !insertmacro SELECT_UNSECTION JRE ${UNSEC0000}
     !insertmacro SELECT_UNSECTION ArgoUML ${UNSEC0001}
@@ -315,25 +338,34 @@ FunctionEnd
 # TODO Update the Language Strings with the appropriate translations.
 LangString ^UninstallLink ${LANG_ENGLISH} "Uninstall $(^Name)"
 LangString ^UninstallLink ${LANG_FRENCH} "Uninstall $(^Name)"
+LangString ^UninstallLink ${LANG_GERMAN} "Uninstall $(^Name)"
 LangString ^UninstallLink ${LANG_SPANISH} "Uninstall $(^Name)"
 LangString ^UninstallLink ${LANG_ITALIAN} "Uninstall $(^Name)"
 LangString ^UninstallLink ${LANG_NORWEGIAN} "Uninstall $(^Name)"
 LangString ^UninstallLink ${LANG_PORTUGUESE} "Uninstall $(^Name)"
+LangString ^UninstallLink ${LANG_PORTUGUESEBR} "Uninstall $(^Name)"
 LangString ^UninstallLink ${LANG_RUSSIAN} "Uninstall $(^Name)"
+LangString ^UninstallLink ${LANG_TRADCHINESE} "Uninstall $(^Name)"
 
 LangString SEC0000_DESC ${LANG_ENGLISH} "Java Runtime Environment (download from sun.com)"
 LangString SEC0000_DESC ${LANG_FRENCH} "Java Runtime Environment (download from sun.com)"
+LangString SEC0000_DESC ${LANG_GERMAN} "Java Runtime Environment (download from sun.com)"
 LangString SEC0000_DESC ${LANG_SPANISH} "Java Runtime Environment (download from sun.com)"
 LangString SEC0000_DESC ${LANG_ITALIAN} "Java Runtime Environment (download from sun.com)"
 LangString SEC0000_DESC ${LANG_NORWEGIAN} "Java Runtime Environment (download from sun.com)"
 LangString SEC0000_DESC ${LANG_PORTUGUESE} "Java Runtime Environment (download from sun.com)"
+LangString SEC0000_DESC ${LANG_PORTUGUESEBR} "Java Runtime Environment (download from sun.com)"
 LangString SEC0000_DESC ${LANG_RUSSIAN} "Java Runtime Environment (download from sun.com)"
+LangString SEC0000_DESC ${LANG_TRADCHINESE} "Java Runtime Environment (download from sun.com)"
 
 LangString SEC0001_DESC ${LANG_ENGLISH} "The ArgoUML application itself (required)."
 LangString SEC0001_DESC ${LANG_FRENCH} "The ArgoUML application itself (required)."
+LangString SEC0001_DESC ${LANG_GERMAN} "The ArgoUML application itself (required)."
 LangString SEC0001_DESC ${LANG_SPANISH} "The ArgoUML application itself (required)."
 LangString SEC0001_DESC ${LANG_ITALIAN} "The ArgoUML application itself (required)."
 LangString SEC0001_DESC ${LANG_NORWEGIAN} "The ArgoUML application itself (required)."
 LangString SEC0001_DESC ${LANG_PORTUGUESE} "The ArgoUML application itself (required)."
+LangString SEC0001_DESC ${LANG_PORTUGUESEBR} "The ArgoUML application itself (required)."
 LangString SEC0001_DESC ${LANG_RUSSIAN} "The ArgoUML application itself (required)."
+LangString SEC0001_DESC ${LANG_TRADCHINESE} "The ArgoUML application itself (required)."
 
