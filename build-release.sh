@@ -296,7 +296,8 @@ then
     done
   )
 
-
+  echo Update the manifest to include modules files.
+  cd $DESTDIR/argouml && $RELATIVE_ANT update-argouml.jar-manifest
 fi
 
 if $builddoc
