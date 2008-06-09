@@ -283,10 +283,8 @@ then
   fi
 
   # Build things
-  echo Build the core argouml that all projects depend on
+  echo Building package in core
   cd $DESTDIR/argouml && $RELATIVE_ANT install
-
-  echo Build all projects
   (
     cd $DESTDIR
     for proj in $PROJECTS
@@ -295,9 +293,6 @@ then
       ( cd $proj && ../argouml/$RELATIVE_ANT install )
     done
   )
-
-  echo Update the manifest to include modules files.
-  cd $DESTDIR/argouml && $RELATIVE_ANT update-argouml.jar-manifest
 fi
 
 if $builddoc
