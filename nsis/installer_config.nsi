@@ -163,9 +163,14 @@ SectionEnd
 
 Section ArgoUML SEC0001
     ReadRegStr $2 HKLM "SOFTWARE\JavaSoft\Java Runtime Environment" \
-             "BrowserJavaVersion"
+             "CurrentVersion"
     ReadRegStr $JavaHome HKLM "SOFTWARE\JavaSoft\Java Runtime Environment\$2" \
              "JavaHome"
+    ${If} $JavaHome == ""
+      MessageBox MB_OK|MB_ICONEXCLAMATION \
+              "Setup detected that Java has not been correctly installed on this system, please reinstall the Java runtime enviroment, then try again."
+      Quit
+    ${EndIf}
                         
     SetOutPath $INSTDIR
     SetOverwrite on
