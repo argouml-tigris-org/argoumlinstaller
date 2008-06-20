@@ -183,6 +183,9 @@ EOF
 
     cat >> $JNLPFILE <<EOF
 
+    <property name="argouml.modules"
+              value="org.argouml.language.cpp.generator.ModuleCpp;org.argouml.language.cpp.notation.NotationModuleCpp;org.argouml.language.cpp.reveng.CppImport;org.argouml.language.cpp.ui.SettingsTabCpp;org.argouml.language.cpp.profile.ProfileModule;org.argouml.uml.reveng.classfile.ClassfileImport;org.argouml.uml.reveng.idl.IDLFileImport;org.argouml.language.php.generator.ModulePHP4;org.argouml.language.php.generator.ModulePHP5;org.argouml.language.csharp.generator.GeneratorCSharp;org.argouml.language.sql.SqlInit"/>
+
   </resources>
   <application-desc main-class="org.argouml.application.Main"/>
 </jnlp>
