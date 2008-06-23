@@ -3,7 +3,7 @@
 # This file describes how the layout of the maven2 repository is i.e.
 # mostly what jar file uses what groupID and version.
 #
-anarres-cpp.jar         org.anarres.cpp	1.2.3
+anarres-cpp-no-dependencies.jar         org.anarres.cpp	1.2.3
 antlr.jar		antlr   2.7.7
 argouml-diagrams-sequence.jar	org.argouml
 argouml-mdr.jar		org.argouml
