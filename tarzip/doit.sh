@@ -52,6 +52,10 @@ mkdir DIST
   cp *.jar README.txt *.sh *.bat argouml-$releasename
   mkdir argouml-$releasename/ext
   cp ext/*.jar argouml-$releasename/ext
+
+  # Extra file for argouml-sql.
+  cp ext/domainmapping.xml argouml-$releasename/ext
+
   "$JAVA_HOME"/bin/jar cvf ../../DIST/ArgoUML-$releasename.zip argouml-$releasename
   tar cvf ../../DIST/ArgoUML-$releasename.tar argouml-$releasename
   rm -rf argouml-$releasename
