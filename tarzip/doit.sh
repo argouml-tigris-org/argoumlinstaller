@@ -6,14 +6,6 @@ BUILD=PACKRELEASE:
 echo $BUILD The purpose of this shellscript is to take the contents
 echo $BUILD of the build directory, and create tar and zip files.
 
-# Check that JAVA_HOME is set correctly (for jar)
-if test ! -x "$JAVA_HOME"/bin/jar
-then
-    echo JAVA_HOME is not set correctly.
-    exit 1;
-fi
-
-
 
 if test ! -d $DESTDIR
 then
@@ -56,7 +48,7 @@ mkdir DIST
   # Extra file for argouml-sql.
   cp ext/domainmapping.xml argouml-$releasename/ext
 
-  "$JAVA_HOME"/bin/jar cvf ../../DIST/ArgoUML-$releasename.zip argouml-$releasename
+  zip -r ../../DIST/ArgoUML-$releasename.zip argouml-$releasename
   tar cvf ../../DIST/ArgoUML-$releasename.tar argouml-$releasename
   rm -rf argouml-$releasename
 )
@@ -68,7 +60,7 @@ mkdir DIST
 (
   cd argouml/build;
   FILES=`ls *.txt *.jar | grep -v '^argouml'`
-  "$JAVA_HOME"/bin/jar cvf ../../DIST/ArgoUML-$releasename-libs.zip $FILES
+  zip -r ../../DIST/ArgoUML-$releasename-libs.zip $FILES
   tar cvf ../../DIST/ArgoUML-$releasename-libs.tar $FILES
 )
 (
