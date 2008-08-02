@@ -74,11 +74,12 @@ VERSIONNAME=VERSION_`echo $release | sed 's/\./_/g'`
 BUILD=`pwd`/build
 DESTDIR=$BUILD/$VERSIONNAME
 JIMICLASSES=$BUILD/JimiProClasses.zip
+USERNAME=linus
 
 echo Release: $release
 echo Tagname: $VERSIONNAME
 echo Destdir: $DESTDIR
-
+echo "User:    $USERNAME"
 
 svn_add_prop()
 {
@@ -89,11 +90,22 @@ svn_add_prop()
   TMPDIR=/tmp/svn_add_prop$$.dir
   svn propget --non-interactive $1 $3 | egrep -v '^$' > $TMPFILE
   echo $2 >> $TMPFILE
-  svn co -q -N $3 $TMPDIR
+  svn co -q --username $USERNAME -N $3 $TMPDIR
   svn propset -q --non-interactive $1 --file $TMPFILE $TMPDIR
-  svn commit -q -m"Updated the $1 tag." $TMPDIR
+  svn commit --username $USERNAME -q -m"Updated the $1 tag." $TMPDIR
   rm $TMPFILE
   rm -rf $TMPDIR
+}
+
+verifyalldefaultidentitiessetup() {
+  echo -n Checking $* default login / password combinations
+  for proj in $PROJECTS
+  do
+    echo -n .
+    svn propget --username $USERNAME dummy:tag \
+      http://$proj.tigris.org/svn/$proj/trunk
+  done
+  echo done.
 }
 
 
@@ -144,6 +156,8 @@ then
 
   if $dontjusttest
   then
+    verifyalldefaultidentitiessetup and setting
+
     # Fixing subclipse:tags property for the main project
     svn info http://argouml.tigris.org/svn/argouml/trunk |
     grep '^Revision:' |
@@ -177,7 +191,7 @@ then
         svn_add_prop subclipse:tags "$rev,$VERSIONNAME,/releases/$VERSIONNAME,tag" http://$proj.tigris.org/svn/$proj/trunk
       done
 
-      svn copy http://$proj.tigris.org/svn/$proj/trunk http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
+      svn copy --username $USERNAME http://$proj.tigris.org/svn/$proj/trunk http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
     done
   else
     exit 0
@@ -241,6 +255,7 @@ verifyjavahome() {
 
 if $checkout
 then
+  verifyalldefaultidentitiessetup
   verifyallexists
 
   if test -d "$DESTDIR"
@@ -257,7 +272,7 @@ then
     for proj in $PROJECTS
     do
       echo Checking out $proj
-      svn co http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME $proj
+      svn co --username $USERNAME http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME $proj
     done
   )
 
