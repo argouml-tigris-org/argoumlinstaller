@@ -284,16 +284,25 @@ Function .onInit
     ${EndSwitch}
 !insertmacro MUI_LANGDLL_DISPLAY
 langok:
-    ReadRegStr $R0 HKLM "${REGKEY}" Path
-    ${If} $R0 != ""
-      MessageBox MB_YESNO|MB_ICONEXCLAMATION \
-        "Setup detected that ${NAME} is already installed to '$R0' \
-        It is strongly advised that you uninstall this version first. \
-        Continue anyway?" IDYES yes IDNO no 
-no:
-      Quit
-yes:
-    ${EndIf}
+  ReadRegStr $R0 HKLM \
+  "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" \
+  "UninstallString"
+  StrCmp $R0 "" done
+ 
+  MessageBox MB_OKCANCEL|MB_ICONQUESTION \
+  "Remove existing installation of ${NAME} first?" \
+  IDOK uninst
+  Abort
+ 
+;Run the uninstaller
+uninst:
+  ClearErrors
+  ExecWait '$R0 /S _?=$INSTDIR' ;Do not copy the uninstaller to a temp file
+  IfErrors no_remove_uninstaller
+    Delete /REBOOTOK $R0
+   no_remove_uninstaller:
+done:
+
     StrCpy $StartMenuGroup "$(^Name)"
 FunctionEnd
 
