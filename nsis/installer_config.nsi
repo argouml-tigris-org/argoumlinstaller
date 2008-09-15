@@ -179,7 +179,9 @@ Section ArgoUML SEC0001
     File "${BUILDDIR}\ArgoUML.ico"
     File "${BUILDDIR}\ArgoUMLdoc.ico"
     SetOutPath $INSTDIR\ext"
-    File /nonfatal "${BUILDDIR}\ext\*.jar"
+    File /nonfatal "${BUILDDIR}\ext\*.jar"      
+    ; Extra file for argouml-sql
+    File /nonfatal "${BUILDDIR}\ext\domainmapping.xml"
     SetOutPath "$SMPROGRAMS\$StartMenuGroup"    ;Create folder on start menu. 
     SetOutPath $INSTDIR
     CreateShortcut "$DESKTOP\ArgoUML.lnk"  \
