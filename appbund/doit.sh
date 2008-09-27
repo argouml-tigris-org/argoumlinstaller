@@ -16,6 +16,20 @@ if test ! -d infra; then
     exit 1
 fi
 
+if test -n "$BUILDDIR"
+then
+    builddirectory=$BUILDDIR
+else
+    VERSIONNAME=VERSION_`echo $releasename | sed 's/\./_/g'`
+    builddirectory=`pwd`/../build/$VERSIONNAME/argouml/build
+    echo "\$BUILDDIR not defined, using $builddirectory."
+fi
+
+if test ! -d $builddirectory; then
+    echo build directory "$builddirectory" does not exist.
+    exit 1
+fi
+
 mkdir -p ../build
 
 mkdir ArgoUML.app
@@ -29,7 +43,7 @@ mkdir ArgoUML.app/Contents/Resources
   cp GenericJavaApp.icns ../ArgoUML.app/Contents/Resources
 )
 # Format the Info.plist file
-( cd ../../argouml/build && ls *.jar ) > ArgoUML.app/temp.list
+( cd $builddirectory && ls *.jar ) > ArgoUML.app/temp.list
 cat < infra/Info.plist |
   sed 's/@VERSION_NUMBER@/'$releasename'/' |
   awk '$0 == "@FILE_LIST@" {
@@ -51,9 +65,10 @@ mkdir ArgoUML.app/Contents/MacOS
 tar uvf ArgoUML.app.tar --mode 755 ArgoUML.app/Contents/MacOS
 
 mkdir ArgoUML.app/Contents/Resources/Java
-cp ../../argouml/build/*.jar ArgoUML.app/Contents/Resources/Java
+cp $builddirectory/*.jar ArgoUML.app/Contents/Resources/Java
 mkdir ArgoUML.app/Contents/Resources/Java/ext
-cp ../../argouml/build/ext/*.jar ArgoUML.app/Contents/Resources/Java/ext
+cp $builddirectory/ext/*.jar ArgoUML.app/Contents/Resources/Java/ext
+cp $builddirectory/ext/domainmapping.xml ArgoUML.app/Contents/Resources/Java/ext
 tar uvf ArgoUML.app.tar ArgoUML.app/Contents/Resources/Java
 
 gzip < ArgoUML.app.tar > ../build/ArgoUML-$releasename.app.tgz
