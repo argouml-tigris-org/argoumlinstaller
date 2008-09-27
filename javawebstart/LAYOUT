@@ -5,13 +5,13 @@
 #
 anarres-cpp-no-dependencies.jar         org.anarres.cpp	1.2.3-2
 antlr.jar		antlr   2.7.7
-argouml-diagrams-sequence.jar	org.argouml
-argouml-mdr.jar		org.argouml
-argouml-model.jar	org.argouml
-argouml.jar		org.argouml
+argouml-diagrams-sequence.jar	org.argouml 0.26
+argouml-mdr.jar		org.argouml 0.26
+argouml-model.jar	org.argouml 0.26
+argouml.jar		org.argouml 0.26
 commons-logging.jar	commons-logging	1.0.2-4
 gef.jar			org.tigris.gef	0.12.4
-java-interfaces.jar	org.argouml
+java-interfaces.jar	org.argouml 0.26
 jmi.jar			jmi	1.0-4
 jmiutils.jar		org.netbeans.mdr	0.0-4
 log4j.jar		log4j	1.2.6-4
@@ -23,19 +23,19 @@ openide-util.jar	org.netbeans.mdr	0.0-4
 swidgets.jar		org.tigris.swidgets	0.1.4-4
 toolbar.jar		org.tigris.toolbar	1.4.1-20071227
 # Ext
-argouml-i18n-de.jar	org.argouml
-argouml-i18n-en_GB.jar	org.argouml
-argouml-i18n-es.jar	org.argouml
-argouml-i18n-fr.jar	org.argouml
-argouml-i18n-it.jar	org.argouml
-argouml-i18n-nb.jar	org.argouml
-argouml-i18n-ru.jar	org.argouml
-argouml-i18n-zh.jar	org.argouml
-argo_classfile.jar	org.argouml
-argo_php.jar		org.argouml
-argouml-csharp.jar	org.argouml
-argo_cpp.jar		org.argouml
-argo_idl.jar		org.argouml
-argouml-i18n-pt.jar	org.argouml
-argouml-i18n-pt_BR.jar	org.argouml
-argouml-sql.jar		org.argouml
+argouml-i18n-de.jar	org.argouml 0.26
+argouml-i18n-en_GB.jar	org.argouml 0.26
+argouml-i18n-es.jar	org.argouml 0.26
+argouml-i18n-fr.jar	org.argouml 0.26
+argouml-i18n-it.jar	org.argouml 0.26
+argouml-i18n-nb.jar	org.argouml 0.26
+argouml-i18n-ru.jar	org.argouml 0.26
+argouml-i18n-zh.jar	org.argouml 0.26
+argo_classfile.jar	org.argouml 0.26
+argo_php.jar		org.argouml 0.26
+argouml-csharp.jar	org.argouml 0.26
+argo_cpp.jar		org.argouml 0.26
+argo_idl.jar		org.argouml 0.26
+argouml-i18n-pt.jar	org.argouml 0.26
+argouml-i18n-pt_BR.jar	org.argouml 0.26
+argouml-sql.jar		org.argouml 0.26
