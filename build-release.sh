@@ -17,16 +17,19 @@
 
 PROJECTS=" \
     argouml \
-    argouml-classfile \
     argouml-cpp \
     argouml-csharp \
     argouml-idl \
+    argouml-java \
     argouml-php \
     argouml-sql \
+    \
     argouml-de argouml-es argouml-en-gb argouml-fr argouml-it argouml-nb \
     argouml-pt argouml-pt-br \
     argouml-ru \
     argouml-i18n-zh \
+    \
+    argouml-documentation \
     "
 
 RELATIVE_ANT=tools/apache-ant-1.7.0/bin/ant
@@ -321,13 +324,13 @@ then
   verifyallcheckedout
 
   # Test that the version does not contain pre.
-  if grep -q "argo.core.version=PRE-" $DESTDIR/argouml/src/argouml-app/default.properties
+  if grep -q "argo.core.version.  *value=.PRE-" $DESTDIR/argouml-documentation/build.xml
   then
     echo The version contains PRE-. 1>&2
     exit 1
   fi
 
-  # Test that the version does not contain pre.
+  # Test that Jimi is in place
   if test ! -f $JIMICLASSES
   then
     echo The file $JIMICLASSES does not exist. 1>&2
@@ -336,11 +339,11 @@ then
 
   # Build things
   echo Downloading docbook again
-  cd $DESTDIR/argouml/documentation && ./build.sh docbook-xsl-get
+  cd $DESTDIR/argouml-documentation && ./build.sh docbook-xsl-get
   echo Copy Jimi
-  cp $JIMICLASSES $DESTDIR/argouml/tools/lib
+  cp $JIMICLASSES $DESTDIR/argouml-documentation/tools/lib
   echo Building documentation
-  cd $DESTDIR/argouml/documentation && ./build.sh pdf
+  cd $DESTDIR/argouml-documentation && ./build.sh pdf
 fi
 
 

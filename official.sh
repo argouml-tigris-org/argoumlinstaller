@@ -16,7 +16,7 @@ read release
 RELEASE=$release
 VERSIONNAME=VERSION_`echo $release | sed 's/\./_/g'`
 BUILDDIR=`pwd`/build/$VERSIONNAME/argouml/build
-DOCBUILDDIR=`pwd`/build/$VERSIONNAME/argouml/documentation/build
+DOCBUILDDIR=`pwd`/build/$VERSIONNAME/argouml-documentation/build
 
 DESTDIR=${DESTDIR-`pwd`/../argouml-downloads/www}
 
@@ -60,7 +60,7 @@ done
 # Tests for modules.
 # This is a complete test to make sure none of the module have failed.
 for file in \
-    argo_classfile.jar \
+    argo_java.jar \
     argo_cpp.jar argo_idl.jar argo_php.jar argouml-csharp.jar \
     argouml-sql.jar \
     argouml-i18n-de.jar \
@@ -89,7 +89,7 @@ then
 fi
 
 # Is the pdf documentation built?
-if test ! -f $DOCBUILDDIR/documentation/pdf/manual/argomanual.pdf
+if test ! -f $DOCBUILDDIR/pdf/manual/argomanual.pdf
 then
     echo $BUILD The pdf version of the manual does not exist. Build incorrect.
     exit 1;
@@ -121,7 +121,7 @@ chmod +x $TARZIPDOIT &&
 
 (
     cd $DIRECTORY/.. &&
-    for pdffile in $DOCBUILDDIR/documentation/pdf/*/*.pdf
+    for pdffile in $DOCBUILDDIR/pdf/*/*.pdf
     do
         cp $pdffile $DESTDIR/argouml-$RELEASE/`basename $pdffile .pdf`-$RELEASE.pdf
     done
