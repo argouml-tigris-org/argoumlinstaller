@@ -99,7 +99,6 @@ Name ${NAME}
 !include "FileFunc.nsh"
 !insertmacro RefreshShellIcons
 !insertmacro VersionCompare
-!insertmacro DirState
 # Variables
 Var StartMenuGroup
 Var JavaHome
@@ -172,20 +171,6 @@ Section ArgoUML SEC0001
               "Setup detected that Java has not been correctly installed on this system, please reinstall the Java runtime enviroment, then try again."
       Quit
     ${EndIf}
-
-    ${DirState} "$INSTDIR" $R0
-    IntCmp $R0 1 rmfilesask
-    Goto rmfilesdone    
-rmfilesask:
-    MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
-            "Contents of '$INSTDIR' will be deleted." \
-            /SD IDOK \
-            IDOK rmfiles
-    Abort
-    
-rmfiles:
-    RMDir /r $INSTDIR\*.*
-rmfilesdone:
                         
     SetOutPath $INSTDIR
     SetOverwrite on
@@ -304,12 +289,11 @@ langok:
   ReadRegStr $R0 HKLM \
   "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" \
   "UninstallString"
-  StrCmp $R0 "" uninstdone
+  StrCmp $R0 "" done
  
   MessageBox MB_OKCANCEL|MB_ICONQUESTION \
-            "Remove existing installation of ${NAME} first?" \
-            /SD IDOK \
-            IDOK uninst
+  "Remove existing installation of ${NAME} first?" \
+  IDOK uninst
   Abort
  
 ;Run the uninstaller
@@ -319,7 +303,7 @@ uninst:
   IfErrors no_remove_uninstaller
     Delete /REBOOTOK $R0
    no_remove_uninstaller:
-uninstdone:
+done:
 
     StrCpy $StartMenuGroup "$(^Name)"
 FunctionEnd
@@ -330,8 +314,7 @@ Function DetectJRE
   ${VersionCompare} "$2" "${JRE_REQUIRED_VERSION}" $3
 ${If} $2 == ""
   MessageBox MB_ICONINFORMATION "No Java Runtime Environment could be found.  \
-    Setup will automatically download a suitable JRE from sun.com." \
-    /SD IDOK 
+    Setup will automatically download a suitable JRE from sun.com."
   DetailPrint "No JRE found, setting option to auto download"
   SectionGetFlags SEC0000 $0
   IntOp $0 $0 | ${SF_SELECTED}
@@ -339,8 +322,7 @@ ${If} $2 == ""
 ${ElseIf} $3 == 2 
   MessageBox MB_ICONINFORMATION "Your current Java Runtime Environment is \
     out of date, and will be automatically updated from sun.com.  \
-    (Required JRE${JRE_REQUIRED_VERSION}, found JRE$2)." \
-     /SD IDOK     
+    (Required JRE${JRE_REQUIRED_VERSION}, found JRE$2)."
   DetailPrint "DetectJRE: Required: [${JRE_REQUIRED_VERSION}], \
     Found [$2].  Setting option to auto download." 
   SectionGetFlags SEC0000 $0
