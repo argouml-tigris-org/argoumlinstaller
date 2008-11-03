@@ -68,7 +68,7 @@
 !define ARGO_FILE_EXT ".zargo"
 !define ARGO_FILE_DESC "ArgoUML Project File"
 !define ARGO_FILE_KEYNAME "ArgoUML.Project"
-!define ARGO_JVM_ARGS "-Xmx512m"
+!define ARGO_JVM_ARGS "-Xms64m -Xmx512m"
 
 Name ${NAME}
 
