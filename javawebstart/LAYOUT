@@ -6,9 +6,9 @@
 anarres-cpp-no-dependencies.jar         org.anarres.cpp	1.2.3-2
 antlr.jar		antlr   2.7.7
 argouml-diagrams-sequence.jar	org.argouml 0.26
-argouml-mdr.jar		org.argouml 0.26
+argouml-mdr.jar		org.argouml 0.26.1.BETA_1
 argouml-model.jar	org.argouml 0.26
-argouml.jar		org.argouml 0.26
+argouml.jar		org.argouml 0.26.1.BETA_1
 commons-logging.jar	commons-logging	1.0.2-4
 gef.jar			org.tigris.gef	0.12.4
 java-interfaces.jar	org.argouml 0.26
