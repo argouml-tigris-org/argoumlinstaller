@@ -29,6 +29,8 @@ PROJECTS=" \
     argouml-i18n-zh \
     "
 
+BRANCH_FROM=branches/BRANCH_0_26_x
+
 RELATIVE_ANT=tools/apache-ant-1.7.0/bin/ant
 
 
@@ -103,7 +105,7 @@ verifyalldefaultidentitiessetup() {
   do
     echo -n .
     svn propget --username $USERNAME dummy:tag \
-      http://$proj.tigris.org/svn/$proj/trunk
+      http://$proj.tigris.org/svn/$proj/$BRANCH_FROM
   done
   echo done.
 }
@@ -140,7 +142,7 @@ then
   echo done.
 
   echo Checking for ant
-  if svn info http://argouml.tigris.org/svn/argouml/trunk/$RELATIVE_ANT 2>/dev/null |
+  if svn info http://argouml.tigris.org/svn/argouml/$BRANCH_FROM/$RELATIVE_ANT 2>/dev/null |
       grep -q "Node Kind: file"
   then
     : ok it does exist
@@ -159,7 +161,7 @@ then
     verifyalldefaultidentitiessetup and setting
 
     # Fixing subclipse:tags property for the main project
-    svn info http://argouml.tigris.org/svn/argouml/trunk |
+    svn info http://argouml.tigris.org/svn/argouml/$BRANCH_FROM |
     grep '^Revision:' |
     while read zz rev
     do
@@ -176,7 +178,7 @@ then
       do
         svn_add_prop subclipse:tags \
 	    "$rev,$VERSIONNAME,/releases/$VERSIONNAME/$subdir,tag" \
-	    http://argouml.tigris.org/svn/argouml/trunk/$subdir
+	    http://argouml.tigris.org/svn/argouml/$BRANCH_FROM/$subdir
       done
     done
 
@@ -184,14 +186,14 @@ then
     do
       echo Creating the release in $proj
 
-      svn info http://$proj.tigris.org/svn/$proj/trunk |
+      svn info http://$proj.tigris.org/svn/$proj/$BRANCH_FROM |
       grep '^Revision:' |
       while read zz rev
       do
-        svn_add_prop subclipse:tags "$rev,$VERSIONNAME,/releases/$VERSIONNAME,tag" http://$proj.tigris.org/svn/$proj/trunk
+        svn_add_prop subclipse:tags "$rev,$VERSIONNAME,/releases/$VERSIONNAME,tag" http://$proj.tigris.org/svn/$proj/$BRANCH_FROM
       done
 
-      svn copy --username $USERNAME http://$proj.tigris.org/svn/$proj/trunk http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
+      svn copy --username $USERNAME http://$proj.tigris.org/svn/$proj/$BRANCH_FROM http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
     done
   else
     exit 0
