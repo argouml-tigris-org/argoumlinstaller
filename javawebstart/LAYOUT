@@ -5,7 +5,7 @@
 #
 anarres-cpp-no-dependencies.jar         org.anarres.cpp	1.2.3-2
 antlr.jar		antlr   		2.7.7
-antlr-runtime.jar	antlr			3.0.1
+antlr-runtime.jar	antlr			3.1.1
 argouml-diagrams-sequence.jar	org.argouml
 argouml-mdr.jar		org.argouml
 argouml-model.jar	org.argouml
