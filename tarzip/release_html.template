@@ -45,9 +45,9 @@ Mac OS X binary distribution
 </TD></TR>
 
 <TR><TD>
-<a href="@URLROOT@/argomanual-@VERSION@.pdf"
-   onClick="javascript:urchinTracker('DOWNLOAD/argomanual-@VERSION@.pdf')"
-   ><nobr>argomanual-@VERSION@.pdf</nobr></a>
+<a href="@URLROOT@/manual-@VERSION@.pdf"
+   onClick="javascript:urchinTracker('DOWNLOAD/manual-@VERSION@.pdf')"
+   ><nobr>manual-@VERSION@.pdf</nobr></a>
 </TD><TD>
 User Manual
 </TD></TR>
@@ -84,14 +84,6 @@ Windows Installer
 
 
 <TR><TH COLSPAN=2>For Developers</TH></TR>
-
-<TR><TD>
-<a href="@URLROOT@/cookbook-@VERSION@.pdf"
-   onClick="javascript:urchinTracker('DOWNLOAD/cookbook-@VERSION@.pdf')"
-   ><nobr>cookbook-@VERSION@.pdf</nobr></a>
-</TD><TD>
-Cookbook
-</TD></TR>
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-libs.tar.gz"
