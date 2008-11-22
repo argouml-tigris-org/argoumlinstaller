@@ -278,13 +278,6 @@ then
       svn co --username $USERNAME http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME $proj
     done
   )
-
-  # The reason for doing this at this point is that a network connection
-  # is needed for this. If this is done here, then the rest of the process
-  # can be done without the network.
-  echo Downloading docbook
-  cd $DESTDIR/argouml/documentation && ./build.sh docbook-xsl-get
-
 fi
 
 
@@ -318,6 +311,7 @@ then
   cd $DESTDIR/argouml && $RELATIVE_ANT update-argouml.jar-manifest
 fi
 
+# Build the English pdf version of the Quick Guide and User Manual
 if $builddoc
 then
   verifyjavahome java
@@ -338,8 +332,6 @@ then
   fi
 
   # Build things
-  echo Downloading docbook again
-  cd $DESTDIR/argouml-documentation && ./build.sh docbook-xsl-get
   echo Copy Jimi
   cp $JIMICLASSES $DESTDIR/argouml-documentation/tools/lib
   echo Building documentation
