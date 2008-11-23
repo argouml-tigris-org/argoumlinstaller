@@ -1,5 +1,15 @@
 <TABLE>
-<TR><TH COLSPAN=2>Downloads</TH></TR>
+<TR><TH COLSPAN=2>Installers</TH></TR>
+
+<TR><TD>
+<a href="@URLROOT@/ArgoUML-@VERSION@-setup.exe"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-setup.exe')"
+   ><nobr>ArgoUML-@VERSION@-setup.exe</nobr></a>
+</TD><TD>
+Windows Installer
+</TD></TR>
+
+<TR><TH COLSPAN=2>Binary Packages</TH></TR>
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@.tar.gz"
@@ -44,6 +54,8 @@ Mac OS X binary distribution
 (Includes same as above.)
 </TD></TR>
 
+<TR><TH COLSPAN=2>Documentation</TH></TR>
+
 <TR><TD>
 <a href="@URLROOT@/manual-@VERSION@.pdf"
    onClick="javascript:urchinTracker('DOWNLOAD/manual-@VERSION@.pdf')"
@@ -70,18 +82,6 @@ Quick Guide
 </TD><TD>
 Starts from Java Web Start
 </TD></TR>
-
-<TR><TH COLSPAN=2>Installers</TH></TR>
-
-<TR><TD>
-<a href="@URLROOT@/ArgoUML-@VERSION@-setup.exe"
-   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-setup.exe')"
-   ><nobr>ArgoUML-@VERSION@-setup.exe</nobr></a>
-</TD><TD>
-Windows Installer
-</TD></TR>
-
-
 
 <TR><TH COLSPAN=2>For Developers</TH></TR>
 
