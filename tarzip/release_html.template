@@ -16,24 +16,7 @@ Windows Installer
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.tar.gz')"
    ><nobr>ArgoUML-@VERSION@.tar.gz</nobr></a>
 </TD><TD>
-binary distribution
-(Includes support for
-classfile,
-cpp,
-idl,
-php,
-csharp,
-sql,
-<nobr>German (de)</nobr>,
-<nobr>U.K. English (en_GB)</nobr>,
-<nobr>Spanish (es)</nobr>,
-<nobr>French (fr)</nobr>,
-<nobr>Italian (it)</nobr>,
-<nobr>Norwegian Bokmål (nb)</nobr>,
-<nobr>Portuguese (pt)</nobr>,
-<nobr>Brazilian Portuguese (pt_BR)</nobr>,
-<nobr>Russian (ru)</nobr>, and
-<nobr>Chinese (zh)</nobr>.)
+Binary distribution (.tar.gz format).
 </TD></TR>
 
 <TR><TD>
@@ -41,8 +24,7 @@ sql,
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.zip')"
    ><nobr>ArgoUML-@VERSION@.zip</nobr></a>
 </TD><TD>
-binary distribution
-(Includes same as above.)
+Binary distribution (.zip format).
 </TD></TR>
 
 <TR><TD>
@@ -50,8 +32,7 @@ binary distribution
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.app.tgz')"
    ><nobr>ArgoUML-@VERSION@.app.tgz</nobr></a>
 </TD><TD>
-Mac OS X binary distribution
-(Includes same as above.)
+Mac OS X binary distribution (.app.tgz format).
 </TD></TR>
 
 <TR><TH COLSPAN=2>Documentation</TH></TR>
@@ -80,36 +61,17 @@ Quick Guide
    onClick="javascript:urchinTracker('JWS/argouml-@VERSION@.jnlp')"
    ><nobr>Java Web Start</nobr></a>
 </TD><TD>
-Starts from Java Web Start
+Starts ArgoUML using Java Web Start
 </TD></TR>
 
 <TR><TH COLSPAN=2>For Developers</TH></TR>
-
-<TR><TD>
-<a href="@URLROOT@/ArgoUML-@VERSION@-libs.tar.gz"
-   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-libs.tar.gz')"
-   ><nobr>ArgoUML-@VERSION@-libs.tar.gz</nobr></a>
-</TD><TD>
-libraries needed to compile
-</TD></TR>
-
-<TR><TD>
-<a href="@URLROOT@/ArgoUML-@VERSION@-libs.zip"
-   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-libs.zip')"
-   ><nobr>ArgoUML-@VERSION@-libs.zip</nobr></a>
-</TD><TD>
-libraries needed to compile
-</TD></TR>
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-src.tar.gz"
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-src.tar.gz')"
    ><nobr>ArgoUML-@VERSION@-src.tar.gz</nobr></a>
 </TD><TD>
-source code without libraries.<br>
-Unpack with GNU-tar.<br>
-If you want to build ArgoUML from source, 
-getting it from the subversion repository is recommended.
+ArgoUML source code without libraries.
 </TD></TR>
 
 <TR><TD>
@@ -117,10 +79,51 @@ getting it from the subversion repository is recommended.
    onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-src.zip')"
    ><nobr>ArgoUML-@VERSION@-src.zip</nobr></a>
 </TD><TD>
-source code without libraries.<br>
-If you want to build ArgoUML from source, 
-getting it from the subversion repository is recommended.
+ArgoUML source code without libraries.
+</TD></TR>
+
+<TR><TD>
+<a href="@URLROOT@/ArgoUML-@VERSION@-libs.tar.gz"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-libs.tar.gz')"
+   ><nobr>ArgoUML-@VERSION@-libs.tar.gz</nobr></a>
+</TD><TD>
+Libraries needed to compile ArgoUML.
+</TD></TR>
+
+<TR><TD>
+<a href="@URLROOT@/ArgoUML-@VERSION@-libs.zip"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@-libs.zip')"
+   ><nobr>ArgoUML-@VERSION@-libs.zip</nobr></a>
+</TD><TD>
+Libraries needed to compile ArgoUML.
 </TD></TR>
 
 
 </TABLE>
+<p>
+If you want to build ArgoUML from source, 
+the recommended way is to download from the subversion repository.  
+Please refer to the cookbook for instructions.
+</p>
+
+<p>
+Installers and binary packages include support for:
+</p>
+<ul>
+<li>classfile,</li>
+<li>cpp</li>
+<li>idl</li>
+<li>php</li>
+<li>csharp</li>
+<li>sql</li>
+<li>German (de)</li>
+<li>U.K. English (en_GB)</li>
+<li>Spanish (es)</li>
+<li>French (fr)</li>
+<li>Italian (it)</li>
+<li>Norwegian Bokmål (nb)</li>
+<li>Portuguese (pt)</li>
+<li>Brazilian Portuguese (pt_BR)</li>
+<li>Russian (ru)</li>
+<li>Chinese (zh)</li>
+</ul>
