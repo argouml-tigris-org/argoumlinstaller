@@ -67,7 +67,7 @@ do
 
 	if test ! -n "$jar"
         then
-            b=`echo $b | sed 's/[._0-9-]*[BETA3]*.jar$/.jar/'`
+            b=`echo $b | sed 's/-[0-9][-._0-9BETA3M]*.jar$/.jar/'`
             jar=`eval $GETLAYOUT | grep "^$b" | awk '{print $1}'`
         fi
 
