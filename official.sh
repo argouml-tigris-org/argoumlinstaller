@@ -46,40 +46,14 @@ then
     exit 1;
 fi
 
-# Update this whenever the version of log4j changes!
-for file in argouml.jar log4j-1.2.6.jar java-interfaces.jar mof.jar
-do
-    if test ! -f $BUILDDIR/$file
-    then
-	echo $BUILD The $file file in $BUILDDIR does not exist.
-	echo $BUILD 'Have you built the release?'
-	exit 1;
-    fi
-done
-
-# Tests for modules.
-# This is a complete test to make sure none of the module have failed.
-for file in \
-    argo_java.jar \
-    argo_cpp.jar argo_idl.jar argo_php.jar argouml-csharp.jar \
-    argouml-sql.jar \
-    argouml-i18n-de.jar \
-    argouml-i18n-en_GB.jar argouml-i18n-es.jar \
-    argouml-i18n-fr.jar \
-    argouml-i18n-it.jar \
-    argouml-i18n-nb.jar \
-    argouml-i18n-pt.jar \
-    argouml-i18n-pt_BR.jar \
-    argouml-i18n-ru.jar \
-    argouml-i18n-zh.jar
-do
-    if test ! -f $BUILDDIR/ext/$file
-    then
-	echo $BUILD The $file file in $BUILDDIR/ext does not exist.
-	echo $BUILD 'Have you built the modules?'
-	exit 1;
-    fi
-done
+if ./test-official-contents.sh $BUILDDIR
+then
+    :
+else
+    echo $BUILD Not all parts of the release is in place.
+    echo $BUILD 'Have you built the release?'
+    exit 1;
+fi
 
 # Are we in the right directory?
 if test ! -d $DIRECTORY
