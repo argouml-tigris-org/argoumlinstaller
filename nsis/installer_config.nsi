@@ -152,12 +152,13 @@ Section /o JRE SEC0000
     DetailPrint "Downloading from ${JRE_URL}."
     nsisdl::download /TIMEOUT=30000 ${JRE_URL} $2
     Pop $R0 ;Get the return value
-        StrCmp $R0 "success" +3
-        MessageBox MB_OK "Download failed: $R0"
-        DetailPrint "Download failed: $R0"
+    StrCmp $R0 "success" +4
+    MessageBox MB_OK "Download failed: $R0"
+    DetailPrint "Download failed: $R0"
     Quit
     ExecWait $2
     Delete $2
+    MessageBox MB_OK "JRE Installation completed"
     DetailPrint "JRE Installation completed"
     WriteRegStr HKLM "${REGKEY}\Components" JRE 1
 SectionEnd
