@@ -119,7 +119,7 @@ then
   for proj in $PROJECTS
   do
     echo -n .
-    if svn info http://$proj.tigris.org/svn/$proj/releases |
+    if svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null |
        grep -q "Node Kind: directory"
     then
       echo -n .
@@ -207,7 +207,7 @@ verifyallexists() {
   for proj in $PROJECTS
   do
     echo -n .
-    if svn info http://$proj.tigris.org/svn/$proj/releases |
+    if svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null |
        grep -q "Node Kind: directory"
     then
         :
@@ -217,7 +217,7 @@ verifyallexists() {
     fi
 
     echo -n .
-    if svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME |
+    if svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME 2>/dev/null |
        grep -q "Node Kind: directory"
     then
 	:
