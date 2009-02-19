@@ -335,7 +335,7 @@ then
   echo Copy Jimi
   cp $JIMICLASSES $DESTDIR/argouml-documentation/tools/lib
   echo Building documentation
-  cd $DESTDIR/argouml-documentation && ./build.sh pdf
+  cd $DESTDIR/argouml-documentation && ./build.sh release-pdfs
 fi
 
 
