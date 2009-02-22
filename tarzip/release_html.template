@@ -41,6 +41,9 @@ Mac OS X binary distribution (.app.tgz format).
 <a href="@URLROOT@/manual-@VERSION@.pdf"
    onClick="javascript:urchinTracker('DOWNLOAD/manual-@VERSION@.pdf')"
    ><nobr>manual-@VERSION@.pdf</nobr></a>
+<a href="@URLROOT@/manual-de-@VERSION@.pdf"
+   onClick="javascript:urchinTracker('DOWNLOAD/manual-de-@VERSION@.pdf')"
+   >(German)</a>
 </TD><TD>
 User Manual
 </TD></TR>
@@ -49,6 +52,9 @@ User Manual
 <a href="@URLROOT@/quickguide-@VERSION@.pdf"
    onClick="javascript:urchinTracker('DOWNLOAD/quickguide-@VERSION@.pdf')"
    ><nobr>quickguide-@VERSION@.pdf</nobr></a>
+<a href="@URLROOT@/quickguide-de-@VERSION@.pdf"
+   onClick="javascript:urchinTracker('DOWNLOAD/quickguide-de-@VERSION@.pdf')"
+   >(German)</a>
 </TD><TD>
 Quick Guide
 </TD></TR>

@@ -16,7 +16,7 @@ read release
 RELEASE=$release
 VERSIONNAME=VERSION_`echo $release | sed 's/\./_/g'`
 BUILDDIR=`pwd`/build/$VERSIONNAME/argouml/build
-DOCBUILDDIR=`pwd`/build/$VERSIONNAME/argouml-documentation/build/en
+DOCBUILDDIR=`pwd`/build/$VERSIONNAME/argouml-documentation/build
 
 DESTDIR=${DESTDIR-`pwd`/../argouml-downloads/www}
 
@@ -63,7 +63,7 @@ then
 fi
 
 # Is the pdf documentation built?
-if test ! -f $DOCBUILDDIR/pdf/manual/manual.pdf
+if test ! -f $DOCBUILDDIR/en/pdf/manual/manual.pdf
 then
     echo $BUILD The pdf version of the manual does not exist. Build incorrect.
     exit 1;
@@ -95,9 +95,17 @@ chmod +x $TARZIPDOIT &&
 
 (
     cd $DIRECTORY/.. &&
-    for pdffile in $DOCBUILDDIR/pdf/*/*.pdf
+    for pdffile in $DOCBUILDDIR/en/pdf/*/*.pdf
     do
         cp $pdffile $DESTDIR/argouml-$RELEASE/`basename $pdffile .pdf`-$RELEASE.pdf
+    done
+
+    for lang in de
+    do
+        for pdffile in $DOCBUILDDIR/$lang/pdf/*/*.pdf
+        do
+            cp $pdffile $DESTDIR/argouml-$RELEASE/`basename $pdffile .pdf`-$lang-$RELEASE.pdf
+        done
     done
 )
 
