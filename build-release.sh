@@ -166,7 +166,7 @@ then
     grep '^Revision:' |
     while read zz rev
     do
-      for subdir in documentation \
+      for subdir in \
              modules/dev \
              src/argouml-app \
              src/argouml-core-diagrams-sequence2 \
