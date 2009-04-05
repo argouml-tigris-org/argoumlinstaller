@@ -165,7 +165,9 @@ then
 		 With your default language.
     </description>
     <description kind="short">ArgoUML $releasename</description>
-    <icon href="http://argouml.tigris.org/images/argologo.gif"/>
+    <icon href="http://argouml.tigris.org/images/argologo16x16.gif" width="16" height="16" />
+    <icon href="http://argouml.tigris.org/images/argologo32x32.gif" width="32" height="32" />
+    <icon href="http://argouml.tigris.org/images/argologo64x64.gif" width="64" height="64" />
     <offline-allowed/>
   </information>
   <security>
