@@ -164,7 +164,7 @@ then
     <description>ArgoUML Tigris Application
 		 With your default language.
     </description>
-    <description kind="short">The ArgoUML version $releasename</description>
+    <description kind="short">ArgoUML $releasename</description>
     <icon href="http://argouml.tigris.org/images/argologo.gif"/>
     <offline-allowed/>
   </information>
