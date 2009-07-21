@@ -40,7 +40,7 @@ mkdir ArgoUML.app/Contents/Resources
 (
   cd infra
   cp PkgInfo ../ArgoUML.app/Contents
-  cp GenericJavaApp.icns ../ArgoUML.app/Contents/Resources
+  cp ArgoIcon.icns ../ArgoUML.app/Contents/Resources
 )
 # Format the Info.plist file
 ( cd $builddirectory && ls *.jar ) > ArgoUML.app/temp.list
