@@ -113,7 +113,7 @@ chmod +x $TARZIPDOIT &&
     cd appbund &&
     ./doit.sh
 )
-mv build/ArgoUML-*.app.tgz $DESTDIR/argouml-$RELEASE
+mv build/ArgoUML-*.app.tar.gz $DESTDIR/argouml-$RELEASE
 
 
 javawebstart/createJWS.sh
