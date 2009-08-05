@@ -28,11 +28,11 @@ Binary distribution (.zip format).
 </TD></TR>
 
 <TR><TD>
-<a href="@URLROOT@/ArgoUML-@VERSION@.app.tgz"
-   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.app.tgz')"
-   ><nobr>ArgoUML-@VERSION@.app.tgz</nobr></a>
+<a href="@URLROOT@/ArgoUML-@VERSION@.app.tar.gz"
+   onClick="javascript:urchinTracker('DOWNLOAD/ArgoUML-@VERSION@.app.tar.gz')"
+   ><nobr>ArgoUML-@VERSION@.app.tar.gz</nobr></a>
 </TD><TD>
-Mac OS X binary distribution (.app.tgz format).
+Mac OS X binary distribution (.app.tar.gz format).
 </TD></TR>
 
 <TR><TH COLSPAN=2>Documentation</TH></TR>

@@ -40,7 +40,8 @@ mkdir ArgoUML.app/Contents/Resources
 (
   cd infra
   cp PkgInfo ../ArgoUML.app/Contents
-  cp GenericJavaApp.icns ../ArgoUML.app/Contents/Resources
+  cp ArgoIcon.icns ../ArgoUML.app/Contents/Resources
+  cp ArgoDocument.icns ../ArgoUML.app/Contents/Resources
 )
 # Format the Info.plist file
 ( cd $builddirectory && ls *.jar ) > ArgoUML.app/temp.list
@@ -71,7 +72,7 @@ cp $builddirectory/ext/*.jar ArgoUML.app/Contents/Resources/Java/ext
 cp $builddirectory/ext/domainmapping.xml ArgoUML.app/Contents/Resources/Java/ext
 tar uvf ArgoUML.app.tar ArgoUML.app/Contents/Resources/Java
 
-gzip < ArgoUML.app.tar > ../build/ArgoUML-$releasename.app.tgz
+gzip < ArgoUML.app.tar > ../build/ArgoUML-$releasename.app.tar.gz
 
 rm -rf ArgoUML.app
 rm ArgoUML.app.tar
