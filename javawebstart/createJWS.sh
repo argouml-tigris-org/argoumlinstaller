@@ -67,7 +67,13 @@ do
 
 	if test ! -n "$jar"
         then
-            b=`echo $b | sed 's/-[0-9][-._0-9BETA3M]*.jar$/.jar/'`
+            b=`echo $b | sed 's/-[0-9][-._0-9BETA3M]*[.]jar$/.jar/'`
+            jar=`eval $GETLAYOUT | grep "^$b" | awk '{print $1}'`
+        fi
+
+	if test ! -n "$jar"
+        then
+            b=`echo $b | sed 's/_[1-9][.][0-9][.][0-9][.]v20[0-9]*[.]jar$/.jar/'`
             jar=`eval $GETLAYOUT | grep "^$b" | awk '{print $1}'`
         fi
 
@@ -111,8 +117,11 @@ do
             if echo $rootname-$version | grep `basename $foundjar .jar` > /dev/null
             then
                : this is OK
+            elif echo ${rootname}_$version | grep `basename $foundjar .jar` > /dev/null
+            then
+               : this is also OK
             else
-               echo `basename $foundjar` does not match $rootname-$version - NOT OK - update "$LAYOUT"
+               echo Neither $rootname-$version nor ${rootname}_$version matches `basename $foundjar` - NOT OK - update "$LAYOUT"
                exit 1
             fi
 
