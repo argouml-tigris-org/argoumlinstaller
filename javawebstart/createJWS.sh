@@ -58,6 +58,32 @@ done || exit 1
 
 echo All GroupIDs OK.
 
+function add_to_file() {
+    groupid=$1
+    name=$2
+    version=$3
+    echo $groupid/$name/$version/$name-$version.jar >> $FILES
+}
+
+function add_to_commands() {
+    groupid=$1
+    name=$2
+    version=$3
+    echo mkdir $TARGETDIR/$groupid/$name/$version >> $CMDS
+    jar=$groupid/$name/$version/$name-$version.jar
+    echo cp $foundjar $TARGETDIR/$jar >> $CMDS
+
+    # Create the pom.xml file
+    echo "cat > $groupid/$name/$version/pom.xml <<EOF" >> $CMDS
+    echo "<project>" >> $CMDS
+    echo "<groupId>$groupid</groupId>" >> $CMDS
+    echo "<artifactId>$name</artifactId>" >> $CMDS
+    echo "<version>$version</version>" >> $CMDS
+    echo "</project>" >> $CMDS
+    echo "EOF" >> $CMDS
+}
+
+
 for jardir in $SOURCEDIRS
 do
     for foundjar in $jardir/*.jar
@@ -99,18 +125,16 @@ do
             then
 		echo $rootname new - OK
 		echo mkdir $TARGETDIR/$groupiddir/$rootname >> $CMDS
-		echo mkdir $TARGETDIR/$groupiddir/$rootname/$releasename >> $CMDS
-		echo cp $foundjar $TARGETDIR/$groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $CMDS
-		echo $groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $FILES
+                add_to_commands $groupiddir $rootname $releasename
+                add_to_file $groupiddir $rootname $releasename
             elif $COMPAREJARS $lastjar $foundjar
 	    then
 		echo $rootname the same as $lastversion - OK
-		echo $groupiddir/$rootname/$lastversion/$rootname-$lastversion.jar >> $FILES
+                add_to_file $groupiddir $rootname $lastversion
 	    else
 		echo $rootname new version $releasename replacing $lastversion - OK
-		echo mkdir $TARGETDIR/$groupiddir/$rootname/$releasename >> $CMDS
-		echo cp $foundjar $TARGETDIR/$groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $CMDS
-		echo $groupiddir/$rootname/$releasename/$rootname-$releasename.jar >> $FILES
+                add_to_commands $groupiddir $rootname $releasename
+		add_to_file $groupiddir $rootname $releasename
 	    fi
 	else
             # Check that $foundjar and $rootname-$version are similar enough
@@ -131,19 +155,17 @@ do
 		if $COMPAREJARS $oldjar $foundjar
 		then
 		    echo $rootname the same version $version - OK
-		    echo $groupiddir/$rootname/$version/$rootname-$version.jar >> $FILES
+                    add_to_file $groupiddir $rootname $version
 		else
 		    echo $rootname differ - NOT OK - update "$LAYOUT"
 		    exit 1
 		fi
 	    else
 		echo $rootname explicit new version $version - OK
-		echo mkdir $TARGETDIR/$groupiddir/$rootname/$version >> $CMDS
-		echo cp $foundjar $TARGETDIR/$groupiddir/$rootname/$version/$rootname-$version.jar >> $CMDS
-		echo $groupiddir/$rootname/$version/$rootname-$version.jar >> $FILES
+                add_to_commands $groupiddir $rootname $version
+		add_to_file $groupiddir $rootname $version
             fi
         fi
-
     done
 done
 
