@@ -109,7 +109,7 @@ Libraries needed to compile ArgoUML.
 <p>
 If you want to build ArgoUML from source, 
 the recommended way is to download from the subversion repository.  
-Please refer to the cookbook for instructions.
+Please refer to the Developer Wiki for instructions.
 </p>
 
 <p>
