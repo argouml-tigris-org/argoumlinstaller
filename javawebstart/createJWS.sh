@@ -74,11 +74,12 @@ function add_to_commands() {
     echo cp $foundjar $TARGETDIR/$jar >> $CMDS
 
     # Create the pom.xml file
-    echo "cat > $groupid/$name/$version/pom.xml <<EOF" >> $CMDS
+    echo "cat > $TARGETDIR/$groupid/$name/$version/$name-$version.pom <<EOF" >> $CMDS
     echo "<project>" >> $CMDS
     echo "<groupId>$groupid</groupId>" >> $CMDS
     echo "<artifactId>$name</artifactId>" >> $CMDS
     echo "<version>$version</version>" >> $CMDS
+    echo "<modelVersion>4.0.0</modelVersion>" >> $CMDS
     echo "</project>" >> $CMDS
     echo "EOF" >> $CMDS
 }
