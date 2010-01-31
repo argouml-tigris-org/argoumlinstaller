@@ -16,7 +16,7 @@ argouml-mdr.jar				org.argouml
 argouml-euml.jar			org.argouml
 # Libraries				
 commons-logging.jar			commons-logging		1.0.2-5
-gef.jar					org.tigris.gef		0.13.1M3
+gef.jar					org.tigris.gef		0.13.1
 log4j.jar				log4j			1.2.6-5
 ocl-argo.jar				tudresden.ocl		1.1-5
 swidgets.jar				org.tigris.swidgets	0.1.4-5
