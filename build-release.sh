@@ -177,6 +177,7 @@ then
              src/argouml-core-model \
              src/argouml-core-model-euml \
              src/argouml-core-model-mdr \
+             src/argouml-core-umlpropertypanels \
              src \
              tools www
       do
