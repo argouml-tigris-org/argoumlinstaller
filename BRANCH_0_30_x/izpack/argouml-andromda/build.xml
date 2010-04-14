@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+     27 août 2005 00:19:39                                                        
+
+     ArgoUML-AndroMDA Installer
+     Require Ant 1.6+          
+     lmaitre                                                                
+     ====================================================================== -->
+<project name="ArgoUML-AndroMDA Installer" default="build" basedir=".">
+
+	<description>ArgoUML-AndroMDA installer helper script.</description>
+
+	<!-- ================================= 
+          target: init
+         ================================= -->
+	<target name="init" description="--> Initialize some properties">
+		<property name="izpack.dir" value=".." />
+		<taskdef name="izpack" classpath="${izpack.dir}/lib/izpack-standalone-compiler-3.8.1.jar"
+			classname="com.izforge.izpack.ant.IzPackTask" />
+		<property name="installer.version" value="0.1" />
+		<property name="installer.name" value="argouml-andromda-installer" />
+		<property name="dist.dir" value="${basedir}/dist" />
+	</target>
+
+	<!-- ================================= 
+          target: build              
+         ================================= -->
+	<target name="build" depends="init,clean" description="--> Create the module installer">
+		<echo message="Makes the installer using IzPack" />
+		<izpack input="${basedir}/install.xml" output="${dist.dir}/${installer.name}-${installer.version}.jar" installerType="standard" basedir="${basedir}" izPackDir="${izpack.dir}" />
+		<izpack input="${basedir}/install.xml" output="${dist.dir}/download/${installer.name}-${installer.version}.jar" basedir="${basedir}" izPackDir="${izpack.dir}" />
+	</target>
+
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" depends="init" description="--> Clean dist folder">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${dist.dir}" defaultexcludes="false">
+				<include name="**" />
+			</fileset>
+		</delete>
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${dist.dir}/download" />
+	</target>
+
+</project>

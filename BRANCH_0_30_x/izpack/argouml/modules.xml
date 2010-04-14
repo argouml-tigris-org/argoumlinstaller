@@ -1,0 +1,42 @@
+<pack name="ClassFile" required="no" preselected="yes">
+<description>This module enables ArgoUML to read jar and/or class files and reverse engineer the information contained in it.</description>
+<fileset dir="build/ext" targetdir="$INSTALL_PATH/ext">
+<include name="argo_classfile.jar"/>
+</fileset>
+</pack>
+<pack name="CPP" required="no" preselected="yes">
+<description>This module intent is to provide C++ round-trip engineering.</description>
+<fileset dir="build/ext" targetdir="$INSTALL_PATH/ext">
+<include name="argo_cpp.jar"/>
+</fileset>
+</pack>
+<pack name="IDL" required="no" preselected="yes">
+<description>This module enables ArgoUML to read IDL files and reverse engineer the information contained in them.</description>
+<fileset dir="build/ext" targetdir="$INSTALL_PATH/ext">
+<include name="argo_idl.jar"/>
+</fileset>
+</pack>
+<pack name="PHP" required="no" preselected="yes">
+<description>This module enables ArgoUML to generate PHP source files.</description>
+<fileset dir="build/ext" targetdir="$INSTALL_PATH/ext">
+<include name="argo_php.jar"/>
+</fileset>
+</pack>
+<pack name="CSharp" required="no" preselected="yes">
+<description>C# support in ArgoUML</description>
+<fileset dir="build/ext" targetdir="$INSTALL_PATH/ext">
+<include name="argouml-csharp.jar"/>
+</fileset>
+</pack>
+<pack name="Norwegian Bokmal" required="no" preselected="no">
+<description>Norwegian Bokmal localization of ArgoUML</description>
+<fileset dir="build/ext" targetdir="$INSTALL_PATH/ext">
+<include name="argouml-i18n-nb.jar"/>
+</fileset>
+</pack>
+<pack name="Chinese" required="no" preselected="no">
+<description>Chinese localization of ArgoUML</description>
+<fileset dir="build/ext" targetdir="$INSTALL_PATH/ext">
+<include name="argouml-i18n-zh.jar"/>
+</fileset>
+</pack>

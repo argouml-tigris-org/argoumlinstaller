@@ -1,0 +1,9 @@
+<modules>
+	<module name="ClassFile" selected="true" file="argo_classfile.jar">This module enables ArgoUML to read jar and/or class files and reverse engineer the information contained in it.</module>
+	<module name="CPP" selected="true" file="argo_cpp.jar">This module intent is to provide C++ round-trip engineering.</module>
+	<module name="IDL" selected="true" file="argo_idl.jar">This module enables ArgoUML to read IDL files and reverse engineer the information contained in them.</module>
+	<module name="PHP" selected="true" file="argo_php.jar">This module enables ArgoUML to generate PHP source files.</module>
+	<module name="CSharp" selected="true" file="argouml-csharp.jar">C# support in ArgoUML</module>
+	<module name="Norwegian Bokmal" file="argouml-i18n-nb.jar">Norwegian Bokmal localization of ArgoUML</module>
+	<module name="Chinese" file="argouml-i18n-zh.jar">Chinese localization of ArgoUML</module>
+</modules>

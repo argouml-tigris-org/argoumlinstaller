@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processing>
+    <job name="Activate AndroMDA profile and install MDR libs">
+        <executeclass name="com.ubikproducts.izpack.AntJob">
+            <arg>-v</arg>
+            <arg>-f</arg>
+            <arg>$INSTALL_PATH/setup.xml</arg>
+            <arg>$USE_ANDRO_PROFILE</arg>
+            <arg>$USE_ANDRO_LIBS</arg>
+            <arg>activate-profile</arg>
+            <arg>copy-mdr-libs</arg>
+        </executeclass>
+    </job>
+</processing>

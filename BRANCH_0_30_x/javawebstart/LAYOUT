@@ -1,0 +1,65 @@
+# $Id$
+#
+# This file describes how the layout of the maven2 repository is i.e.
+# mostly what jar file uses what groupID and version.
+#
+anarres-cpp-no-dependencies.jar		org.anarres.cpp		1.2.3-3
+antlr.jar				antlr  			2.7.7-2
+antlr-runtime.jar			antlr			3.1.1-1
+argouml-diagrams-sequence.jar 		org.argouml	0.30.1.BETA_1
+argouml-umlpropertypanels.jar           org.argouml	0.30.1.BETA_1
+argouml-model.jar			org.argouml	0.30.1.BETA_1
+argouml.jar				org.argouml	0.30.1.BETA_1
+# MDR					
+argouml-mdr.jar				org.argouml	0.30.1.BETA_1
+# Euml					
+argouml-euml.jar			org.argouml	0.30.1.BETA_1
+# Libraries				
+commons-logging.jar			commons-logging		1.0.2-5
+gef.jar					org.tigris.gef		0.13.1
+log4j.jar				log4j			1.2.6-5
+ocl-argo.jar				tudresden.ocl		1.1-5
+swidgets.jar				org.tigris.swidgets	0.1.4-5
+toolbar.jar				org.tigris.toolbar	1.4.1-20071227-1
+# Libraries for mdr			
+java-interfaces.jar			org.argouml	0.30.0
+jmi.jar					jmi			1.0-5
+mof.jar					jmi			0.0-5
+jmiutils.jar				org.netbeans.mdr	0.0-5
+mdrapi.jar				org.netbeans.mdr	0.0-5
+nbmdr.jar				org.netbeans.mdr	0.0-5
+openide-util.jar			org.netbeans.mdr	0.0-5
+# Libraries for euml
+org.eclipse.emf.common.jar		org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.emf.ecore.change.edit.jar	org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.emf.ecore.change.jar	org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.emf.ecore.edit.jar		org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.emf.ecore.xmi.jar		org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.emf.ecore.jar		org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.emf.edit.jar		org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.emf.mapping.ecore2xml.jar	org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.emf.mapping.ecore.jar	org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.emf.mapping.jar		org.eclipse.emf		2.5.0.v200906151043
+org.eclipse.uml2.common.edit.jar	org.eclipse.uml2	1.5.0.v200905041045
+org.eclipse.uml2.common.jar		org.eclipse.uml2	1.5.0.v200905041045
+org.eclipse.uml2.uml.edit.jar		org.eclipse.uml2	3.0.0.v200905041045
+org.eclipse.uml2.uml.resources.jar	org.eclipse.uml2	3.0.0.v200906011111
+org.eclipse.uml2.uml.jar		org.eclipse.uml2	3.0.1.v200908281330
+# Ext
+argouml-i18n-de.jar			org.argouml	0.30.0
+argouml-i18n-en_GB.jar			org.argouml	0.30.0
+argouml-i18n-es.jar			org.argouml	0.30.0
+argouml-i18n-fr.jar			org.argouml	0.30.0
+argouml-i18n-it.jar			org.argouml	0.30.0
+argouml-i18n-nb.jar			org.argouml	0.30.0
+argouml-i18n-ru.jar			org.argouml	0.30.0
+argouml-i18n-zh.jar			org.argouml	0.30.0
+# argo_classfile.jar			org.argouml	0.30.0
+argo_php.jar				org.argouml	0.30.0
+argouml-csharp.jar			org.argouml	0.30.0
+argo_cpp.jar				org.argouml	0.30.0
+argo_idl.jar				org.argouml	0.30.0
+argouml-i18n-pt.jar			org.argouml	0.30.0
+argouml-i18n-pt_BR.jar			org.argouml	0.30.0
+argouml-sql.jar				org.argouml	0.30.0
+argo_java.jar				org.argouml	0.30.1.BETA_1

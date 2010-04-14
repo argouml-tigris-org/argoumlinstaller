@@ -1,0 +1,221 @@
+<html>
+<head>
+</head>
+<body>
+
+<div class="h2">
+<h2>Mission</h2>
+<p>
+This project contains scripts to package ArgoUML.
+The result of the packaging are "installers"
+i.e. something that can be used to install ArgoUML on a host.
+An "installer" can be
+for a specific platform or
+for a specific purpose (with a customized set of modules).
+</p>
+</div>
+
+<div class="h2">
+<h2>Organization of the scripts</h2>
+<p>
+A script is centered around a specific tool.
+There is one directory for each script to be run.
+The directory contains all the configuration files, and tools,
+needed to build a package using that script.
+Running the script can result in several installers.
+</p>
+
+<p>
+Each directory contains the script
+doit.sh if the script is runnable on a unix platform, and
+doit.bat if the script is runnable on a windows platform.
+All scripts assume that argouml has been built or downloaded and
+available in
+../argouml/build.
+This is achieved by running a special script
+build-release.sh.
+</p>
+
+<p>
+The documentation of the specifics for each installer is in 
+a directory in the web site part of this directory.
+Each such set contains:
+<ul>
+  <li>information on the platform needed to run that installer
+  <li>the list of tools to install and links to installation instructions.
+</ul>
+
+<p>
+The result of running the installers is either 
+published somewhere on the web
+(the <a href="http://argouml-downloads.tigris.org">argouml-downloads project</a>
+is one possibility) or
+available only for the runner (for burning on cd:s).
+(This project was previously used for the purpose of publishing releases.
+This is not a good idea and will be discontinued.)
+</p>
+</div>
+
+
+<div class="h2">
+<h2>Documentation for each of the different installers</h2>
+
+<ul>
+  <li><a href="tarzip/">tarzip</a></li>
+  <li><a href="appbund/">appbund</a></li>
+  <li><a href="javawebstart/">javawebstart</a></li>
+  <li><a href="izpack/">izpack</a></li>
+  <li><a href="nsis/">nsis</a></li>
+</ul>
+
+<div class="h2">
+<h2>Candidates</h2>
+The following tools are candidates to investigate:
+<ul>
+  <li>zerog: Installer tool from <a href="http://www.zerog.com">ZeroG</a>.
+- not implemented</li>
+  <li>launch4j: Generation of windows native executables using <a
+      href="http://launch4j.sourceforge.net/">Launch4j</a> -not
+  implemented (suggested by Christian L&oacute;pez 
+  <a href="http://argouml.tigris.org/servlets/ReadMsg?list=dev&msgNo=21647">
+      mail in argouml-dev</a>)
+  </li>
+</ul>
+See also, the discussion of other candidates in the <a 
+    href="http://argouml.tigris.org/servlets/ReadMsg?list=dev&msgNo=21749">
+    argouml-dev mailing list</a>.
+</div>
+
+<div class="h2">
+<h2>What is done at every official release</h2>
+<p>
+The official release consists of the result of some of the scripts.
+These scripts are special in that they move the result into a
+special directory for the argouml-downloads project.
+There is also a "How to do it"-instruction in
+<a
+    href="http://argouml-stats.tigris.org/documentation/defaulthtml/cookbook/ch02s12.html">Cookbook section on building</a>.
+</p>
+
+<p>
+These are the scripts used in the official release:
+<ul>
+  <li><a href="tarzip/">tarzip</a></li>
+  <li><a href="appbund/">appbund</a></li>
+  <li><a href="javawebstart/">javawebstart</a></li>
+</ul>
+</p>
+
+<p>
+Linus Tolke is responsible for issuing official releases of ArgoUML.
+</p>
+
+</div>
+
+<div class="h2">
+<h2>Directory structure when doing releases</h2>
+<p>
+The build-release.sh script is used to tag, check out, and build
+the projects in an ArgoUML release.
+The resulting file hierarchy is the following:
+</p>
+<dl>
+  <dt>argoumlinstaller</dt>
+  <dd>the directory where the build-release.sh script is residing</dd>
+
+  <dt>argoumlinstaller/build</dt>
+  <dd>directory where everything that is downloaded and built by the script
+    resides.
+    This directory contains a separate checked out copy for each release
+    built.
+    If you have plenty of disk space on your computer, save them for ever!
+    If disk space is scarse, remove them once the release work is complete.
+  </dd>
+  <dd>
+    This directory also shall contain the file JimiProClasses.zip
+    that is used to build the pdf versions of the documentation.
+    This file must be copied there manually by the person doing the release
+    since its license does not allow distribution.
+  </dd>
+
+  <dt>argoumlinstaller/build/VERSION_<i>VER_NO</i></dt>
+  <dd>
+    This is where every argouml-project is checked out in their directories
+    respectively.
+    When done, the layout is like this:
+    <table>
+      <tr><th>Path</th><th>Project</th><th>Svn url</th></tr>
+      <tr>
+        <td>argoumlinstaller/build/VERSION_<i>VER_NO</i>/argouml</td>
+        <td>argouml</td>
+        <td>
+          http://argouml.tigris.org/svn/argouml/releases/VERSION_<i>VER_NO</i>
+          branched from
+          http://argouml.tigris.org/svn/argouml/trunk
+        </td>
+      </tr>
+      <tr>
+        <td>argoumlinstaller/build/VERSION_<i>VER_NO</i>/argouml-classfile</td>
+        <td>argouml-classfile</td>
+        <td>
+          http://argouml-classfile.tigris.org/svn/argouml-classfile/releases/VERSION_<i>VER_NO</i>
+          branched from
+          http://argouml-classfile.tigris.org/svn/argouml-classfile/trunk
+        </td>
+      </tr>
+      <tr>
+        <td>argoumlinstaller/build/VERSION_<i>VER_NO</i>/argouml-cpp</td>
+        <td>argouml-cpp</td>
+        <td>
+          http://argouml-cpp.tigris.org/svn/argouml-cpp/releases/VERSION_<i>VER_NO</i>
+          branched from
+          http://argouml-cpp.tigris.org/svn/argouml-cpp/trunk
+	</td>
+      </tr>
+      <tr><td>...</td><td>...</td><td>...</td></tr>
+    </table>
+  </dd>
+
+  <dt>argouml-downloads/www</dt>
+  <dd>
+    A checked out copy of the downloads project.
+    This is where the release is copied and everything is directly available at
+    <a href="http://argouml-downloads.tigris.org/">
+    the downloads project at http://argouml-downloads.tigris.org/</a>.
+    The installers scripts are supposed to copy everything needed into
+    the checked out copy.
+    The person doing the releases checks that it is all in place and 
+    updates links to the included parts, if needed.
+    The he commits it, publishing the new release.
+  </dd>
+
+  <dt>argouml-downloads/www/argouml-<i>VER.NO</i>/</dt>
+  <dd>Files for a given release.</dd>
+
+  <dt>argouml-downloads/www/index.html</dt>
+  <dt>argouml-downloads/www/devrel.html</dt>
+  <dd>Manually updated indexes to make all releases available</dd>
+
+  <dt>argouml-downloads/www/jws/</dt>
+  <dd>Directory for the Java Web Start jnlp files.</dd>
+
+  <dt>argouml-downloads/www/maven2/</dt>
+  <dd>Directory for the Java Web Start jar files.
+    This has a directory structure according to the maven2 standard for
+    how to publish files but there are not any maven2 control files.
+    The reason for having this structure is to allow future use of maven2.
+    There are some special functions when building the jnlp files that
+    avoids creating new files with the exact same contents.
+    This is to allow the Java Web Start of new release of ArgoUML to reuse
+    previously downloaded files.
+  </dd>
+</dl>
+
+</div>
+
+
+<hr>
+This page was last modified $Date$.
+
+</body>
+</html>
