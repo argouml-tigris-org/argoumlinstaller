@@ -48,6 +48,10 @@ mkdir DIST
   # Extra file for argouml-sql.
   cp ext/domainmapping.xml argouml-$releasename/ext
 
+  # Icons
+  mkdir argouml-$releasename/icon
+  cp `dirname $0`/icons/*.png argouml-$releasename/icon
+
   zip -r ../../DIST/ArgoUML-$releasename.zip argouml-$releasename
   tar cvf ../../DIST/ArgoUML-$releasename.tar argouml-$releasename
   rm -rf argouml-$releasename
