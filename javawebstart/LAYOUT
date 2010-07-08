@@ -7,11 +7,11 @@ anarres-cpp-no-dependencies.jar		org.anarres.cpp		1.2.3-3
 antlr.jar				antlr  			2.7.7-2
 antlr-runtime.jar			antlr			3.1.1-1
 argouml-diagrams-sequence.jar 		org.argouml		0.30.1
-argouml-umlpropertypanels.jar           org.argouml		0.30.2.BETA_1
+argouml-umlpropertypanels.jar           org.argouml		0.30.2
 argouml-model.jar			org.argouml		0.30.1
-argouml.jar				org.argouml		0.30.2.BETA_1
+argouml.jar				org.argouml		0.30.2
 # MDR					
-argouml-mdr.jar				org.argouml		0.30.2.BETA_1
+argouml-mdr.jar				org.argouml		0.30.2
 # Euml					
 argouml-euml.jar			org.argouml		0.30.1
 # Libraries				
@@ -62,4 +62,4 @@ argo_idl.jar				org.argouml	0.30.0
 argouml-i18n-pt.jar			org.argouml	0.30.0
 argouml-i18n-pt_BR.jar			org.argouml	0.30.0
 argouml-sql.jar				org.argouml	0.30.0
-argo_java.jar				org.argouml	0.30.2.BETA_1
+argo_java.jar				org.argouml	0.30.2
