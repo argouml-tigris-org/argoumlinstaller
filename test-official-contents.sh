@@ -12,7 +12,11 @@ then
 fi
 
 # Update this whenever the version of log4j changes!
-for file in argouml.jar log4j-1.2.6.jar java-interfaces.jar mof.jar
+for file in \
+    argouml.jar \
+    argouml-model.jar argouml-mdr.jar argouml-euml.jar \
+    log4j-1.2.6.jar \
+    java-interfaces.jar mof.jar
 do
     if test ! -f $BUILDDIR/$file
     then
@@ -21,9 +25,12 @@ do
     fi
 done
 
-# Tests for modules.
+# Tests for modules in ext directory
 # This is a complete test to make sure none of the module have failed.
 for file in \
+    argouml-diagrams-activity.jar \
+    argouml-diagrams-sequence.jar \
+    argouml-umlpropertypanels.jar \
     argo_java.jar \
     argo_cpp.jar argo_idl.jar argo_php.jar argouml-csharp.jar \
     argouml-sql.jar \

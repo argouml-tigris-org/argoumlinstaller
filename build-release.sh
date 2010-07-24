@@ -173,6 +173,7 @@ then
              modules/dev \
              src/argouml-app \
              src/argouml-core-diagrams-sequence2 \
+             src/argouml-core-diagrams-activity2 \
              src/argouml-core-infra \
              src/argouml-core-model \
              src/argouml-core-model-euml \
