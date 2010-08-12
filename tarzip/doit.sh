@@ -51,6 +51,7 @@ mkdir DIST
   # Icons
   mkdir argouml-$releasename/icon
   cp `dirname $0`/icons/*.png argouml-$releasename/icon
+  cp `dirname $0`/icons/*.svg argouml-$releasename/icon
 
   zip -r ../../DIST/ArgoUML-$releasename.zip argouml-$releasename
   tar cvf ../../DIST/ArgoUML-$releasename.tar argouml-$releasename
