@@ -6,11 +6,13 @@
 anarres-cpp-no-dependencies.jar		org.anarres.cpp		1.2.3-3
 antlr.jar				antlr  			2.7.7-2
 antlr-runtime.jar			antlr			3.1.1-1
+argouml.jar				org.argouml
+# Modules from 
 argouml-diagrams-sequence.jar 		org.argouml
 argouml-diagrams-activity.jar 		org.argouml
 argouml-umlpropertypanels.jar           org.argouml
+argouml-transformer.jar			org.argouml
 argouml-model.jar			org.argouml
-argouml.jar				org.argouml
 # MDR					
 argouml-mdr.jar				org.argouml
 # Euml					
