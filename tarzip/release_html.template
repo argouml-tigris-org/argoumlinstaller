@@ -70,7 +70,62 @@ Quick Guide
 Starts ArgoUML using Java Web Start
 </TD></TR>
 
+</TABLE>
+
+<p>
+Installers and binary packages include support for:
+</p>
+<ul>
+<li>classfile,</li>
+<li>cpp</li>
+<li>idl</li>
+<li>php</li>
+<li>csharp</li>
+<li>sql</li>
+<li>German (de)</li>
+<li>U.K. English (en_GB)</li>
+<li>Spanish (es)</li>
+<li>French (fr)</li>
+<li>Italian (it)</li>
+<li>Norwegian Bokmål (nb)</li>
+<li>Portuguese (pt)</li>
+<li>Brazilian Portuguese (pt_BR)</li>
+<li>Russian (ru)</li>
+<li>Chinese (zh)</li>
+</ul>
+
+<P>
+The promoted releases are the stable releases (named 0.EVEN or 0.EVEN.N).
+They are all listed on the 
+<a href="http://argouml-downloads.tigris.org">downloads page</a>.
+</P>
+
+<P>
+There are also not promoted releases called Development Releases
+(named 0.ODD.N, 0.EVEN.alphaN, or 0.EVEN.betaN).
+These are used during the development of ArgoUML.
+You are welcome to test these for the purpose of helping in the
+development or get a preview of upcoming features but there is a
+risk that they are not working as well as the stable releases.
+You can find them by following the link to the Development Releases 
+on the 
+<a href="http://argouml-downloads.tigris.org">downloads page</a>.
+</p>
+
+<TABLE>
 <TR><TH COLSPAN=2>For Developers</TH></TR>
+
+<TR><TD COLSPAN=2>
+If you want to build ArgoUML from source, 
+the recommended way is to download from the subversion repository.  
+Please refer to the Developer Wiki for instructions.
+</TD></TR>
+
+<TR><TD COLSPAN=2>
+If you just want to have a look at the source,
+you can either use the web site to browse the source or 
+download one of these packages.
+</TD></TR>
 
 <TR><TD>
 <a href="@URLROOT@/ArgoUML-@VERSION@-src.tar.gz"
@@ -105,31 +160,3 @@ Libraries needed to compile ArgoUML.
 </TD></TR>
 
 
-</TABLE>
-<p>
-If you want to build ArgoUML from source, 
-the recommended way is to download from the subversion repository.  
-Please refer to the Developer Wiki for instructions.
-</p>
-
-<p>
-Installers and binary packages include support for:
-</p>
-<ul>
-<li>classfile,</li>
-<li>cpp</li>
-<li>idl</li>
-<li>php</li>
-<li>csharp</li>
-<li>sql</li>
-<li>German (de)</li>
-<li>U.K. English (en_GB)</li>
-<li>Spanish (es)</li>
-<li>French (fr)</li>
-<li>Italian (it)</li>
-<li>Norwegian Bokmål (nb)</li>
-<li>Portuguese (pt)</li>
-<li>Brazilian Portuguese (pt_BR)</li>
-<li>Russian (ru)</li>
-<li>Chinese (zh)</li>
-</ul>
