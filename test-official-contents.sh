@@ -30,6 +30,7 @@ done
 for file in \
     argouml-diagrams-activity.jar \
     argouml-diagrams-sequence.jar \
+    argouml-diagrams-state.jar \
     argouml-umlpropertypanels.jar \
     argouml-transformer.jar \
     argo_java.jar \

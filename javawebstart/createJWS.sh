@@ -218,8 +218,39 @@ EOF
     cat >> $JNLPFILE <<EOF
 
     <property name="argouml.modules"
-              value="org.argouml.language.java.cognitive.critics.InitJavaCritics;org.argouml.language.java.generator.GeneratorJava;org.argouml.language.java.profile.ProfileJava;org.argouml.language.java.reveng.classfile.ClassfileImport;org.argouml.language.java.reveng.JavaImport;org.argouml.language.java.ui.JavaTools;org.argouml.language.java.ui.SettingsTabJava;org.argouml.language.cpp.generator.ModuleCpp;org.argouml.language.cpp.notation.NotationModuleCpp;org.argouml.language.cpp.reveng.CppImport;org.argouml.language.cpp.ui.SettingsTabCpp;org.argouml.language.cpp.profile.ProfileModule;org.argouml.uml.reveng.classfile.ClassfileImport;org.argouml.uml.reveng.idl.IDLFileImport;org.argouml.language.php.generator.ModulePHP4;org.argouml.language.php.generator.ModulePHP5;org.argouml.language.csharp.generator.GeneratorCSharp;org.argouml.language.sql.SqlInit;org.argouml.sequence2.SequenceDiagramModule;org.argouml.core.propertypanels.module.XmlPropertyPanelsModule"/>
-
+EOF
+    awk 'BEGIN { printf "      value=\""; first=true; }
+         { if (!first) { printf ";"; }
+           first=false;
+           printf "%s", $0;
+         }
+         END { printf "\""; }' >> $JNLPFILE <<EOF
+org.argouml.state2.StateDiagramModule
+org.argouml.sequence2.SequenceDiagramModule
+org.argouml.activity2.ActivityDiagramModule
+org.argouml.core.propertypanels.module.XmlPropertyPanelsModule
+org.argouml.transformer.TransformerModule
+org.argouml.language.cpp.generator.ModuleCpp
+org.argouml.language.cpp.notation.NotationModuleCpp
+org.argouml.language.cpp.profile.ProfileModule
+org.argouml.language.cpp.reveng.CppImport
+org.argouml.language.cpp.ui.SettingsTabCpp
+org.argouml.language.csharp.generator.GeneratorCSharp
+org.argouml.language.java.cognitive.critics.InitJavaCritics
+org.argouml.language.java.generator.GeneratorJava
+org.argouml.language.java.profile.ProfileJava
+org.argouml.language.java.reveng.JavaImport
+org.argouml.language.java.reveng.classfile.ClassfileImport
+org.argouml.language.java.ui.JavaTools
+org.argouml.language.java.ui.SettingsTabJava
+org.argouml.language.php.generator.ModulePHP4
+org.argouml.language.php.generator.ModulePHP5
+org.argouml.language.sql.SqlInit
+org.argouml.uml.reveng.classfile.ClassfileImport
+org.argouml.uml.reveng.idl.IDLFileImport
+EOF
+    cat >> $JNLPFILE <<EOF
+    />
   </resources>
   <application-desc main-class="org.argouml.application.Main"/>
 </jnlp>
