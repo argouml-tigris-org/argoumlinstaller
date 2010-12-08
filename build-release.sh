@@ -110,6 +110,10 @@ verifyalldefaultidentitiessetup() {
   do
     echo -n .
     svn propget --username $USERNAME dummy:tag \
+      http://$proj.tigris.org/svn/$proj/$BRANCH_FROM ||
+    svn propget --username $USERNAME dummy:tag \
+      http://$proj.tigris.org/svn/$proj/$BRANCH_FROM ||
+    svn propget --username $USERNAME dummy:tag \
       http://$proj.tigris.org/svn/$proj/$BRANCH_FROM
   done
   echo done.
@@ -123,11 +127,15 @@ then
   for proj in $PROJECTS
   do
     echo -n .
-    if svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null |
+    if ( svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null ||
+         svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null ||
+         svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null ) |
        grep -q "Node Kind: directory"
     then
       echo -n .
-      if svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME 2>/dev/null |
+      if ( svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME 2>/dev/null ||
+           svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME 2>/dev/null ||
+           svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME 2>/dev/null ) |
 	 grep -q "Node Kind: directory"
       then
 	  echo The release $VERSIONNAME already exists in the $proj project. 1>&2
@@ -202,6 +210,8 @@ then
       done
 
       echo COMMAND: svn copy --username $USERNAME http://$proj.tigris.org/svn/$proj/$BRANCH_FROM http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
+      svn copy --username $USERNAME http://$proj.tigris.org/svn/$proj/$BRANCH_FROM http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE" ||
+      svn copy --username $USERNAME http://$proj.tigris.org/svn/$proj/$BRANCH_FROM http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE" ||
       svn copy --username $USERNAME http://$proj.tigris.org/svn/$proj/$BRANCH_FROM http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
     done
   else
@@ -215,7 +225,9 @@ verifyallexists() {
   for proj in $PROJECTS
   do
     echo -n .
-    if svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null |
+    if ( svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null ||
+         svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null ||
+         svn info http://$proj.tigris.org/svn/$proj/releases 2>/dev/null ) |
        grep -q "Node Kind: directory"
     then
         :
@@ -225,7 +237,9 @@ verifyallexists() {
     fi
 
     echo -n .
-    if svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME 2>/dev/null |
+    if ( svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME 2>/dev/null ||
+         svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME 2>/dev/null ||
+         svn info http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME 2>/dev/null ) | 
        grep -q "Node Kind: directory"
     then
 	:
@@ -296,7 +310,13 @@ then
   verifyallcheckedout
 
   # Test that the version does not contain pre.
-  if grep -q "argo.core.version=PRE-" $DESTDIR/argouml/src/argouml-app/default.properties
+  if grep -q PRE- $DESTDIR/argouml/src/argouml-app/src/org/argouml/application/ArgoVersion.java
+  then
+    echo The version contains PRE-. 1>&2
+    exit 1
+  fi
+
+  if grep -q PRE- $DESTDIR/argouml-documentation/build.xml
   then
     echo The version contains PRE-. 1>&2
     exit 1
