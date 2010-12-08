@@ -94,6 +94,7 @@ svn_add_prop()
   # $3 the path
   TMPFILE=/tmp/svn_add_prop$$.txt
   TMPDIR=/tmp/svn_add_prop$$.dir
+  echo COMMAND: add line $2 to property $1 for $3
   svn propget --non-interactive $1 $3 | egrep -v '^$' > $TMPFILE
   echo $2 >> $TMPFILE
   svn co -q --username $USERNAME -N $3 $TMPDIR
@@ -200,6 +201,7 @@ then
         svn_add_prop subclipse:tags "$rev,$VERSIONNAME,/releases/$VERSIONNAME,tag" http://$proj.tigris.org/svn/$proj/$BRANCH_FROM
       done
 
+      echo COMMAND: svn copy --username $USERNAME http://$proj.tigris.org/svn/$proj/$BRANCH_FROM http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
       svn copy --username $USERNAME http://$proj.tigris.org/svn/$proj/$BRANCH_FROM http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME -m"Creating the release $RELEASE"
     done
   else
@@ -281,6 +283,7 @@ then
     for proj in $PROJECTS
     do
       echo Checking out $proj
+      echo COMMAND: svn co --username $USERNAME http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME $proj
       svn co --username $USERNAME http://$proj.tigris.org/svn/$proj/releases/$VERSIONNAME $proj
     done
   )
