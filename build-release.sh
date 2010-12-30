@@ -33,7 +33,7 @@ PROJECTS=" \
     "
 
 # This is factored out to make it easier to release from branches.
-BRANCH_FROM=trunk
+BRANCH_FROM=branches/BRANCH_0_32_x
 
 RELATIVE_ANT=tools/apache-ant-1.7.0/bin/ant
 
