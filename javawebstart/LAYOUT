@@ -6,18 +6,18 @@
 anarres-cpp-no-dependencies.jar		org.anarres.cpp		1.2.3-3
 antlr.jar				antlr  			2.7.7-2
 antlr-runtime.jar			antlr			3.1.1-1
-argouml.jar				org.argouml
+argouml.jar				org.argouml		0.32
 # Modules from 
-argouml-diagrams-state.jar 		org.argouml
-argouml-diagrams-sequence.jar 		org.argouml
-argouml-diagrams-activity.jar 		org.argouml
-argouml-umlpropertypanels.jar           org.argouml
-argouml-transformer.jar			org.argouml
-argouml-model.jar			org.argouml
+argouml-diagrams-state.jar 		org.argouml		0.32
+argouml-diagrams-sequence.jar 		org.argouml		0.32
+argouml-diagrams-activity.jar 		org.argouml		0.32
+argouml-umlpropertypanels.jar           org.argouml		0.32
+argouml-transformer.jar			org.argouml		0.32
+argouml-model.jar			org.argouml		0.32
 # MDR					
-argouml-mdr.jar				org.argouml
+argouml-mdr.jar				org.argouml		0.32
 # Euml					
-argouml-euml.jar			org.argouml
+argouml-euml.jar			org.argouml		0.32
 # Libraries				
 commons-logging.jar			commons-logging		1.0.2-5
 gef.jar					org.tigris.gef		0.13.3
@@ -26,7 +26,7 @@ ocl-argo.jar				tudresden.ocl		1.1-5
 swidgets.jar				org.tigris.swidgets	0.1.4-5
 toolbar.jar				org.tigris.toolbar	1.4.1-20071227-1
 # Libraries for mdr			
-java-interfaces.jar			org.argouml
+java-interfaces.jar			org.argouml		0.32
 jmi.jar					jmi			1.0-5
 mof.jar					jmi			0.0-5
 jmiutils.jar				org.netbeans.mdr	0.0-5
@@ -50,20 +50,20 @@ org.eclipse.uml2.uml.edit.jar		org.eclipse.uml2	3.1.0.v201005031530
 org.eclipse.uml2.uml.resources.jar	org.eclipse.uml2	3.1.1.v201008191505
 org.eclipse.uml2.uml.jar		org.eclipse.uml2	3.1.1.v201008191505
 # Ext
-argouml-i18n-de.jar			org.argouml
-argouml-i18n-en_GB.jar			org.argouml
-argouml-i18n-es.jar			org.argouml
-argouml-i18n-fr.jar			org.argouml
-argouml-i18n-it.jar			org.argouml
-argouml-i18n-nb.jar			org.argouml
-argouml-i18n-ru.jar			org.argouml
-argouml-i18n-zh.jar			org.argouml
-# argo_classfile.jar			org.argouml
-argo_php.jar				org.argouml
-argouml-csharp.jar			org.argouml
-argo_cpp.jar				org.argouml
-argo_idl.jar				org.argouml
-argouml-i18n-pt.jar			org.argouml
-argouml-i18n-pt_BR.jar			org.argouml
-argouml-sql.jar				org.argouml
-argo_java.jar				org.argouml
+argouml-i18n-de.jar			org.argouml		0.32
+argouml-i18n-en_GB.jar			org.argouml		0.32
+argouml-i18n-es.jar			org.argouml		0.32
+argouml-i18n-fr.jar			org.argouml		0.32
+argouml-i18n-it.jar			org.argouml		0.32
+argouml-i18n-nb.jar			org.argouml		0.32
+argouml-i18n-ru.jar			org.argouml		0.32
+argouml-i18n-zh.jar			org.argouml		0.32
+# argo_classfile.jar			org.argouml		0.32
+argo_php.jar				org.argouml		0.32
+argouml-csharp.jar			org.argouml		0.32
+argo_cpp.jar				org.argouml		0.32
+argo_idl.jar				org.argouml		0.32
+argouml-i18n-pt.jar			org.argouml		0.32
+argouml-i18n-pt_BR.jar			org.argouml		0.32
+argouml-sql.jar				org.argouml		0.32
+argo_java.jar				org.argouml		0.32
