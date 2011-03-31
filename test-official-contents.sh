@@ -35,6 +35,7 @@ for file in \
     argouml-transformer.jar \
     argo_java.jar \
     argo_cpp.jar argo_idl.jar argo_php.jar argouml-csharp.jar \
+    argo_argoprint.jar \
     argouml-sql.jar \
     argouml-i18n-de.jar \
     argouml-i18n-en_GB.jar argouml-i18n-es.jar \

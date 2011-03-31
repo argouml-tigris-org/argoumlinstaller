@@ -29,6 +29,8 @@ PROJECTS=" \
     argouml-ru \
     argouml-i18n-zh \
     \
+    argoprint \
+    \
     argouml-documentation \
     "
 
