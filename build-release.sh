@@ -1,4 +1,4 @@
-#!/bin/sh
+/src#!/bin/sh
 # $Id$
 
 #
@@ -183,15 +183,20 @@ then
       for subdir in \
              modules/dev \
              src/argouml-app \
-             src/argouml-core-diagrams-sequence2 \
+	     src/argouml-build \
              src/argouml-core-diagrams-activity2 \
+             src/argouml-core-diagrams-class2 \
+             src/argouml-core-diagrams-sequence2 \
+             src/argouml-core-diagrams-state2 \
+             src/argouml-core-diagrams-structure2 \
+             src/argouml-core-diagrams-uml2 \
              src/argouml-core-infra \
              src/argouml-core-model \
              src/argouml-core-model-euml \
              src/argouml-core-model-mdr \
-             src/argouml-core-umlpropertypanels \
+             src/argouml-core-notation \
              src/argouml-core-transformer \
-             src \
+             src/argouml-core-umlpropertypanels \
              tools www
       do
         svn_add_prop subclipse:tags \

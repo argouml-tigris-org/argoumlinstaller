@@ -8,11 +8,12 @@ antlr.jar				antlr  			2.7.7-3
 antlr-runtime.jar			antlr			3.1.1-2
 argouml.jar				org.argouml
 # Modules from 
-argouml-diagrams-state.jar 		org.argouml
-argouml-diagrams-sequence.jar 		org.argouml
 argouml-diagrams-activity.jar 		org.argouml
-argouml-umlpropertypanels.jar           org.argouml
+argouml-diagrams-sequence.jar 		org.argouml
+argouml-diagrams-state.jar 		org.argouml
+argouml-notation.jar                    org.argouml
 argouml-transformer.jar			org.argouml
+argouml-umlpropertypanels.jar           org.argouml
 argouml-model.jar			org.argouml
 # MDR					
 argouml-mdr.jar				org.argouml

@@ -31,8 +31,9 @@ for file in \
     argouml-diagrams-activity.jar \
     argouml-diagrams-sequence.jar \
     argouml-diagrams-state.jar \
-    argouml-umlpropertypanels.jar \
+    argouml-notation.jar \
     argouml-transformer.jar \
+    argouml-umlpropertypanels.jar \
     argo_java.jar \
     argo_cpp.jar argo_idl.jar argo_php.jar argouml-csharp.jar \
     argo_argoprint.jar \
