@@ -1,4 +1,4 @@
-/src#!/bin/sh
+#!/bin/sh
 # $Id$
 
 #
