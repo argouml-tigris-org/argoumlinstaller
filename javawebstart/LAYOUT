@@ -10,6 +10,7 @@ argouml.jar				org.argouml
 #
 # Modules from the argouml project
 argouml-diagrams-activity.jar 		org.argouml
+argouml-diagrams-deployment.jar		org.argouml
 argouml-diagrams-sequence.jar 		org.argouml
 argouml-diagrams-state.jar 		org.argouml
 argouml-notation.jar                    org.argouml

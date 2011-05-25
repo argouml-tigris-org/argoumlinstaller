@@ -29,6 +29,7 @@ done
 # This is a complete test to make sure none of the module have failed.
 for file in \
     argouml-diagrams-activity.jar \
+    argouml-diagrams-deployment.jar \
     argouml-diagrams-sequence.jar \
     argouml-diagrams-state.jar \
     argouml-notation.jar \

@@ -186,6 +186,7 @@ then
 	     src/argouml-build \
              src/argouml-core-diagrams-activity2 \
              src/argouml-core-diagrams-class2 \
+             src/argouml-core-diagrams-deployment2 \
              src/argouml-core-diagrams-sequence2 \
              src/argouml-core-diagrams-state2 \
              src/argouml-core-diagrams-structure2 \
