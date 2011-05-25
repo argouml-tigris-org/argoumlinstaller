@@ -7,7 +7,8 @@ anarres-cpp-no-dependencies.jar		org.anarres.cpp		1.2.3-4
 antlr.jar				antlr  			2.7.7-3
 antlr-runtime.jar			antlr			3.1.1-2
 argouml.jar				org.argouml
-# Modules from 
+#
+# Modules from the argouml project
 argouml-diagrams-activity.jar 		org.argouml
 argouml-diagrams-sequence.jar 		org.argouml
 argouml-diagrams-state.jar 		org.argouml
@@ -21,11 +22,18 @@ argouml-mdr.jar				org.argouml
 argouml-euml.jar			org.argouml
 # Libraries				
 commons-logging.jar			commons-logging		1.0.2-6
-gef.jar					org.tigris.gef		0.13.4
+gef.jar					org.tigris.gef		0.13.7
 log4j.jar				log4j			1.2.6-6
 ocl-argo.jar				tudresden.ocl		1.1-6
 swidgets.jar				org.tigris.swidgets	0.1.4-6
 toolbar.jar				org.tigris.toolbar	1.4.1-20071227-2
+batik-awt-util.jar			org.apache.batik	1.7
+batik-dom.jar				org.apache.batik	1.7
+batik-ext.jar				org.apache.batik	1.7
+batik-svggen.jar			org.apache.batik	1.7
+batik-util.jar				org.apache.batik	1.7
+batik-xml.jar				org.apache.batik	1.7
+#
 # Libraries for mdr			
 java-interfaces.jar			org.argouml
 jmi.jar					jmi			1.0-6
@@ -34,6 +42,7 @@ jmiutils.jar				org.netbeans.mdr	0.0-6
 mdrapi.jar				org.netbeans.mdr	0.0-6
 nbmdr.jar				org.netbeans.mdr	0.0-6
 openide-util.jar			org.netbeans.mdr	0.0-6
+#
 # Libraries for euml
 org.eclipse.emf.common.jar		org.eclipse.emf		2.6.0.v20100914-1218-1
 org.eclipse.emf.ecore.change.edit.jar	org.eclipse.emf		2.5.0.v20100521-1846-1
