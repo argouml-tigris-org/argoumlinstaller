@@ -15,6 +15,7 @@ if test ! -r "$LAYOUT"; then
     exit 1
 fi
 COMPAREJARS="`dirname $0`/compare-jars.sh"
+CREATECHECKSUMS="`dirname $0`/createCheckSums.sh"
 
 if test -n "$RELEASE"
 then
@@ -170,6 +171,7 @@ do
     done
 done
 
+echo "(" cd $TARGETDIR "&&" $CREATECHECKSUMS ")" >> $CMDS
 
 if $notonlytest
 then
