@@ -29,10 +29,11 @@ PROJECTS=" \
     argouml-ru \
     argouml-i18n-zh \
     \
-    argoprint \
     \
     argouml-documentation \
     "
+#     argoprint \
+
 
 # This is factored out to make it easier to release from branches.
 BRANCH_FROM=trunk

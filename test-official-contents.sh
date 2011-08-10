@@ -37,7 +37,6 @@ for file in \
     argouml-umlpropertypanels.jar \
     argo_java.jar \
     argo_cpp.jar argo_idl.jar argo_php.jar argouml-csharp.jar \
-    argo_argoprint.jar \
     argouml-sql.jar \
     argouml-i18n-de.jar \
     argouml-i18n-en_GB.jar argouml-i18n-es.jar \
@@ -48,6 +47,7 @@ for file in \
     argouml-i18n-pt_BR.jar \
     argouml-i18n-ru.jar \
     argouml-i18n-zh.jar
+#    argo_argoprint.jar \
 do
     if test ! -f $BUILDDIR/ext/$file
     then
