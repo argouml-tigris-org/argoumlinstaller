@@ -67,15 +67,17 @@ function add_to_file() {
 }
 
 function add_to_commands() {
-    groupid=$1
+    groupiddir=$1
     name=$2
     version=$3
-    echo mkdir $TARGETDIR/$groupid/$name/$version >> $CMDS
-    jar=$groupid/$name/$version/$name-$version.jar
+    echo mkdir $TARGETDIR/$groupiddir/$name/$version >> $CMDS
+    jar=$groupiddir/$name/$version/$name-$version.jar
     echo cp $foundjar $TARGETDIR/$jar >> $CMDS
 
     # Create the pom.xml file
-    echo "cat > $TARGETDIR/$groupid/$name/$version/$name-$version.pom <<EOF" >> $CMDS
+    groupid=`echo $groupiddir | tr / .`
+
+    echo "cat > $TARGETDIR/$groupiddir/$name/$version/$name-$version.pom <<EOF" >> $CMDS
     echo "<project>" >> $CMDS
     echo "<groupId>$groupid</groupId>" >> $CMDS
     echo "<artifactId>$name</artifactId>" >> $CMDS
