@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.argouml.maven-dist-main-jar</groupId>
+  <artifactId>argouml</artifactId>
+  <version>0.35.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <groupId>org.argouml</groupId>
+  </properties>
+
+  <dependencies>
+    <!-- The list of dependencies here are the ones that are distributed. -->
+    <!-- They are all added to the class-path and to the distributions -->
+    <!-- by the main-dist project. -->
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>argouml</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>argouml-csharp</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>argo_java</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <!-- add a long list. -->
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${groupId}</groupId>
+                  <artifactId>argouml</artifactId>
+                  <version>${project.version}</version>
+                  <type>jar</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                  <excludes>**/*.mf</excludes>
+                </artifactItem>
+              </artifactItems>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>org.argouml.application.Main</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+
+  <name>maven-dist-main-jar</name>
+  <description>
+This is a project that rebuilds the main jar of the argoumlproject
+to add a manifest with dependencies and such.
+  </description>
+</project>
