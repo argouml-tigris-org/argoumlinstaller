@@ -40,6 +40,8 @@ BRANCH_FROM=trunk
 
 RELATIVE_ANT=tools/apache-ant-1.7.0/bin/ant
 
+unset LANG
+export LANG
 
 tag=false
 dontjusttest=false
